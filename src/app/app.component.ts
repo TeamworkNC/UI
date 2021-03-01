@@ -26,4 +26,13 @@ export class AppComponent {
             this.router.navigate(
               ['/catalog']);
           }
+
+  goRegistrationPage() {
+              this.router.navigate(
+                ['/registration']);
+            }
+  goAuthorizationPage() {
+                this.router.navigate(
+                  ['/authorization']);
+              }
 }

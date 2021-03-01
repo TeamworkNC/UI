@@ -1,0 +1,43 @@
+<br>
+<img src="assets/resource/a.png" style="float: right; margin-right: 8%;" >
+<img src="assets/resource/a.png" style="float: left; margin-left: 8%;" >
+<div style="text-align : center;font-family:Impact;">Добро пожаловать в online кинотеатр Movie And Chill!</div>
+<div style="text-align : center; font-family:Impact;">Для регистрации, пожалуйста, заполните форму ниже.</div>
+<div style="width: 100%; height: 80%; text-align: center;">
+  <div style="text-align: center; display: inline-block;vertical-align: middle;width: 50%;">
+
+    <mat-form-field appearance="fill" style="width:100%;  display: inline-block; vertical-align: middle;">
+      <mat-label>Введите ваше имя</mat-label>
+      <input matInput placeholder="Пример - Иван" [formControl]="firstName" required>
+      <mat-error *ngIf="firstName.invalid">{{getErrorMessageFirstName()}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" style="width:100%;  display: inline-block; vertical-align: middle;">
+      <mat-label>Введите вашу фамилию</mat-label>
+      <input matInput placeholder="Пример - Иванов" [formControl]="lastName" required>
+      <mat-error *ngIf="lastName.invalid">{{getErrorMessageLastName()}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" style="width:100%;  display: inline-block; vertical-align: middle;">
+      <mat-label >Введите вашу почту</mat-label>
+      <input matInput placeholder="Пример - ivan1234@mail.ru" [formControl]="email" required>
+      <mat-error *ngIf="email.invalid">{{getErrorMessageEmail()}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" style="width:100%;  display: inline-block; vertical-align: middle;">
+      <mat-label>Введите пароль</mat-label>
+      <input matInput placeholder="Пример - password12345*" [formControl]="passFirst"  required>
+      <mat-error *ngIf="passFirst.invalid">{{getErrorMessagePassFirst()}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" style="width:100%;  display: inline-block; vertical-align: middle;">
+      <mat-label>Повторите пароль</mat-label>
+      <input matInput placeholder="Пример - password12345*" [formControl]="passSecond"  required>
+      <mat-error *ngIf="passSecond.invalid">{{getErrorMessagePassSecond()}}</mat-error>
+    </mat-form-field>
+
+    <button mat-button ><div style="">Зарегистрироваться</div></button>
+  </div>
+  <div style="height: 100%; display: inline-block; vertical-align: middle;"></div>
+
+</div>

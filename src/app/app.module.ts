@@ -9,12 +9,17 @@ import { FilmPageComponent } from './film-page/film-page.component';
 import { UserPageComponent } from './user-page/user-page.component';
 import { CatalogPageComponent } from './catalog-page/catalog-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RegistrationPageComponent } from './registration-page/registration-page.component';
+import { AuthorizationPageComponent } from './authorization-page/authorization-page.component';
+
 import {MatMenuModule} from "@angular/material/menu";
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,7 +27,9 @@ import {MatInputModule} from '@angular/material/input';
     HomePageComponent,
     FilmPageComponent,
     UserPageComponent,
-    CatalogPageComponent
+    CatalogPageComponent,
+    RegistrationPageComponent,
+    AuthorizationPageComponent
   ],
   imports: [
     BrowserModule,
@@ -35,6 +42,9 @@ import {MatInputModule} from '@angular/material/input';
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
+    MatSelectModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

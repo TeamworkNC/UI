@@ -1,0 +1,26 @@
+<br>
+<img src="assets/resource/a.png" style="float: right; margin-right: 8%;" >
+<img src="assets/resource/a.png" style="float: left; margin-left: 8%;" >
+<div style="text-align : center;font-family:Impact;">Добро пожаловать в online кинотеатр Movie And Chill!</div>
+<div style="text-align : center; font-family:Impact;">Для авторизации, пожалуйста, заполните форму ниже.</div>
+<div style="width: 100%; height: 80%; text-align: center;">
+  <div style="text-align: center; display: inline-block;vertical-align: middle;width: 50%;">
+
+    <mat-form-field appearance="fill" style="width:100%;  display: inline-block; vertical-align: middle;">
+      <mat-label >Введите вашу почту</mat-label>
+      <input matInput placeholder="Пример - ivan1234@mail.ru" [formControl]="email"  required>
+      <mat-error *ngIf="pass.invalid">{{getErrorMessageEmail()}}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" style="width:100%;  display: inline-block; vertical-align: middle;">
+      <mat-label>Введите пароль</mat-label>
+      <input matInput placeholder="Пример - password12345*"  [formControl]="pass" required>
+      <mat-error *ngIf="pass.invalid">{{getErrorMessagePass()}}</mat-error>
+    </mat-form-field>
+
+    <button mat-button type="submit"><div style="">Войти</div></button>
+    <button mat-button ><div style="">Забыли пароль?</div></button>
+  </div>
+  <div style="height: 100%; display: inline-block; vertical-align: middle;"></div>
+
+</div>
