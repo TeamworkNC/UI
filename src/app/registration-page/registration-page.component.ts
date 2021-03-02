@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
+import {User} from 'src/app/user';
+import {Reg} from 'src/app/reg';
+import {RegistrationData} from 'src/app/registrationData';
+import {Observable} from "rxjs";
+import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
+var headers = new HttpHeaders();
+headers.append('Content-Type', 'application/json');
 
 @Component({
   selector: 'app-registration-page',
@@ -8,6 +15,12 @@ import {FormControl, Validators} from '@angular/forms';
 })
 export class RegistrationPageComponent implements OnInit {
 
+user: User;
+userData: RegistrationData;
+constructor(private http: HttpClient, private api: Reg) {
+  this.user = {"userId":0};
+  this.userData = {"firstName": '', "lastName":'', "email":'', "password": ''};
+}
 email = new FormControl('', [Validators.required, Validators.email]);
 firstName = new FormControl('', [Validators.required]);
 lastName = new FormControl('', [Validators.required]);
@@ -46,9 +59,19 @@ getErrorMessagePassSecond() {
           return '';
         }
 
-  constructor() { }
-
   ngOnInit(): void {
   }
 
+  sendUserData(){
+
+    this.api.postCommand("svdvsv","dcsds","sdcsds","sdcsds")
+        .subscribe((data: HttpResponse<User>) => {
+
+          if( data.body == null){
+            this.user = {"userId":0};
+          }else{
+          this.user = data.body;
+          }
+        });
+  }
 }
