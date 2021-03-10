@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {User} from 'src/app/user';
-import {Autor} from 'src/app/autor';
+import {Autor} from 'src/app/req/autor';
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-authorization-page',
@@ -12,7 +13,7 @@ import {Autor} from 'src/app/autor';
 export class AuthorizationPageComponent implements OnInit {
   user: User;
 
-  constructor(private http: HttpClient, private api: Autor) {
+  constructor(private http: HttpClient, private api: Autor, private activateRoute: ActivatedRoute, private router: Router) {
    this.user = {"userId":0, "name": "", "birthday": "", "logoUrl": "", "description": "", "registrationDate": ""};
    }
 noWhitespaceValidator(control: FormControl) {
@@ -40,6 +41,12 @@ noWhitespaceValidator(control: FormControl) {
   ngOnInit(): void {
   }
 
+  goToProfile() {
+      this.router.navigate(
+        ['/user', this.user.userId]);
+    }
+
+
   sendUserData(){
 
       this.api.postCommand( this.email.value.trim(), this.pass.value)
@@ -49,6 +56,9 @@ noWhitespaceValidator(control: FormControl) {
             }else{
             this.user = data.body;
             }
+            if (data.status == 200){
+                            this.goToProfile();
+                          }
           });
     }
 }

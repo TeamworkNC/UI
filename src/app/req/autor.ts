@@ -5,7 +5,7 @@ import {User} from "src/app/user";
 
 var headers = new HttpHeaders();
 headers.append('Content-Type', 'application/json');
-const localUrl1 = 'https://mac21-user-management.herokuapp.com/api/v1/users/login';//поменять потом
+const localUrl1 = 'http://localhost:8080/test';//поменять потом
 
 @Injectable({
   providedIn: 'root'

@@ -12,7 +12,7 @@ export const routes: Routes = [
   {path: 'home', component: HomePageComponent},
   {path: 'film', component: FilmPageComponent},
   {path: 'film/:id', component: FilmPageComponent},
-  {path: 'user', component: UserPageComponent},
+  {path: 'user/:id', component: UserPageComponent},
   {path: 'catalog', component: CatalogPageComponent},
   {path: 'registration', component: RegistrationPageComponent },
   {path: 'authorization', component: AuthorizationPageComponent},
