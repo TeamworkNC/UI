@@ -13,15 +13,15 @@ export class AuthorizationPageComponent implements OnInit {
   user: User;
 
   constructor(private http: HttpClient, private api: Autor) {
-   this.user = {"userId":0};
+   this.user = {"userId":0, "name": "", "birthday": "", "logoUrl": "", "description": "", "registrationDate": ""};
    }
 noWhitespaceValidator(control: FormControl) {
     const isWhitespace = (control.value || '').trim().length === 0;
     const isValid = !isWhitespace;
     return isValid ? null : { 'whitespace': true };
 }
-
-  email = new FormControl('', [Validators.required, Validators.email, this.noWhitespaceValidator]);
+//Validators.email,
+  email = new FormControl('', [Validators.required, this.noWhitespaceValidator]);
   pass = new FormControl('', [Validators.required, this.noWhitespaceValidator]);
   getErrorMessageEmail() {
     if (this.email.hasError('required') || this.email.value.trim() == '') {
@@ -45,7 +45,7 @@ noWhitespaceValidator(control: FormControl) {
       this.api.postCommand( this.email.value.trim(), this.pass.value)
           .subscribe((data: HttpResponse<User>) => {
             if( data.body == null){
-              this.user = {"userId":0};
+              this.user = {"userId":0, "name": "", "birthday": "", "logoUrl": "", "description": "", "registrationDate": ""};
             }else{
             this.user = data.body;
             }

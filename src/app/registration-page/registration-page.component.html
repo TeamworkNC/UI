@@ -30,7 +30,7 @@
       <mat-error *ngIf="passFirst.invalid">{{getErrorMessagePassFirst()}}</mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="fill" style="width:100%;  display: inline-block; vertical-align: middle;">
+   <mat-form-field appearance="fill" style="width:100%;  display: inline-block; vertical-align: middle;">
       <mat-label>Повторите пароль</mat-label>
       <input matInput placeholder="Пример - password12345*" [formControl]="passSecond"  required>
       <mat-error *ngIf="passSecond.invalid">{{getErrorMessagePassSecond()}}</mat-error>
