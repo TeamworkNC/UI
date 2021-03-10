@@ -1,13 +1,16 @@
 <br>
-<button mat-button [matMenuTriggerFor]="menu" class="example-button-row"><mat-icon>home</mat-icon></button>
-<mat-menu #menu="matMenu">
-  <button mat-menu-item (click)="goHomePage()">Главная</button>
-  <button mat-menu-item (click)="goCatalogPage()">Каталог</button>
-  <button mat-menu-item (click)="goUserPage()">Личный кабинет</button>
-  <button mat-menu-item (click)="goAuthorizationPage()">Авторизация</button>
-  <button mat-menu-item (click)="goRegistrationPage()">Регистрация</button>
-  <button mat-menu-item>Выйти </button>
-</mat-menu>
+<div style="margin-left: 2%">
+  <button mat-button [matMenuTriggerFor]="menu" class="example-button-row"><mat-icon>home</mat-icon></button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="goHomePage()">Главная</button>
+    <button mat-menu-item (click)="goCatalogPage()">Каталог</button>
+    <button mat-menu-item (click)="goUserPage()">Личный кабинет</button>
+    <button mat-menu-item (click)="goAuthorizationPage()">Авторизация</button>
+    <button mat-menu-item (click)="goRegistrationPage()">Регистрация</button>
+    <button mat-menu-item>Выйти </button>
+  </mat-menu>
+</div>
+
 <br>
 
 <router-outlet></router-outlet>

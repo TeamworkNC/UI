@@ -36,9 +36,8 @@
       <mat-error *ngIf="passSecond.invalid">{{getErrorMessagePassSecond()}}</mat-error>
     </mat-form-field>
 
-    <button mat-button ><div style="">Зарегистрироваться</div></button>
+    <button mat-button *ngIf="this.lastName.invalid || this.firstName.invalid || this.passSecond.invalid || this.passFirst.invalid || this.email.invalid" [disabled]="true" type="submit"><div style="">Зарегистрироваться</div></button>
+    <button mat-button *ngIf="!this.lastName.invalid && !this.firstName.invalid && !this.passSecond.invalid && !this.passFirst.invalid && !this.email.invalid" type="submit" (click)="sendUserData()"><div style="">Зарегистрироваться</div></button>
   </div>
   <div style="height: 100%; display: inline-block; vertical-align: middle;"></div>
 </div>
-<button mat-button (click)="sendUserData()"><div style="">123</div></button>
-<p>{{this.user.userId}}</p>

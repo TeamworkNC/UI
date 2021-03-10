@@ -5,6 +5,8 @@ import {Reg} from 'src/app/reg';
 import {RegistrationData} from 'src/app/registrationData';
 import {Observable} from "rxjs";
 import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
+import {MatDialog, MatDialogRef, MatDialogModule} from "@angular/material/dialog";
+
 var headers = new HttpHeaders();
 headers.append('Content-Type', 'application/json');
 
@@ -17,43 +19,49 @@ export class RegistrationPageComponent implements OnInit {
 
 user: User;
 userData: RegistrationData;
-constructor(private http: HttpClient, private api: Reg) {
+constructor(private http: HttpClient, private api: Reg, public dialog: MatDialog) {
   this.user = {"userId":0};
   this.userData = {"firstName": '', "lastName":'', "email":'', "password": ''};
 }
-email = new FormControl('', [Validators.required, Validators.email]);
-firstName = new FormControl('', [Validators.required]);
-lastName = new FormControl('', [Validators.required]);
-passFirst = new FormControl('', [Validators.required]);
-passSecond = new FormControl('', [Validators.required]);
+noWhitespaceValidator(control: FormControl) {
+    const isWhitespace = (control.value || '').trim().length === 0;
+    const isValid = !isWhitespace;
+    return isValid ? null : { 'whitespace': true };
+}
+
+email = new FormControl('', [Validators.required, Validators.email, this.noWhitespaceValidator]);
+firstName = new FormControl('', [Validators.required, this.noWhitespaceValidator]);
+lastName = new FormControl('', [Validators.required, this.noWhitespaceValidator]);
+passFirst = new FormControl('', [Validators.required, this.noWhitespaceValidator]);
+passSecond = new FormControl('', [Validators.required, this.noWhitespaceValidator]);
 getErrorMessageEmail() {
-    if (this.email.hasError('required')) {
+    if (this.email.hasError('required') || this.email.value.trim()=='') {
       return 'Поле обязательно для заполнения';
     }
     return this.email.hasError('email') ? 'Некорректный email' : '';
   }
 
   getErrorMessageFirstName() {
-      if (this.firstName.hasError('required')) {
+      if (this.firstName.hasError('required') || this.firstName.value.trim()=='') {
         return 'Поле обязательно для заполнения';
       }
       return '';
     }
     getErrorMessageLastName() {
-          if (this.lastName.hasError('required')) {
+          if (this.lastName.hasError('required') || this.lastName.value.trim()=='') {
             return 'Поле обязательно для заполнения';
           }
           return '';
         }
 getErrorMessagePassFirst() {
-                   if (this.passFirst.hasError('required')) {
+                   if (this.passFirst.hasError('required') || this.passFirst.value.trim()=='') {
                      return 'Поле обязательно для заполнения';
                    }
                    return '';
                  }
 
 getErrorMessagePassSecond() {
-          if (this.passSecond.hasError('required')) {
+          if (this.passSecond.hasError('required') || this.passSecond.value.trim()=='') {
             return 'Поле обязательно для заполнения';
           }
           return '';
@@ -62,16 +70,39 @@ getErrorMessagePassSecond() {
   ngOnInit(): void {
   }
 
-  sendUserData(){
-
-    this.api.postCommand("svdvsv","dcsds","sdcsds","sdcsds")
-        .subscribe((data: HttpResponse<User>) => {
-
-          if( data.body == null){
-            this.user = {"userId":0};
-          }else{
-          this.user = data.body;
-          }
-        });
+  openDialog(){
+    this.dialog.open(NotEq);
   }
+
+  sendUserData(){
+  if (this.passSecond.value!=this.passFirst.value) {
+                  this.openDialog();
+                }
+
+    if(this.passSecond.value==this.passFirst.value){
+    this.api.postCommand(this.firstName.value.trim(),this.lastName.value.trim(),this.passFirst.value,this.email.value.trim())
+            .subscribe((data: HttpResponse<User>) => {
+
+              if( data.body == null){
+                this.user = {"userId":0};
+              }else{
+              this.user = data.body;
+              }
+            });
+      }
+    }
+
+}
+
+
+@Component({
+  selector: 'notEquals',
+  templateUrl: 'notEquals.html',
+})
+export class NotEq {
+constructor(public dialogRef: MatDialogRef<NotEq>) {
+  }
+close(){
+   this.dialogRef.close(true);
+}
 }

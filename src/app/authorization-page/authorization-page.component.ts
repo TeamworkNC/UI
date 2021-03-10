@@ -15,18 +15,23 @@ export class AuthorizationPageComponent implements OnInit {
   constructor(private http: HttpClient, private api: Autor) {
    this.user = {"userId":0};
    }
+noWhitespaceValidator(control: FormControl) {
+    const isWhitespace = (control.value || '').trim().length === 0;
+    const isValid = !isWhitespace;
+    return isValid ? null : { 'whitespace': true };
+}
 
-  email = new FormControl('', [Validators.required, Validators.email]);
-  pass = new FormControl('', [Validators.required]);
+  email = new FormControl('', [Validators.required, Validators.email, this.noWhitespaceValidator]);
+  pass = new FormControl('', [Validators.required, this.noWhitespaceValidator]);
   getErrorMessageEmail() {
-    if (this.email.hasError('required')) {
+    if (this.email.hasError('required') || this.email.value.trim() == '') {
       return 'Поле обязательно для заполнения';
     }
     return this.email.hasError('email') ? 'Некорректный email' : '';
   }
 
   getErrorMessagePass() {
-      if (this.pass.hasError('required')) {
+      if (this.pass.hasError('required') || this.pass.value.trim() == '') {
         return 'Поле обязательно для заполнения';
       }
       return '';
@@ -37,7 +42,7 @@ export class AuthorizationPageComponent implements OnInit {
 
   sendUserData(){
 
-      this.api.postCommand("svdvsv","dcsds")
+      this.api.postCommand( this.email.value.trim(), this.pass.value)
           .subscribe((data: HttpResponse<User>) => {
             if( data.body == null){
               this.user = {"userId":0};
