@@ -80,6 +80,10 @@ getErrorMessagePassSecond() {
     this.dialog.open(NotEq);
   }
 
+  failRegistrationDialog(){
+  this.dialog.open(FailRegistration);
+  }
+
   sendUserData(){
   if (this.passSecond.value!=this.passFirst.value) {
                   this.openDialog();
@@ -98,7 +102,9 @@ getErrorMessagePassSecond() {
               if (data.status == 200){
                 this.goToProfile();
               }
-            });
+            },
+            (err) => {this.failRegistrationDialog();}
+            );
       }
     }
 
@@ -111,6 +117,19 @@ getErrorMessagePassSecond() {
 })
 export class NotEq {
 constructor(public dialogRef: MatDialogRef<NotEq>) {
+  }
+close(){
+   this.dialogRef.close(true);
+}
+}
+
+
+@Component({
+  selector: 'failRegistration',
+  templateUrl: 'failRegistration.html',
+})
+export class FailRegistration {
+constructor(public dialogRef: MatDialogRef<FailRegistration>) {
   }
 close(){
    this.dialogRef.close(true);

@@ -6,7 +6,7 @@ import {map} from "rxjs/operators";
 
 var headers = new HttpHeaders();
 headers.append('Content-Type', 'application/json');
-const localUrl1 = 'http://localhost:8080/test';//поменять потом
+const localUrl1 = 'http://localhost:8080/test1';//поменять потом
 
 @Injectable({
   providedIn: 'root'

@@ -4,6 +4,7 @@ import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {User} from 'src/app/user';
 import {Autor} from 'src/app/req/autor';
 import {ActivatedRoute, Router} from "@angular/router";
+import {MatDialog, MatDialogRef, MatDialogModule} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-authorization-page',
@@ -13,7 +14,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 export class AuthorizationPageComponent implements OnInit {
   user: User;
 
-  constructor(private http: HttpClient, private api: Autor, private activateRoute: ActivatedRoute, private router: Router) {
+  constructor(private http: HttpClient, private api: Autor, private activateRoute: ActivatedRoute, private router: Router, public dialog: MatDialog,) {
    this.user = {"userId":0, "name": "", "birthday": "", "logoUrl": "", "description": "", "registrationDate": ""};
    }
 noWhitespaceValidator(control: FormControl) {
@@ -46,6 +47,10 @@ noWhitespaceValidator(control: FormControl) {
         ['/user', this.user.userId]);
     }
 
+    failRegistrationDialog(){
+      this.dialog.open(FailLogin);
+      }
+
 
   sendUserData(){
 
@@ -59,6 +64,21 @@ noWhitespaceValidator(control: FormControl) {
             if (data.status == 200){
                             this.goToProfile();
                           }
-          });
+          },
+
+            (err) => {this.failRegistrationDialog();}
+          );
     }
+}
+
+@Component({
+  selector: 'failLogin',
+  templateUrl: 'failLogin.html',
+})
+export class FailLogin {
+constructor(public dialogRef: MatDialogRef<FailLogin>) {
+  }
+close(){
+   this.dialogRef.close(true);
+}
 }
