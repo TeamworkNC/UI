@@ -22,7 +22,7 @@ noWhitespaceValidator(control: FormControl) {
     const isValid = !isWhitespace;
     return isValid ? null : { 'whitespace': true };
 }
-//Validators.email,
+//Validators.email,Validators.required, this.noWhitespaceValidator
   email = new FormControl('', [Validators.required, this.noWhitespaceValidator]);
   pass = new FormControl('', [Validators.required, this.noWhitespaceValidator]);
   getErrorMessageEmail() {

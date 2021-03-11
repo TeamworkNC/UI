@@ -1,17 +1,28 @@
-<br>
-<div style="margin-left: 2%">
-  <button mat-button [matMenuTriggerFor]="menu" class="example-button-row"><mat-icon>home</mat-icon></button>
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="goHomePage()">Главная</button>
-    <button mat-menu-item (click)="goCatalogPage()">Каталог</button>
-    <button mat-menu-item (click)="goUserPage()">Личный кабинет</button>
-    <button mat-menu-item (click)="goAuthorizationPage()">Авторизация</button>
-    <button mat-menu-item (click)="goRegistrationPage()">Регистрация</button>
-    <button mat-menu-item>Выйти </button>
-  </mat-menu>
-</div>
+<html lang="en">
+<head>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Infant&display=swap" rel="stylesheet">
+</head>
+<style>
 
-<br>
+.main{
+font-family: 'Cormorant Infant', serif;
+  font-size: 120%
+}
+</style>
+  <body>
+  <br>
 
-<router-outlet></router-outlet>
+  <button class="main" mat-button (click)="goHomePage()">Главная</button>
+  <button class="main" mat-button (click)="goCatalogPage()">Каталог</button>
+  <button class="main" mat-button (click)="goUserPage()">Личный кабинет</button>
+  <button class="main" mat-button (click)="goAuthorizationPage()">Авторизация</button>
+  <button class="main" mat-button (click)="goRegistrationPage()">Регистрация</button>
+
+  <br>
+  <br>
+  <router-outlet></router-outlet>
+  </body>
+</html>
+
 
