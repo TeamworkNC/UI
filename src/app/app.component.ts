@@ -35,4 +35,9 @@ export class AppComponent {
                 this.router.navigate(
                   ['/authorization']);
               }
+
+  goFilmPage() {
+                  this.router.navigate(
+                    ['/film']);
+                }
 }

@@ -1,0 +1,8 @@
+::ng-deep .mat-tab-label {
+  color : #ffffff;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 150%
+}
+::ng-deep .mat-tab-group.mat-primary .mat-ink-bar {
+  background-color: #ccccff;
+}
