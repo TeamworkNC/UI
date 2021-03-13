@@ -1,0 +1,19 @@
+::ng-deep .carousel-control-next{
+    display: none;
+}
+::ng-deep  .carousel-control-prev{
+                                     display: none;
+                                 }
+::ng-deep  :focus {outline:none;}
+
+::ng-deep .mat-tab-label {
+  color : #ffffff;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 150%
+}
+::ng-deep .mat-tab-group.mat-primary .mat-ink-bar {
+  background-color: #ccccff;
+}
+
+
+

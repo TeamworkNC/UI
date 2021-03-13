@@ -19,7 +19,7 @@ export class AppComponent {
 
   goUserPage() {
           this.router.navigate(
-            ['/user']);
+            ['/user/'+1]); //убрать
         }
 
   goCatalogPage() {
