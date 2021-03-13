@@ -1,26 +1,50 @@
-<h2 align="center"  style="font-family:Impact; color:#b22222" >Добро пожаловать, [логин]!</h2>
+<html >
+<head>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&display=swap" rel="stylesheet">
+</head>
+<style>
+.test{
+font-family: 'Cormorant Garamond', serif;
+  font-size: 170%;
+  color : #ffffff;
+}
+</style>
+<body style="background-color: black " class="test">
 <br>
-<br>
-<div id="sectionA" style="margin-left: 5%">
-  <mat-card class="example-card">
-    <img mat-card-image src="assets/resource/no_img.jpg" alt="Avatar">
-    <mat-card-actions >
-      <div align="center">
-        <input type="file">
-        <button mat-button ><div style="font-family:Verdana; font-size: 12pt;">Изменить</div></button>
+<div style="display: table; width: 100%; height: 100%;">
+  <div style="display: table-row; width: 100%; height: 100%">
+    <div style="display: table-cell; width: 26%" align="center">
+      <div>Картинка</div>
+    </div>
+    <div style="display: table-cell; width: 70%" align="center">
+      <div>Добро пожаловать, {{this.user.name}}</div>
+      <div>
+        <mat-accordion>
+          <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                This is the expansion title
+              </mat-panel-title>
+              <mat-panel-description>
+                This is a summary of the content
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <p>This is the primary content of the panel.</p>
+          </mat-expansion-panel>
+        </mat-accordion>
       </div>
-    </mat-card-actions>
-  </mat-card>
+    </div>
+  </div>
 </div>
 
-<div align="center" id="sectionB">EWFWEFWEFW</div>
-<div align="center" id="sectionC">EFWEFWEF</div>
-
-
-<button mat-button (click)="getUserData(1)"><div style="">123</div></button>
+<button mat-button (click)="getUserData(1)"><div >123</div></button>
 <p>userId - {{this.user.userId}}</p>
 <p>name - {{this.user.name}}</p>
 <p>birthday - {{this.user.birthday}}</p>
 <p>logoUrl - {{this.user.logoUrl}}</p>
 <p>description - {{this.user.description}}</p>
 <p>registrationDate - {{this.user.registrationDate}}</p>
+
+</body>
+</html>

@@ -23,6 +23,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import {MatTabsModule} from '@angular/material/tabs';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
+    MatExpansionModule,
     NgbModule,
     BrowserAnimationsModule,
     MatMenuModule,
