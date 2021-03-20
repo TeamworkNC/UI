@@ -25,6 +25,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatTableModule} from '@angular/material/table';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import {MatTableModule} from '@angular/material/table';
     MatDialogModule,
     MatTabsModule,
     MatTableModule,
+    MatCheckboxModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-catalog-page',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CatalogPageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private activateRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  goFilmPage() {
+    this.router.navigate(
+      ['/film']);
   }
 
 }
