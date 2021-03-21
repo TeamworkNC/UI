@@ -33,7 +33,7 @@
       <img src="https://s2.kinoteatr.ru/upload/movies/6367/screenshots/58543.jpg?_ga=2.126278925.1254814042.1615635254-2029323597.1615635254" alt="Random second slide" style="width:40%;float:left;" vspace="3" hspace="91">
       <div style="color : #ffffff; font-size: 200%; margin-left:2%; margin-right:2%" class="test">Мавританец</div>
       <br>
-      <div style="color : #ffffff; font-size: 150%" class="test">Звезды самого высокого эшелона Бенедикт Камбербэтч и Джоди Фостер готовы рассказать историю о величайшей теории заговора тысячелетия. Реальная история заключенного в Гуантанамо, которого подозревали в совершении ужасного теракта, наконец, рассказана во всеуслышание. Не получивший официальных обвинений и возможности защиты в суде, Мохаммед Ульд Слахи провел в заключении более 6 лет. Только после этого он был удостоен права на адвокатов. Но и им в борьбе с правительственной машиной предстоит побороть личные сомнения. Ведь как можно быть до конца уверенными в невиновности заключенного?</div>
+      <div style="color : #ffffff; font-size: 150%;margin-left:2%; margin-right:2%" class="test">Звезды самого высокого эшелона Бенедикт Камбербэтч и Джоди Фостер готовы рассказать историю о величайшей теории заговора тысячелетия. Реальная история заключенного в Гуантанамо, которого подозревали в совершении ужасного теракта, наконец, рассказана во всеуслышание. Не получивший официальных обвинений и возможности защиты в суде, Мохаммед Ульд Слахи провел в заключении более 6 лет. Только после этого он был удостоен права на адвокатов. Но и им в борьбе с правительственной машиной предстоит побороть личные сомнения. Ведь как можно быть до конца уверенными в невиновности заключенного?</div>
       <br>
       <div>
         <button mat-raised-button style=" font-size: 150%" class="test" (click)="goFilmPage()">Смотреть</button>
@@ -45,7 +45,7 @@
       <img src="https://s1.kinoteatr.ru/upload/movies/6569/screenshots/58719.jpg?_ga=2.235772161.1254814042.1615635254-2029323597.1615635254" alt="Random third slide" style="width:40%; float:left;" vspace="3" hspace="91">
       <div style="color : #ffffff; font-size: 200%; margin-left:2%; margin-right:2%" class="test">Любовное настроение</div>
       <br>
-      <div style="color : #ffffff; font-size: 150%" class="test">Гонконг, 1962 год. Две супружеские пары, господин Чоу с женой и госпожа Су с мужем, одновременно въезжают в соседние квартиры. Пока их супруги пропадают на работе или в заграничных командировках, Чоу и Су проводят много времени в одиночестве и общаются друг с другом как обычные соседи. Все меняется, когда они обнаруживают, что их супруги изменяют им друг с другом. Чоу и Су пытаются понять, как начался этот роман, и постепенно сближаются, но не хотят давать волю чувствам...</div>
+      <div style="color : #ffffff; font-size: 150%;margin-left:2%; margin-right:2%" class="test">Гонконг, 1962 год. Две супружеские пары, господин Чоу с женой и госпожа Су с мужем, одновременно въезжают в соседние квартиры. Пока их супруги пропадают на работе или в заграничных командировках, Чоу и Су проводят много времени в одиночестве и общаются друг с другом как обычные соседи. Все меняется, когда они обнаруживают, что их супруги изменяют им друг с другом. Чоу и Су пытаются понять, как начался этот роман, и постепенно сближаются, но не хотят давать волю чувствам...</div>
       <br>
       <div>
         <button mat-raised-button style="font-size: 150%" class="test" (click)="goFilmPage()">Смотреть</button>
@@ -94,7 +94,24 @@
         </mat-card>
       </div>
     </mat-tab>
-    <mat-tab style="color : #ffffff;" class="test" label="Добавить фильм"> Content 3 </mat-tab>
+    <mat-tab style="color : #ffffff;" class="test" label="Добавить фильм">
+
+      <div style="text-align: center; display: inline-block; vertical-align: middle; width: 25%; background-color: #ffffff;border: 1px dotted black; border-radius: 10px 10px 10px 10px">
+        <mat-form-field class="test" appearance="fill" style="width:80%;  display: inline-block; vertical-align: middle;margin-top: 5% ">
+          <mat-label class="test">Введите вашу почту</mat-label>
+          <input class="test" matInput placeholder="Пример - ivan1234@mail.ru" required >
+          <mat-error class="test"  ></mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="test"  appearance="fill" style="width:80%;  display: inline-block; vertical-align: middle; " >
+          <mat-label class="test" >Введите пароль</mat-label>
+          <input class="test"  matInput class = "login" placeholder="Пример - password12345*"  required >
+          <mat-error class="test" ></mat-error>
+        </mat-form-field>
+
+      </div>
+
+    </mat-tab>
   </mat-tab-group>
 </div>
 </body>
