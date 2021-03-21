@@ -11,3 +11,11 @@
   right: 40px;
   z-index: 100;
 }
+
+::ng-deep .nb-theme-default nb-layout .layout .layout-container .content .columns nb-layout-column {
+    padding-top: 0rem;
+        padding-right: 0rem;
+        padding-bottom: 0rem;
+        padding-left: 0rem;
+}
+
