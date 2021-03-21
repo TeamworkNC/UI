@@ -20,9 +20,25 @@ font-family: 'Cormorant Infant', serif;
   <button class="main" mat-button (click)="goRegistrationPage()">Регистрация</button>
   <button class="main" mat-button (click)="goFilmPage()">Фильм</button>
 
-  <br>
-  <br>
-  <router-outlet></router-outlet>
+  <nb-layout>
+    <nb-layout-column>
+      <router-outlet></router-outlet>
+    </nb-layout-column>
+  </nb-layout>
+
+
+  <app-recommendation-chat-open-button
+    (click)="openChat()"
+    *ngIf="!chatIsOpen"
+    class="open_button"
+  ></app-recommendation-chat-open-button>
+
+  <app-closable-recommendation-chat
+    (closeChat)="closeChat()"
+    *ngIf="chatIsOpen"
+    class="chat"
+  ></app-closable-recommendation-chat>
+
   </body>
 </html>
 

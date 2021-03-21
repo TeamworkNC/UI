@@ -26,6 +26,10 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatTableModule} from '@angular/material/table';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {RecommendationChatModule} from './features/recommendation-chat/recommendation-chat.module';
+import {NbIconModule, NbLayoutModule, NbThemeModule} from '@nebular/theme';
+import {CoreModule} from './features/core/core.module';
+import {NbEvaIconsModule} from '@nebular/eva-icons';
 
 @NgModule({
   declarations: [
@@ -57,6 +61,12 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     MatTabsModule,
     MatTableModule,
     MatCheckboxModule,
+    RecommendationChatModule,
+    NbThemeModule.forRoot({name: 'default'}),
+    NbLayoutModule,
+    NbIconModule,
+    CoreModule,
+    NbEvaIconsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

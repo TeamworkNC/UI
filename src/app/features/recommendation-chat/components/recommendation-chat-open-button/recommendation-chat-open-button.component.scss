@@ -1,0 +1,15 @@
+@import '../../../../../themes';
+
+.open-chat-button {
+  display: flex;
+  align-items: center;
+  justify-content: center; //выравниваем иконку по центру
+  padding: 15px;
+  background-color: nb-theme(background-basic-color-1);
+  box-shadow: nb-theme(shadow);
+  border-radius: 50%;
+
+  &:hover {
+    background-color: nb-theme(background-basic-color-2);
+  }
+}

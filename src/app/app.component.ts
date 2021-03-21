@@ -40,4 +40,14 @@ export class AppComponent {
                   this.router.navigate(
                     ['/film']);
                 }
+
+  chatIsOpen = false;
+
+    openChat(): void {
+      this.chatIsOpen = true;
+    }
+
+    closeChat(): void {
+      this.chatIsOpen = false;
+    }
 }

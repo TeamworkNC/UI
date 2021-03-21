@@ -1,0 +1,28 @@
+@import '../../../../../themes';
+
+.recommendation-chat {
+  display: flex;
+  flex-direction: column;
+}
+
+.recommendation-chat__close-button {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.recommendation-chat__chat {
+  width: 500px;
+  height: 550px;
+  padding: 8px;
+}
+
+.close-button {
+  padding: 6px;
+  background-color: nb-theme(background-basic-color-2);
+  box-shadow: nb-theme(shadow);
+  border-radius: 50%;
+
+  &:hover {
+    background-color: nb-theme(background-basic-color-3);
+  }
+}
