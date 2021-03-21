@@ -17,7 +17,7 @@ const ELEMENT_DATA1: FilmMain[] = [
 @Component({
   selector: 'ngb-carousel-basic',
   templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.css']
+  styleUrls: ['./home-page.component.scss']
 })
 
 export class HomePageComponent implements OnInit {

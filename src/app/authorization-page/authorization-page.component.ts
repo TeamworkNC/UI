@@ -9,7 +9,7 @@ import {MatDialog, MatDialogRef, MatDialogModule} from "@angular/material/dialog
 @Component({
   selector: 'app-authorization-page',
   templateUrl: './authorization-page.component.html',
-  styleUrls: ['./authorization-page.component.css']
+  styleUrls: ['./authorization-page.component.scss']
 })
 export class AuthorizationPageComponent implements OnInit {
   user: User;
