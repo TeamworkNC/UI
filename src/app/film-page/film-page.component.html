@@ -53,18 +53,29 @@ font-family: 'Cormorant Garamond', serif;
           Ферн (Фрэнсис МакДорманд) остается без работы и без дома, когда во время экономического кризиса закрывается единственная фабрика в её небольшом городке. Единственный выход для Ферн - погрузить свой небогатый скарб в фургон и стать одной из племени современных кочевников, путешествующих от штата к штату в поисках сезонного заработка. В фильме снялись настоящие кочевники – Линда Мэй, Шарлин Свэнки и Боб Уэллс, которые стали для Ферн наставниками и товарищами в бесконечном путешествии по просторам США.
         </div>
 
+        <div style="width: 90%; margin-top:3%">
+          <ng-image-slider #nav
+                           [images]="imageObject"
+                           [infinite]="false"
+                           [autoSlide]="1"
+                           [imageSize]="{width: '28%', height: 200}"
+                           slideImage="1"></ng-image-slider>
+        </div>
       </mat-tab>
       <mat-tab style="color : #ffffff; width: 100%;" class="test" label="Трейлер">
         <ng-template matTabContent>
-          <youtube-player
-            [videoId]="id"
-            (ready)="savePlayer($event)"
-            (change)="onStateChange($event)"
-          ></youtube-player>
+          <div style="margin-top: 3%; margin-left: 2%">
+            <youtube-player [width]=1000 [height]=500
+                            [videoId]="id"
+                            (ready)="savePlayer($event)"
+                            (change)="onStateChange($event)" id="sdfsdf"
+            ></youtube-player>
+          </div>
         </ng-template>
 
       </mat-tab>
       <mat-tab style="color : #ffffff;" class="test" label="Фильм">
+        <ng-template matTabContent>
 
         <vg-player style="width: 90%; margin-top:1%; margin-left: 1%">
           <vg-overlay-play></vg-overlay-play>
@@ -96,6 +107,7 @@ font-family: 'Cormorant Garamond', serif;
             <source src="http://static.videogular.com/assets/videos/videogular.mp4" type="video/mp4">
           </video>
         </vg-player>
+        </ng-template>
       </mat-tab>
       <mat-tab style="color : #ffffff;" class="test" label="Отзывы"> Content 3 </mat-tab>
     </mat-tab-group>

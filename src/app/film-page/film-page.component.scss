@@ -13,3 +13,7 @@
 :host ::ng-deep .mat-tab-body-content {
     height: auto;
 }
+::ng-deep .nb-theme-default a {
+    color: black;
+    text-decoration: none;
+}
