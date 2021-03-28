@@ -9,6 +9,12 @@ font-family: 'Cormorant Garamond', serif;
   font-size: 100%;
   color : #ffffff;
 }
+
+.test1{
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 105%;
+  color: black
+}
 </style>
 <body style="background-color: black " class="test">
 <br>
@@ -109,7 +115,29 @@ font-family: 'Cormorant Garamond', serif;
         </vg-player>
         </ng-template>
       </mat-tab>
-      <mat-tab style="color : #ffffff;" class="test" label="Отзывы"> Content 3 </mat-tab>
+      <mat-tab style="color : #ffffff;" class="test" label="Отзывы">
+        <div class="test1" style="width: 90%; margin-top: 3%; margin-right: 3%; margin-left: 3%">
+          <mat-card >
+            <form class="example-form">
+<!--              <mat-form-field class="example-full-width">-->
+<!--                <mat-label class="test1">Favorite food</mat-label>-->
+<!--                <mat-slider [formControl]="mark"-->
+<!--                  thumbLabel-->
+<!--                  [displayWith]="formatLabel"-->
+<!--                  tickInterval="1"-->
+<!--                  min="1"-->
+<!--                  max="10"></mat-slider>-->
+<!--              </mat-form-field>-->
+              <br>
+              <mat-form-field class="example-full-width" style="width: 100%;">
+                <mat-label class="test1" >Напишите ваш отзыв</mat-label>
+                <textarea matInput placeholder="" class="test1" [formControl]="textOtz"></textarea>
+              </mat-form-field>
+            </form>
+          </mat-card>
+        </div>
+
+      </mat-tab>
     </mat-tab-group>
   </div>
 </div>

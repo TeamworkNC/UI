@@ -36,6 +36,7 @@ import {VgOverlayPlayModule} from '@videogular/ngx-videogular/overlay-play';
 import {VgBufferingModule} from '@videogular/ngx-videogular/buffering';
 import { NgxYoutubePlayerModule } from 'ngx-youtube-player';
 import { NgImageSliderModule } from 'ng-image-slider';
+import {MatSliderModule} from '@angular/material/slider';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,8 @@ import { NgImageSliderModule } from 'ng-image-slider';
     VgOverlayPlayModule,
     VgBufferingModule,
     NgxYoutubePlayerModule.forRoot(),
-    NgImageSliderModule
+    NgImageSliderModule,
+    MatSliderModule
   ],
   providers: [],
   bootstrap: [AppComponent]

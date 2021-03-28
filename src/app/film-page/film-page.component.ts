@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-film-page',
@@ -33,7 +34,8 @@ imageObject = [{
       image: 'https://resizer.mail.ru/p/3ce77a16-15de-5885-abfd-2d3da5a30bf8/AAACBbm3gNtv4nLllFzetiPDys44XxDcrrguV4TSdd1ytMewutL74nUsu7ayEw3536CFTdfxgknm98ft_BNhvvlpCPA.jpg',
       thumbImage: 'https://resizer.mail.ru/p/3ce77a16-15de-5885-abfd-2d3da5a30bf8/AAACBbm3gNtv4nLllFzetiPDys44XxDcrrguV4TSdd1ytMewutL74nUsu7ayEw3536CFTdfxgknm98ft_BNhvvlpCPA.jpg'
   }];
-
+ mark = new FormControl('', [Validators.required, this.noWhitespaceValidator]);
+    textOtz = new FormControl('', [Validators.required, this.noWhitespaceValidator]);
   onStateChange(event) {
     this.ytEvent = event.data;
   }
@@ -48,4 +50,28 @@ imageObject = [{
   pauseVideo() {
     this.player.pauseVideo();
   }
+
+  noWhitespaceValidator(control: FormControl) {
+      const isWhitespace = (control.value || '').trim().length === 0;
+      const isValid = !isWhitespace;
+      return isValid ? null : { 'whitespace': true };
+  }
+
+    getErrorMessageMark() {
+      if (this.mark.hasError('required') || this.mark.value.trim() == '') {
+        return 'Поле обязательно для заполнения';
+      }
+      return '';
+    }
+
+    getErrorMessageText() {
+        if (this.textOtz.hasError('required') || this.textOtz.value.trim() == '') {
+          return 'Поле обязательно для заполнения';
+        }
+        return '';
+      }
+
+  formatLabel(value: number) {
+      return value;
+    }
 }
