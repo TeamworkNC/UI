@@ -11,11 +11,6 @@ font-family: 'Cormorant Garamond', serif;
 }
 </style>
 <body style="background-color: black " class="test">
-<youtube-player
-  [videoId]="id"
-  (ready)="savePlayer($event)"
-  (change)="onStateChange($event)"
-></youtube-player>
 <br>
 <div style="width: 100%;">
   <img src="http://avatars.mds.yandex.net/get-kinopoisk-image/4303601/880fabac-7893-4a4e-a11c-966de84b1e9d/600x900" style="width:20%;float:left; margin-top: 5%" vspace="3" hspace="91">
@@ -60,11 +55,14 @@ font-family: 'Cormorant Garamond', serif;
 
       </mat-tab>
       <mat-tab style="color : #ffffff; width: 100%;" class="test" label="Трейлер">
-        <youtube-player
-          [videoId]="id"
-          (ready)="savePlayer($event)"
-          (change)="onStateChange($event)"
-        ></youtube-player>
+        <ng-template matTabContent>
+          <youtube-player
+            [videoId]="id"
+            (ready)="savePlayer($event)"
+            (change)="onStateChange($event)"
+          ></youtube-player>
+        </ng-template>
+
       </mat-tab>
       <mat-tab style="color : #ffffff;" class="test" label="Фильм">
 

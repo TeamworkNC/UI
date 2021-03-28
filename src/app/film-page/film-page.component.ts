@@ -15,7 +15,6 @@ id = 'qDuKsiwS5xw';
   playerVars = {
     cc_lang_pref: 'en'
   };
-
   private player;
   private ytEvent;
 
