@@ -12,7 +12,7 @@ font-family: 'Cormorant Garamond', serif;
 
 .test1{
   font-family: 'Cormorant Garamond', serif;
-  font-size: 105%;
+  font-size: 115%;
   color: black
 }
 </style>
@@ -118,22 +118,47 @@ font-family: 'Cormorant Garamond', serif;
       <mat-tab style="color : #ffffff;" class="test" label="Отзывы">
         <div class="test1" style="width: 90%; margin-top: 3%; margin-right: 3%; margin-left: 3%">
           <mat-card >
+
             <form class="example-form">
-<!--              <mat-form-field class="example-full-width">-->
-<!--                <mat-label class="test1">Favorite food</mat-label>-->
-<!--                <mat-slider [formControl]="mark"-->
-<!--                  thumbLabel-->
-<!--                  [displayWith]="formatLabel"-->
-<!--                  tickInterval="1"-->
-<!--                  min="1"-->
-<!--                  max="10"></mat-slider>-->
-<!--              </mat-form-field>-->
+
+              <ngb-rating style="font-size:135%" [(rate)]="selected" (hover)="hovered=$event" required [formControl]="mark" (leave)="hovered=0" [readonly]="readonly"></ngb-rating>
               <br>
               <mat-form-field class="example-full-width" style="width: 100%;">
                 <mat-label class="test1" >Напишите ваш отзыв</mat-label>
-                <textarea matInput placeholder="" class="test1" [formControl]="textOtz"></textarea>
+                <textarea matInput placeholder="" class="test1" [formControl]="textOtz" required></textarea>
               </mat-form-field>
+
+              <div style="margin-bottom: 1%">
+                <button mat-button class="test1" *ngIf="this.textOtz.invalid || this.mark.invalid" [disabled]="true" type="submit"><div style="">Оставить отзыв</div></button>
+                <button mat-button  class="test1"  *ngIf="!this.textOtz.invalid && !this.mark.invalid" type="submit">
+<!--                        (click)="sendUserData()"-->
+                <div style="">Оставить отзыв</div></button>
+              </div>
             </form>
+
+          </mat-card>
+        </div>
+        <div style="width: 90%; margin-top: 3%; margin-right: 3%; margin-left: 3%; font-size: 130%">Отзывы о фильме:</div>
+        <div style="width: 90%; margin-top: 3%; margin-right: 3%; margin-left: 3%; font-size: 130%">
+          <mat-card>
+            <mat-card-header>
+              <img mat-card-avatar class="example-header-image" src="https://avatars.mds.yandex.net/get-ott/374297/2a000001616b87458162c9216ccd5144e94d/678x380">
+              <mat-card-title class="test1">Shiba Inu1</mat-card-title>
+            </mat-card-header>
+            <mat-card-content style="margin-top:2%">
+              <ngb-rating style="font-size:135%"  [rate]="3" [readonly]=true></ngb-rating>
+              <br>
+              <br>
+              <p class="test1" style="font-size: 137%">
+                The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+                A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+                bred for hunting.
+              </p>
+            </mat-card-content>
+            <mat-card-actions >
+              <button mat-button class="test1" style="font-size: 100%">Полезный отзыв</button>
+              <button mat-button class="test1" style="font-size: 100%">Бесполезный отзыв</button>
+            </mat-card-actions>
           </mat-card>
         </div>
 

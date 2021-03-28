@@ -1,15 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-film-page',
+  selector: 'ngbd-rating-events',
   templateUrl: './film-page.component.html',
   styleUrls: ['./film-page.component.scss']
 })
 export class FilmPageComponent implements OnInit {
 
   constructor() { }
-
+  selected = 0;
+  hovered = 0;
+  readonly = false;
   ngOnInit(): void {
   }
 id = 'D0lJAv9WCSA';
