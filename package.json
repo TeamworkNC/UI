@@ -31,6 +31,7 @@
     "eva-icons": "^1.1.3",
     "g": "^2.0.1",
     "ngx-admin": "0.0.0-beta.0",
+    "ngx-youtube-player": "^9.1.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "videogular2": "^7.0.2",

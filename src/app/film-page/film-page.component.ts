@@ -11,5 +11,26 @@ export class FilmPageComponent implements OnInit {
 
   ngOnInit(): void {
   }
+id = 'qDuKsiwS5xw';
+  playerVars = {
+    cc_lang_pref: 'en'
+  };
 
+  private player;
+  private ytEvent;
+
+  onStateChange(event) {
+    this.ytEvent = event.data;
+  }
+  savePlayer(player) {
+    this.player = player;
+  }
+
+  playVideo() {
+    this.player.playVideo();
+  }
+
+  pauseVideo() {
+    this.player.pauseVideo();
+  }
 }
