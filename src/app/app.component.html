@@ -12,14 +12,23 @@ font-family: 'Cormorant Infant', serif;
 </style>
   <body>
   <br>
-  <div>
-  <img  class="ava" style="margin-bottom: 0.5%; margin-right: 0.5%;"   src="https://avatars.mds.yandex.net/get-ott/374297/2a000001616b87458162c9216ccd5144e94d/678x380">
-  <button class="main" mat-button (click)="goHomePage()">Главная</button>
-  <button class="main" mat-button (click)="goCatalogPage()">Каталог</button>
-  <button class="main" mat-button (click)="goUserPage()">Личный кабинет</button>
-  <button class="main" mat-button (click)="goAuthorizationPage()">Авторизация</button>
-  <button class="main" mat-button (click)="goRegistrationPage()">Регистрация</button>
-  <button class="main" mat-button (click)="goFilmPage()">Фильм</button>
+  <div style="display: table; width: 100%; margin-bottom: 0.5%; ">
+    <div style="display: table-row; width: 100%; ">
+      <div style="display: table-cell; width: 90%; vertical-align: top">
+        <button class="main" mat-button (click)="goHomePage()">Главная</button>
+        <button class="main" mat-button (click)="goCatalogPage()">Каталог</button>
+        <button class="main" mat-button (click)="goUserPage()">Личный кабинет</button>
+        <button class="main" mat-button (click)="goAuthorizationPage()">Авторизация</button>
+        <button class="main" mat-button (click)="goRegistrationPage()">Регистрация</button>
+        <button class="main" mat-button (click)="goFilmPage()">Фильм</button>
+      </div>
+      <div style="display: table-cell;">
+        <img  class="ava" align="right" style="margin-right: 1%; margin-left : 0.5%" src="https://avatars.mds.yandex.net/get-ott/374297/2a000001616b87458162c9216ccd5144e94d/678x380">
+      </div>
+    </div>
+
+
+
 
   </div>
   <nb-layout>
