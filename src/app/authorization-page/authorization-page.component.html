@@ -17,7 +17,7 @@
     <div style="text-align : center; margin-top: 5%; margin-left:5%; margin-right : 5% " >Добро пожаловать в online кинотеатр Movie And Chill!</div>
     <div style="text-align : center; margin-left:5%; margin-right : 5% " class="test">Для авторизации, пожалуйста, заполните форму ниже.</div>
     <br>
-    <mat-form-field class="test" appearance="fill" style="width:80%;  display: inline-block; vertical-align: middle; ">
+    <mat-form-field class="test" appearance="fill" style="width:80%;  display: inline-block; vertical-align: middle; "    id="123">
       <mat-label class="test">Введите вашу почту</mat-label>
       <input class="test" matInput placeholder="Пример - ivan1234@mail.ru" [formControl]="email"  required >
       <mat-error class="test" *ngIf="this.email.invalid" >{{getErrorMessageEmail()}}</mat-error>
