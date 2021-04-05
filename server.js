@@ -22,10 +22,10 @@ const forceSSL = function () {
 
 app.use(forceSSL());
 
-app.use(express.static('./dist/movies-and-chill'));
+app.use(express.static('./dist/my-app111'));
 
 app.get('/*', (req, res) =>
-  res.sendFile('index.html', {root: 'dist/movies-and-chill/'}),
+  res.sendFile('index.html', {root: 'dist/my-app111/'}),
 );
 
 app.listen(process.env.PORT || 8080);
