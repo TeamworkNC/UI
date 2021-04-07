@@ -15,7 +15,7 @@ export class AuthorizationPageComponent implements OnInit {
   user: User;
 
   constructor(private http: HttpClient, private api: Autor, private activateRoute: ActivatedRoute, private router: Router, public dialog: MatDialog,) {
-   this.user = {"userId":0, "name": "", "birthday": "", "logoUrl": "", "description": "", "registrationDate": ""};
+   this.user = {"userId":0};
    }
 noWhitespaceValidator(control: FormControl) {
     const isWhitespace = (control.value || '').trim().length === 0;
@@ -57,7 +57,7 @@ noWhitespaceValidator(control: FormControl) {
       this.api.postCommand( this.login.value.trim(), this.pass.value)
           .subscribe((data: HttpResponse<User>) => {
             if( data.body == null){
-              this.user = {"userId":0, "name": "", "birthday": "", "logoUrl": "", "description": "", "registrationDate": ""};
+              this.user = {"userId":0};
             }else{
             this.user = data.body;
             }

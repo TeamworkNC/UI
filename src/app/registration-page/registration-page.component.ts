@@ -37,7 +37,7 @@ export class RegistrationPageComponent implements OnInit {
 user: User;
 userData: RegistrationData;
 constructor(private http: HttpClient, private api: Reg, public dialog: MatDialog, private activateRoute: ActivatedRoute, private router: Router) {
-  this.user = {"userId":0, "name": "", "birthday": "", "logoUrl": "", "description": "", "registrationDate": ""};
+  this.user = {"userId":0};
   this.userData = {"firstName": '', "lastName":'', "email":'', "password": ''};
 }
 noWhitespaceValidator(control: FormControl) {
@@ -106,7 +106,7 @@ getErrorMessagePassSecond() {
             .subscribe((data: HttpResponse<User>) => {
 
               if( data.body == null){
-                this.user = {"userId":0, "name": "", "birthday": "", "logoUrl": "", "description": "", "registrationDate": ""};
+                this.user = {"userId":0};
               }else{
               this.user = data.body;
               }

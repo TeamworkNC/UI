@@ -51,7 +51,7 @@ displayedColumns: string[] = ['position', 'name', 'weight'];
 dataSource1 = ELEMENT_DATA1;
 dataSource = ELEMENT_DATA;
   constructor(private http: HttpClient, private api: ProfileInfo, private api1: Reg, private activateRoute: ActivatedRoute,  public dialog: MatDialog,  private router: Router) {
-    this.user = {"userId":0, "name": "", "birthday": "", "logoUrl": "", "description": "", "registrationDate": ""};
+    this.user = {"userId":0};
     this.subscription = new Subscription();
     this.userId1 = 0;
   }
@@ -120,7 +120,7 @@ sendUserData(){
             .subscribe((data: HttpResponse<User>) => {
 
               if( data.body == null){
-                this.user = {"userId":0, "name": "", "birthday": "", "logoUrl": "", "description": "", "registrationDate": ""};
+                this.user = {"userId":0};
               }else{
               this.user = data.body;
               }
@@ -149,7 +149,7 @@ sendUserData(){
           .subscribe((data: User) => {
 
             if( data == null){
-              this.user = {"userId":0, "name": "", "birthday": "", "logoUrl": "", "description": "", "registrationDate": ""};
+              this.user = {"userId":0};
             }else{
             this.user = data;
             }
