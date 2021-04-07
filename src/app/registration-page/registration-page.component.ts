@@ -7,14 +7,30 @@ import {Observable} from "rxjs";
 import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {MatDialog, MatDialogRef, MatDialogModule} from "@angular/material/dialog";
 import {ActivatedRoute, Router} from "@angular/router";
-
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import {MomentDateAdapter} from '@angular/material-moment-adapter';
+import * as _moment from "moment";
+const moment = _moment;
 var headers = new HttpHeaders();
 headers.append('Content-Type', 'application/json');
+export const ISO_FORMAT = {
+    parse: {
+        dateInput: 'LL',
+    },
+    display: {
+        dateInput: 'YYYY-MM-DD',
+        monthYearLabel: 'MMM YYYY',
+        dateA11yLabel: 'LL',
+        monthYearA11yLabel: 'MMMM YYYY',
+    },
+};
 
 @Component({
   selector: 'app-registration-page',
   templateUrl: './registration-page.component.html',
-  styleUrls: ['./registration-page.component.scss']
+  styleUrls: ['./registration-page.component.scss'],
+  providers: [{provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+                        {provide: MAT_DATE_FORMATS, useValue: ISO_FORMAT},],
 })
 export class RegistrationPageComponent implements OnInit {
 
@@ -29,10 +45,10 @@ noWhitespaceValidator(control: FormControl) {
     const isValid = !isWhitespace;
     return isValid ? null : { 'whitespace': true };
 }
+date = new FormControl(moment());
 
 email = new FormControl('', [Validators.required, Validators.email, this.noWhitespaceValidator]);
-firstName = new FormControl('', [Validators.required, this.noWhitespaceValidator]);
-lastName = new FormControl('', [Validators.required, this.noWhitespaceValidator]);
+login = new FormControl('', [Validators.required, this.noWhitespaceValidator]);
 passFirst = new FormControl('', [Validators.required, this.noWhitespaceValidator]);
 passSecond = new FormControl('', [Validators.required, this.noWhitespaceValidator]);
 getErrorMessageEmail() {
@@ -42,18 +58,13 @@ getErrorMessageEmail() {
     return this.email.hasError('email') ? 'Некорректный email' : '';
   }
 
-  getErrorMessageFirstName() {
-      if (this.firstName.hasError('required') || this.firstName.value.trim()=='') {
+  getErrorMessageLogin() {
+      if (this.login.hasError('required') || this.login.value.trim()=='') {
         return 'Поле обязательно для заполнения';
       }
       return '';
     }
-    getErrorMessageLastName() {
-          if (this.lastName.hasError('required') || this.lastName.value.trim()=='') {
-            return 'Поле обязательно для заполнения';
-          }
-          return '';
-        }
+
 getErrorMessagePassFirst() {
                    if (this.passFirst.hasError('required') || this.passFirst.value.trim()=='') {
                      return 'Поле обязательно для заполнения';
@@ -84,13 +95,14 @@ getErrorMessagePassSecond() {
   this.dialog.open(FailRegistration);
   }
 
+
   sendUserData(){
   if (this.passSecond.value!=this.passFirst.value) {
                   this.openDialog();
                 }
 
     if(this.passSecond.value==this.passFirst.value){
-    this.api.postCommand(this.firstName.value.trim(),this.lastName.value.trim(),this.passFirst.value,this.email.value.trim())
+    this.api.postCommand(this.login.value.trim(), this.passFirst.value,this.email.value.trim(), this.date.value)
             .subscribe((data: HttpResponse<User>) => {
 
               if( data.body == null){

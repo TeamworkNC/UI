@@ -55,10 +55,9 @@ dataSource = ELEMENT_DATA;
     this.subscription = new Subscription();
     this.userId1 = 0;
   }
-
+  date = new FormControl();
   email = new FormControl('', [Validators.required, Validators.email, this.noWhitespaceValidator]);
-  firstName = new FormControl('', [Validators.required, this.noWhitespaceValidator]);
-  lastName = new FormControl('', [Validators.required, this.noWhitespaceValidator]);
+  login = new FormControl('', [Validators.required, this.noWhitespaceValidator]);
   passFirst = new FormControl('', [Validators.required, this.noWhitespaceValidator]);
   passSecond = new FormControl('', [Validators.required, this.noWhitespaceValidator]);
 
@@ -69,18 +68,13 @@ dataSource = ELEMENT_DATA;
       return this.email.hasError('email') ? 'Некорректный email' : '';
     }
 
-    getErrorMessageFirstName() {
-        if (this.firstName.hasError('required') || this.firstName.value.trim()=='') {
+    getErrorMessageLogin() {
+        if (this.login.hasError('required') || this.login.value.trim()=='') {
           return 'Поле обязательно для заполнения';
         }
         return '';
       }
-      getErrorMessageLastName() {
-            if (this.lastName.hasError('required') || this.lastName.value.trim()=='') {
-              return 'Поле обязательно для заполнения';
-            }
-            return '';
-          }
+
   getErrorMessagePassFirst() {
                      if (this.passFirst.hasError('required') || this.passFirst.value.trim()=='') {
                        return 'Поле обязательно для заполнения';
@@ -122,7 +116,7 @@ sendUserData(){
                 }
 
     if(this.passSecond.value==this.passFirst.value){
-    this.api1.postCommand(this.firstName.value.trim(),this.lastName.value.trim(),this.passFirst.value,this.email.value.trim())
+    this.api1.postCommand(this.login.value.trim(),this.email.value.trim(),this.passFirst.value, this.date.value)
             .subscribe((data: HttpResponse<User>) => {
 
               if( data.body == null){

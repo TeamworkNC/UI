@@ -12,22 +12,17 @@ font-family: 'Cormorant Garamond', serif;
 </style>
 <body >
 <div style="width: 100%; height: 100%; text-align: center; background-color:rgba(0,0,0,1); background-image: url(https://images.unsplash.com/photo-1486492440844-ebc195542a40?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1267&q=80);  background-size: contain; " >
-  <div style="text-align: center; display: inline-block; vertical-align: middle; width: 25%; background-color: #ffffff;border: 1px dotted black; border-radius: 10px 10px 10px 10px">
+  <div style="color: white">{{this.date.value}}</div>
+  <div style="text-align: center; display: inline-block; vertical-align: middle; width: 30%; background-color: #ffffff;border: 1px dotted black; border-radius: 10px 10px 10px 10px">
     <img src="assets/resource/img1.PNG" style="margin-top: 5%; width:70%; " >
     <div class="test">Добро пожаловать в online кинотеатр Movie And Chill!</div>
     <div class="test">Для регистрации, пожалуйста, заполните форму ниже.</div>
     <br>
     <br>
     <mat-form-field appearance="fill" style="width:80%;  display: inline-block; vertical-align: middle;">
-      <mat-label class="test">Введите ваше имя</mat-label>
-      <input matInput class="test" placeholder="Пример - Иван" [formControl]="firstName" required>
-      <mat-error *ngIf="firstName.invalid" class="test">{{getErrorMessageFirstName()}}</mat-error>
-    </mat-form-field>
-
-    <mat-form-field appearance="fill" style="width:80%;  display: inline-block; vertical-align: middle;">
-      <mat-label class="test">Введите вашу фамилию</mat-label>
-      <input matInput class="test" placeholder="Пример - Иванов" [formControl]="lastName" required>
-      <mat-error *ngIf="lastName.invalid" class="test">{{getErrorMessageLastName()}}</mat-error>
+      <mat-label class="test">Придумайте логин</mat-label>
+      <input matInput class="test" placeholder="Пример - ivan12345" [formControl]="login" required>
+      <mat-error *ngIf="login.invalid" class="test">{{getErrorMessageLogin()}}</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill" style="width:80%;  display: inline-block; vertical-align: middle;">
@@ -36,9 +31,16 @@ font-family: 'Cormorant Garamond', serif;
       <mat-error class="test" *ngIf="email.invalid">{{getErrorMessageEmail()}}</mat-error>
     </mat-form-field>
 
+    <mat-form-field appearance="fill"  style="width:80%;  display: inline-block; vertical-align: middle;">
+      <mat-label class="test">Выберете дату рождения</mat-label>
+      <input class="test" matInput [matDatepicker]="picker" [formControl]="date" required>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
     <mat-form-field appearance="fill" style="width:80%;  display: inline-block; vertical-align: middle;">
       <mat-label class="test">Введите пароль</mat-label>
-      <input matInput class="test" placeholder="Пример - password12345*" [formControl]="passFirst"  required>
+      <input matInput class="test" [formControl]="passFirst"  required>
       <mat-error *ngIf="passFirst.invalid" class="test">{{getErrorMessagePassFirst()}}</mat-error>
     </mat-form-field>
 
@@ -48,8 +50,8 @@ font-family: 'Cormorant Garamond', serif;
       <mat-error class="test" *ngIf="passSecond.invalid">{{getErrorMessagePassSecond()}}</mat-error>
     </mat-form-field>
     <div style="margin-bottom: 5%">
-    <button mat-button class="test" *ngIf="this.lastName.invalid || this.firstName.invalid || this.passSecond.invalid || this.passFirst.invalid || this.email.invalid" [disabled]="true" type="submit"><div style="">Зарегистрироваться</div></button>
-    <button mat-button class="test" *ngIf="!this.lastName.invalid && !this.firstName.invalid && !this.passSecond.invalid && !this.passFirst.invalid && !this.email.invalid" type="submit" (click)="sendUserData()"><div style="">Зарегистрироваться</div></button>
+    <button mat-button class="test" *ngIf="this.login.invalid || this.passSecond.invalid || this.passFirst.invalid || this.email.invalid" [disabled]="true" type="submit"><div style="">Зарегистрироваться</div></button>
+    <button mat-button class="test" *ngIf="!this.login.invalid && !this.passSecond.invalid && !this.passFirst.invalid && !this.email.invalid" type="submit" (click)="sendUserData()"><div style="">Зарегистрироваться</div></button>
     </div>
   </div>
   <div style="height: 100%; display: inline-block; vertical-align: middle;"></div>

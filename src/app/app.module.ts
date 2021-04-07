@@ -37,6 +37,11 @@ import {VgBufferingModule} from '@videogular/ngx-videogular/buffering';
 import { NgxYoutubePlayerModule } from 'ngx-youtube-player';
 import { NgImageSliderModule } from 'ng-image-slider';
 import {MatSliderModule} from '@angular/material/slider';
+import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import {MomentDateAdapter} from '@angular/material-moment-adapter';
+
 
 @NgModule({
   declarations: [
@@ -80,7 +85,11 @@ import {MatSliderModule} from '@angular/material/slider';
     VgBufferingModule,
     NgxYoutubePlayerModule.forRoot(),
     NgImageSliderModule,
-    MatSliderModule
+    MatSliderModule,
+    MatNativeDateModule,
+    MatRippleModule,
+    MatDatepickerModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

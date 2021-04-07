@@ -5,7 +5,7 @@ import {User} from "src/app/user";
 
 var headers = new HttpHeaders();
 headers.append('Content-Type', 'application/json');
-const localUrl1 = 'http://localhost:8080/test';
+const localUrl1 = 'https://mac21-portal-backend.herokuapp.com/api/v1/public/auth/register';
 
 @Injectable({
   providedIn: 'root'
@@ -15,12 +15,12 @@ export class Reg {
   constructor(private http: HttpClient) {
   }
 
-  postCommand(firstName: string, lastName: string, password: string, email : string): Observable <HttpResponse<User>> {
+  postCommand(login: string, password: string, email : string, date : string): Observable <HttpResponse<User>> {
   const body = {
-        firstName: firstName,
-        lastName: lastName,
+        login: login,
         password : password,
-        email : email
+        email : email,
+        date : date
       };
     return this.http.post<User>(localUrl1, body, {
       observe: 'response', headers: headers
