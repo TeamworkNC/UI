@@ -9,19 +9,17 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 })
 export class FilmPageComponent implements OnInit {
 
-  constructor() { }
-  selected = 0;
-  hovered = 0;
-  readonly = false;
-  ngOnInit(): void {
-  }
-id = 'D0lJAv9WCSA';
-  playerOptions = {
-    cc_lang_pref: 'en'
-  };
-  private player;
-  private ytEvent;
-imageObject = [{
+film = {
+id : 5,
+name : "Земля кочевников",
+genre: "Драмма",
+producer : "Хлои Чжао",
+actors: "Фрэнсис МакДорманд, Дэвид Стрэтэйрн, Линда Мэй , Шарлин Свэнки , Боб Уэллс",
+rating: "7.0",
+ageRestrictions : "18",
+description : "Ферн (Фрэнсис МакДорманд) остается без работы и без дома, когда во время экономического кризиса закрывается единственная фабрика в её небольшом городке. Единственный выход для Ферн - погрузить свой небогатый скарб в фургон и стать одной из племени современных кочевников, путешествующих от штата к штату в поисках сезонного заработка. В фильме снялись настоящие кочевники – Линда Мэй, Шарлин Свэнки и Боб Уэллс, которые стали для Ферн наставниками и товарищами в бесконечном путешествии по просторам США.",
+trailerId : 'D0lJAv9WCSA',
+imageObject : [{
       image: 'https://api.kinoart.ru/storage/post/1999/regular_detail_picture-0b858bb02ffe94a7227e9c629278b35b.jpg',
       thumbImage: 'https://api.kinoart.ru/storage/post/1999/regular_detail_picture-0b858bb02ffe94a7227e9c629278b35b.jpg'
   }, {
@@ -36,7 +34,34 @@ imageObject = [{
   }, {
       image: 'https://resizer.mail.ru/p/3ce77a16-15de-5885-abfd-2d3da5a30bf8/AAACBbm3gNtv4nLllFzetiPDys44XxDcrrguV4TSdd1ytMewutL74nUsu7ayEw3536CFTdfxgknm98ft_BNhvvlpCPA.jpg',
       thumbImage: 'https://resizer.mail.ru/p/3ce77a16-15de-5885-abfd-2d3da5a30bf8/AAACBbm3gNtv4nLllFzetiPDys44XxDcrrguV4TSdd1ytMewutL74nUsu7ayEw3536CFTdfxgknm98ft_BNhvvlpCPA.jpg'
-  }];
+  }],
+  reviews : [{
+    logo : "https://lh3.googleusercontent.com/proxy/YyY1kU2iJNAeohPgn7sYDUNG78DFvWLY-rBAPpbxcuyjuZAQDHggTyTwtkqt-JewDY71L1C-9w",
+    login: "Test",
+    mark: 10,
+    text: ` Test`
+  },
+  {
+      logo : "https://avatars.mds.yandex.net/get-ott/374297/2a000001616b87458162c9216ccd5144e94d/678x380",
+      login: "Shiba Inu1",
+      mark: 3,
+      text: `The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally bred for hunting.`
+    }
+    ]
+}
+
+  constructor() { }
+  selected = 0;
+  hovered = 0;
+  readonly = false;
+  ngOnInit(): void {
+  }
+  playerOptions = {
+    cc_lang_pref: 'en'
+  };
+  private player;
+  private ytEvent;
+
  mark = new FormControl('', [Validators.required, this.noWhitespaceValidator]);
     textOtz = new FormControl('', [Validators.required, this.noWhitespaceValidator]);
   onStateChange(event) {

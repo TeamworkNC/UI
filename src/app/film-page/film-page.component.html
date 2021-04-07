@@ -22,7 +22,7 @@ font-family: 'Cormorant Garamond', serif;
   <img src="http://avatars.mds.yandex.net/get-kinopoisk-image/4303601/880fabac-7893-4a4e-a11c-966de84b1e9d/600x900" style="width:20%;float:left; margin-top: 5%" vspace="3" hspace="91">
 
   <div style="color : #ffffff; width: 100%; " >
-    <div align="center" style="font-size: 200%; ">Земля кочевников</div>
+    <div align="center" style="font-size: 200%; ">{{this.film.name}}</div>
     <br>
     <mat-tab-group style="color : #ffffff; " mat-align-tabs="center" class="test">
       <mat-tab style="color : #ffffff;" class="test" label="Описание">
@@ -30,38 +30,38 @@ font-family: 'Cormorant Garamond', serif;
         <div style="display: table; width: 100%; margin-top: 3%;font-size: 150%;">
           <div style="display: table-row;width: 100% ">
             <div style="display: table-cell; width: 20%; color: #ccccff">Жанр:</div>
-            <div style="display: table-cell">Драмма</div>
+            <div style="display: table-cell">{{this.film.genre}}</div>
           </div>
 
           <div style="display: table-row">
             <div style="display: table-cell; color: #ccccff">Режиссер:  </div>
-            <div style="display: table-cell">Хлои Чжао</div>
+            <div style="display: table-cell">{{this.film.producer}}</div>
           </div>
 
           <div style="display: table-row">
             <div style="display: table-cell; color: #ccccff">В ролях:</div>
-            <div style="display: table-cell">Фрэнсис МакДорманд, Дэвид Стрэтэйрн, Линда Мэй , Шарлин Свэнки , Боб Уэллс</div>
+            <div style="display: table-cell">{{this.film.actors}}</div>
           </div>
 
           <div style="display: table-row">
             <div style="display: table-cell; color: #ccccff">Рейтинг:</div>
-            <div style="display: table-cell">7.0</div>
+            <div style="display: table-cell">{{this.film.rating}}</div>
           </div>
 
           <div style="display: table-row">
             <div style="display: table-cell; color: #ccccff">Возрастные ограничения:</div>
-            <div style="display: table-cell">18+</div>
+            <div style="display: table-cell">{{this.film.ageRestrictions}}+</div>
           </div>
 
         </div>
 
         <div style="width: 90%;font-size: 150%; margin-top: 2%" class="test">
-          Ферн (Фрэнсис МакДорманд) остается без работы и без дома, когда во время экономического кризиса закрывается единственная фабрика в её небольшом городке. Единственный выход для Ферн - погрузить свой небогатый скарб в фургон и стать одной из племени современных кочевников, путешествующих от штата к штату в поисках сезонного заработка. В фильме снялись настоящие кочевники – Линда Мэй, Шарлин Свэнки и Боб Уэллс, которые стали для Ферн наставниками и товарищами в бесконечном путешествии по просторам США.
+          {{this.film.description}}
         </div>
 
         <div style="width: 90%; margin-top:3%">
           <ng-image-slider #nav
-                           [images]="imageObject"
+                           [images]="this.film.imageObject"
                            [infinite]="false"
                            [autoSlide]="1"
                            [imageSize]="{width: '28%', height: 200}"
@@ -72,49 +72,49 @@ font-family: 'Cormorant Garamond', serif;
         <ng-template matTabContent>
           <div style="margin-top: 3%; margin-left: 2%">
             <youtube-player [width]=1000 [height]=500
-                            [videoId]="id"
+                            [videoId]="this.film.trailerId"
                             (ready)="savePlayer($event)"
-                            (change)="onStateChange($event)" id="sdfsdf"
+                            (change)="onStateChange($event)"
             ></youtube-player>
           </div>
         </ng-template>
 
       </mat-tab>
-      <mat-tab style="color : #ffffff;" class="test" label="Фильм">
-        <ng-template matTabContent>
+<!--      <mat-tab style="color : #ffffff;" class="test" label="Фильм">-->
+<!--        <ng-template matTabContent>-->
 
-        <vg-player style="width: 90%; margin-top:1%; margin-left: 1%">
-          <vg-overlay-play></vg-overlay-play>
-          <vg-buffering></vg-buffering>
+<!--        <vg-player style="width: 90%; margin-top:1%; margin-left: 1%">-->
+<!--          <vg-overlay-play></vg-overlay-play>-->
+<!--          <vg-buffering></vg-buffering>-->
 
-          <vg-scrub-bar>
-            <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
-            <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
-          </vg-scrub-bar>
+<!--          <vg-scrub-bar>-->
+<!--            <vg-scrub-bar-current-time></vg-scrub-bar-current-time>-->
+<!--            <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>-->
+<!--          </vg-scrub-bar>-->
 
-          <vg-controls>
-            <vg-play-pause></vg-play-pause>
-            <vg-playback-button></vg-playback-button>
+<!--          <vg-controls>-->
+<!--            <vg-play-pause></vg-play-pause>-->
+<!--            <vg-playback-button></vg-playback-button>-->
 
-            <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+<!--            <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>-->
 
-            <vg-scrub-bar style="pointer-events: none;"></vg-scrub-bar>
+<!--            <vg-scrub-bar style="pointer-events: none;"></vg-scrub-bar>-->
 
-            <vg-time-display vgProperty="left" vgFormat="mm:ss"></vg-time-display>
-            <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+<!--            <vg-time-display vgProperty="left" vgFormat="mm:ss"></vg-time-display>-->
+<!--            <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>-->
 
-            <vg-mute></vg-mute>
-            <vg-volume></vg-volume>
+<!--            <vg-mute></vg-mute>-->
+<!--            <vg-volume></vg-volume>-->
 
-            <vg-fullscreen></vg-fullscreen>
-          </vg-controls>
+<!--            <vg-fullscreen></vg-fullscreen>-->
+<!--          </vg-controls>-->
 
-          <video [vgMedia]="$any(media)" #media id="singleVideo" preload="auto" crossorigin>
-            <source src="http://static.videogular.com/assets/videos/videogular.mp4" type="video/mp4">
-          </video>
-        </vg-player>
-        </ng-template>
-      </mat-tab>
+<!--          <video [vgMedia]="$any(media)" #media id="singleVideo" preload="auto" crossorigin>-->
+<!--            <source src="http://static.videogular.com/assets/videos/videogular.mp4" type="video/mp4">-->
+<!--          </video>-->
+<!--        </vg-player>-->
+<!--        </ng-template>-->
+<!--      </mat-tab>-->
       <mat-tab style="color : #ffffff;" class="test" label="Отзывы">
         <div class="test1" style="width: 90%; margin-top: 3%; margin-right: 3%; margin-left: 3%">
           <mat-card >
@@ -140,19 +140,17 @@ font-family: 'Cormorant Garamond', serif;
         </div>
         <div style="width: 90%; margin-top: 3%; margin-right: 3%; margin-left: 3%; font-size: 130%">Отзывы о фильме:</div>
         <div style="width: 90%; margin-top: 3%; margin-right: 3%; margin-left: 3%; font-size: 130%">
-          <mat-card>
+          <mat-card *ngFor="let review of film.reviews; index as i" style = "margin-top: 1%">
             <mat-card-header>
-              <img mat-card-avatar class="example-header-image" src="https://avatars.mds.yandex.net/get-ott/374297/2a000001616b87458162c9216ccd5144e94d/678x380">
-              <mat-card-title class="test1">Shiba Inu1</mat-card-title>
+              <img mat-card-avatar class="example-header-image" src={{review.logo}}>
+              <mat-card-title class="test1">{{review.login}}</mat-card-title>
             </mat-card-header>
             <mat-card-content style="margin-top:2%">
-              <ngb-rating style="font-size:135%"  [rate]="3" [readonly]=true></ngb-rating>
+              <ngb-rating style="font-size:135%"  [rate]="review.mark" [readonly]=true></ngb-rating>
               <br>
               <br>
               <p class="test1" style="font-size: 137%">
-                The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-                A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-                bred for hunting.
+                {{review.text}}
               </p>
             </mat-card-content>
             <mat-card-actions >
