@@ -18,9 +18,9 @@
     <div style="text-align : center; margin-left:5%; margin-right : 5% " class="test">Для авторизации, пожалуйста, заполните форму ниже.</div>
     <br>
     <mat-form-field class="test" appearance="fill" style="width:80%;  display: inline-block; vertical-align: middle; "    id="123">
-      <mat-label class="test">Введите вашу почту</mat-label>
-      <input class="test" matInput placeholder="Пример - ivan1234@mail.ru" [formControl]="email"  required >
-      <mat-error class="test" *ngIf="this.email.invalid" >{{getErrorMessageEmail()}}</mat-error>
+      <mat-label class="test">Введите ваш логин</mat-label>
+      <input class="test" matInput placeholder="Пример - ivan1234" [formControl]="login"  required >
+      <mat-error class="test" *ngIf="this.login.invalid" >{{getErrorMessageEmail()}}</mat-error>
     </mat-form-field>
 
     <mat-form-field class="test"  appearance="fill" style="width:80%;  display: inline-block; vertical-align: middle; " >
@@ -32,8 +32,8 @@
     <br>
 
     <div style="margin-bottom: 5%">
-      <button mat-button class="test" *ngIf="this.pass.invalid || this.email.invalid" [disabled]="true" type="submit"><div style="">Войти</div></button>
-      <button mat-button  class="test"  *ngIf="!this.pass.invalid && !this.email.invalid" type="submit" (click)="sendUserData()"><div style="">Войти</div></button>
+      <button mat-button class="test" *ngIf="this.pass.invalid || this.login.invalid" [disabled]="true" type="submit"><div style="">Войти</div></button>
+      <button mat-button  class="test"  *ngIf="!this.pass.invalid && !this.login.invalid" type="submit" (click)="sendUserData()"><div style="">Войти</div></button>
       <button mat-button class="test" ><div style="">Забыли пароль?</div></button>
     </div>
   </div>

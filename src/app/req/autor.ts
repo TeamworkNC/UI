@@ -15,9 +15,9 @@ export class Autor {
   constructor(private http: HttpClient) {
   }
 
-  postCommand(email: string, password: string): Observable <HttpResponse<User>> {
+  postCommand(login: string, password: string): Observable <HttpResponse<User>> {
   const body = {
-        name: email,
+        login: login,
         password : password
       };
     return this.http.post<User>(localUrl1, body, {

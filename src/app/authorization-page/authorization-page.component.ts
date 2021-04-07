@@ -22,14 +22,14 @@ noWhitespaceValidator(control: FormControl) {
     const isValid = !isWhitespace;
     return isValid ? null : { 'whitespace': true };
 }
-//Validators.email,Validators.required, this.noWhitespaceValidator
-  email = new FormControl('', [Validators.required, this.noWhitespaceValidator]);
+
+  login = new FormControl('', [Validators.required, this.noWhitespaceValidator]);
   pass = new FormControl('', [Validators.required, this.noWhitespaceValidator]);
   getErrorMessageEmail() {
-    if (this.email.hasError('required') || this.email.value.trim() == '') {
+    if (this.login.hasError('required') || this.login.value.trim() == '') {
       return 'Поле обязательно для заполнения';
     }
-    return this.email.hasError('email') ? 'Некорректный email' : '';
+    return this.login.hasError('login') ? 'Некорректный login' : '';
   }
 
   getErrorMessagePass() {
@@ -54,7 +54,7 @@ noWhitespaceValidator(control: FormControl) {
 
   sendUserData(){
 
-      this.api.postCommand( this.email.value.trim(), this.pass.value)
+      this.api.postCommand( this.login.value.trim(), this.pass.value)
           .subscribe((data: HttpResponse<User>) => {
             if( data.body == null){
               this.user = {"userId":0, "name": "", "birthday": "", "logoUrl": "", "description": "", "registrationDate": ""};
