@@ -20,7 +20,7 @@
     <mat-form-field class="test" appearance="fill" style="width:80%;  display: inline-block; vertical-align: middle; "    id="123">
       <mat-label class="test">Введите ваш логин</mat-label>
       <input class="test" matInput placeholder="Пример - ivan1234" [formControl]="login"  required >
-      <mat-error class="test" *ngIf="this.login.invalid" >{{getErrorMessageEmail()}}</mat-error>
+      <mat-error class="test" *ngIf="this.login.invalid" >{{getErrorMessageLogin()}}</mat-error>
     </mat-form-field>
 
     <mat-form-field class="test"  appearance="fill" style="width:80%;  display: inline-block; vertical-align: middle; " >

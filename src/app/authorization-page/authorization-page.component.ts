@@ -25,7 +25,7 @@ noWhitespaceValidator(control: FormControl) {
 
   login = new FormControl('', [Validators.required, this.noWhitespaceValidator]);
   pass = new FormControl('', [Validators.required, this.noWhitespaceValidator]);
-  getErrorMessageEmail() {
+  getErrorMessageLogin() {
     if (this.login.hasError('required') || this.login.value.trim() == '') {
       return 'Поле обязательно для заполнения';
     }
