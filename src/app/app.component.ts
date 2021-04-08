@@ -38,7 +38,7 @@ export class AppComponent {
 
   goFilmPage() {
                   this.router.navigate(
-                    ['/film']);
+                    ['/film/'+1]);
                 }
 
   chatIsOpen = false;

@@ -10,7 +10,6 @@ import { AuthorizationPageComponent } from './authorization-page/authorization-p
 export const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'home', component: HomePageComponent},
-  {path: 'film', component: FilmPageComponent},
   {path: 'film/:id', component: FilmPageComponent},
   {path: 'user/:id', component: UserPageComponent},
   {path: 'catalog', component: CatalogPageComponent},

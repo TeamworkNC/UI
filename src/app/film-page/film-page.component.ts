@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {Subject, Subscription} from 'rxjs';
+import {FilmAll} from "src/app/filmAll";
+import {ActivatedRoute, Router} from "@angular/router";
+import {FilmAllGet} from "src/app/req/filmAllGet";
 
 @Component({
   selector: 'ngbd-rating-events',
@@ -9,8 +13,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 })
 export class FilmPageComponent implements OnInit {
 
-film = {
+film1 = {
 id : 5,
+logo: "http://avatars.mds.yandex.net/get-kinopoisk-image/4303601/880fabac-7893-4a4e-a11c-966de84b1e9d/600x900",
 name : "Земля кочевников",
 genre: "Драмма",
 producer : "Хлои Чжао",
@@ -49,13 +54,60 @@ imageObject : [{
     }
     ]
 }
-
-  constructor() { }
+private subscription: Subscription;
+  filmId: number;
+  film : FilmAll;
+  constructor(private activateRoute: ActivatedRoute, private api: FilmAllGet) {
+  this.subscription = new Subscription();
+  this.filmId = 0;
+  this.film = {
+             "id" : 0,
+             "logo": "",
+             "name" : "",
+             "genre": "",
+             "producer" : "",
+             "actors" : "",
+             "rating" : "",
+             "ageRestrictions" : "",
+             "description" : "",
+             "trailerId" : '',
+             "imageObject" : [{
+                   "image": '',
+                   "thumbImage": ''
+               }],
+               "reviews" : [{
+                 "logo" : "",
+                 "login": "",
+                 "mark": 0,
+                 "text": ""
+               }
+                 ]
+             }
+  }
   selected = 0;
   hovered = 0;
+
   readonly = false;
   ngOnInit(): void {
+    this.subscription = this.activateRoute.params.subscribe(params => {
+            this.filmId = params['id'];
+            this.getFilmData(this.filmId);
+          });
   }
+
+  getFilmData(filmId: number){
+
+      this.api.getCommand(filmId)
+          .subscribe((data: FilmAll) => {
+
+            if( data == null){
+              this.film;
+            }else{
+            this.film  = data;
+            }
+          });
+    }
+
   playerOptions = {
     cc_lang_pref: 'en'
   };
