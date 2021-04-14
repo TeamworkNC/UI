@@ -13,84 +13,63 @@
 <br>
 <div align="center"  class="test" style="color : #ffffff; font-size: 300%">Добро пожаловать в online кинотеатр Movie And Chill!</div>
 <br>
-<ngb-carousel style="margin-top: 3%">
-  <ng-template ngbSlide>
+<ngb-carousel style="margin-top: 3%; margin-bottom: 3%">
+  <ng-template ngbSlide *ngFor="let film of home.slider; index as i">
     <div class="picsum-img-wrapper">
-      <div>
-        <img src="https://s1.kinoteatr.ru/upload/movies/6571/screenshots/58989.jpg?_ga=2.227358365.1254814042.1615635254-2029323597.1615635254" alt="Random first slide" style="width:40%;float:left;" vspace="3" hspace="91">
-        <div style="color : #ffffff; font-size: 200%" class="test">Земля кочевников</div>
-        <br>
-        <div style="color : #ffffff; font-size: 150%; margin-left:2%; margin-right:2%" class="test">Ферн (Фрэнсис МакДорманд) остается без работы и без дома, когда во время экономического кризиса закрывается единственная фабрика в её небольшом городке. Единственный выход для Ферн - погрузить свой небогатый скарб в фургон и стать одной из племени современных кочевников, путешествующих от штата к штату в поисках сезонного заработка. В фильме снялись настоящие кочевники – Линда Мэй, Шарлин Свэнки и Боб Уэллс, которые стали для Ферн наставниками и товарищами в бесконечном путешествии по просторам США.</div>
-        <br>
-        <div>
-          <button mat-raised-button style="font-size: 150%" class="test" (click)="goFilmPage()">Смотреть</button>
+      <div >
+        <img src={{film.image}} alt="Random first slide" style="width:40%;float:left;" vspace="3" hspace="91">
+        <div style="display: table; ">
+          <div style="color : #ffffff; font-size: 200%; display: table-row" class="test">{{film.name}}</div>
+          <br>
+          <div style="color : #ffffff; font-size: 150%; margin-left:2%; margin-right:2%; display: table-row " class="test">{{film.description}}</div>
+          <br>
+          <div style="display: table-row">
+            <button mat-raised-button style="font-size: 150%" class="test" (click)="goFilmPage(film.id)">Смотреть</button>
+          </div>
         </div>
       </div>
     </div>
   </ng-template>
-  <ng-template ngbSlide>
-    <div class="picsum-img-wrapper">
-      <img src="https://s2.kinoteatr.ru/upload/movies/6367/screenshots/58543.jpg?_ga=2.126278925.1254814042.1615635254-2029323597.1615635254" alt="Random second slide" style="width:40%;float:left;" vspace="3" hspace="91">
-      <div style="color : #ffffff; font-size: 200%; margin-left:2%; margin-right:2%" class="test">Мавританец</div>
-      <br>
-      <div style="color : #ffffff; font-size: 150%;margin-left:2%; margin-right:2%" class="test">Звезды самого высокого эшелона Бенедикт Камбербэтч и Джоди Фостер готовы рассказать историю о величайшей теории заговора тысячелетия. Реальная история заключенного в Гуантанамо, которого подозревали в совершении ужасного теракта, наконец, рассказана во всеуслышание. Не получивший официальных обвинений и возможности защиты в суде, Мохаммед Ульд Слахи провел в заключении более 6 лет. Только после этого он был удостоен права на адвокатов. Но и им в борьбе с правительственной машиной предстоит побороть личные сомнения. Ведь как можно быть до конца уверенными в невиновности заключенного?</div>
-      <br>
-      <div>
-        <button mat-raised-button style=" font-size: 150%" class="test" (click)="goFilmPage()">Смотреть</button>
-      </div>
-    </div>
-  </ng-template>
-  <ng-template ngbSlide>
-    <div class="picsum-img-wrapper">
-      <img src="https://s1.kinoteatr.ru/upload/movies/6569/screenshots/58719.jpg?_ga=2.235772161.1254814042.1615635254-2029323597.1615635254" alt="Random third slide" style="width:40%; float:left;" vspace="3" hspace="91">
-      <div style="color : #ffffff; font-size: 200%; margin-left:2%; margin-right:2%" class="test">Любовное настроение</div>
-      <br>
-      <div style="color : #ffffff; font-size: 150%;margin-left:2%; margin-right:2%" class="test">Гонконг, 1962 год. Две супружеские пары, господин Чоу с женой и госпожа Су с мужем, одновременно въезжают в соседние квартиры. Пока их супруги пропадают на работе или в заграничных командировках, Чоу и Су проводят много времени в одиночестве и общаются друг с другом как обычные соседи. Все меняется, когда они обнаруживают, что их супруги изменяют им друг с другом. Чоу и Су пытаются понять, как начался этот роман, и постепенно сближаются, но не хотят давать волю чувствам...</div>
-      <br>
-      <div>
-        <button mat-raised-button style="font-size: 150%" class="test" (click)="goFilmPage()">Смотреть</button>
-      </div>
-    </div>
-  </ng-template>
+
 </ngb-carousel>
 <br>
 <div style="color : #ffffff; width: 100%; " >
   <mat-tab-group style="color : #ffffff;" mat-align-tabs="center" class="test">
     <mat-tab style="color : #ffffff;" class="test" label="Наши новинки">
       <div style=" width: 100%; margin-top:1%; margin-bottom:1%" align="center" >
-        <mat-card class="test" style="width: 20%; margin-left: 3%; margin-top: 3%; display: inline-block" *ngFor="let film of dataSource; index as i" >
+        <mat-card class="test" style="width: 20%; margin-left: 3%; margin-top: 3%; display: inline-block" *ngFor="let film of home.novelty; index as i" >
           <div align="left">
             <div style="display: inline">
               <img src="assets/resource/rate.png" style="margin-top: 1%; margin-right: 2%; margin-left: 2%; width: 10%; float:inherit;" align="left">
             </div>
-            <div style="display: inline;" align="left">{{film.filmRate}}</div>
+            <div style="display: inline;" align="left">{{film.rating}}</div>
             <div style="display: inline">
               <img src="assets/resource/age.png" style="margin-top: 1%; margin-right: 2%; margin-left: 2%; width: 10%; float:inherit;" align="left">
             </div>
-            <div style="display: inline;" align="left">{{film.filmAge}}+</div>
+            <div style="display: inline;" align="left">{{film.ageRestrictions}}+</div>
           </div>
-          <img src={{film.filmImg}} style="margin-top: 2%; margin-right: 2%; margin-left: 2%; width: 90%">
-          <div style="font-weight: bold; margin-left: 3%; margin-top:3%; margin-right: 3%;">{{film.filmName}}</div>
-          <button mat-button  style="width: 80%; margin-left: 2%; margin-top: 3%; display: inline-block" class="test" (click)="goFilmPage()">Смотреть</button>
+          <img src={{film.logo}} style="margin-top: 2%; margin-right: 2%; margin-left: 2%; width: 90%">
+          <div style="font-weight: bold; margin-left: 3%; margin-top:3%; margin-right: 3%;">{{film.name}}</div>
+          <button mat-button  style="width: 80%; margin-left: 2%; margin-top: 3%; display: inline-block" class="test" (click)="goFilmPage(film.id)">Смотреть</button>
         </mat-card>
       </div>
     </mat-tab>
     <mat-tab style="color : #ffffff;" class="test" label="Самые популярные">
       <div style=" width: 100%; margin-top:1%; margin-bottom:1%" align="center" >
-        <mat-card class="test" style="width: 20%; margin-left: 3%; margin-top: 3%; display: inline-block" *ngFor="let film of dataSource1; index as i">
+        <mat-card class="test" style="width: 20%; margin-left: 3%; margin-top: 3%; display: inline-block" *ngFor="let film of home.recommendation; index as i">
           <div align="left">
             <div style="display: inline">
               <img src="assets/resource/rate.png" style="margin-top: 1%; margin-right: 2%; margin-left: 2%; width: 10%; float:inherit;" align="left">
             </div>
-            <div style="display: inline;" align="left">{{film.filmRate}}</div>
+            <div style="display: inline;" align="left">{{film.rating}}</div>
             <div style="display: inline">
               <img src="assets/resource/age.png" style="margin-top: 1%; margin-right: 2%; margin-left: 2%; width: 10%; float:inherit;" align="left">
             </div>
-            <div style="display: inline;" align="left">{{film.filmAge}}+</div>
+            <div style="display: inline;" align="left">{{film.ageRestrictions}}+</div>
           </div>
-          <img src={{film.filmImg}} style="margin-top: 2%; margin-right: 2%; margin-left: 2%; width: 90%">
-          <div style="font-weight: bold; margin-left: 3%; margin-top:3%; margin-right: 3%;">{{film.filmName}}</div>
-          <button mat-button  style="width: 80%; margin-left: 2%; margin-top: 3%; display: inline-block" class="test" (click)="goFilmPage()">Смотреть</button>
+          <img src={{film.logo}} style="margin-top: 2%; margin-right: 2%; margin-left: 2%; width: 90%">
+          <div style="font-weight: bold; margin-left: 3%; margin-top:3%; margin-right: 3%;">{{film.name}}</div>
+          <button mat-button  style="width: 80%; margin-left: 2%; margin-top: 3%; display: inline-block" class="test" (click)="goFilmPage(film.id)">Смотреть</button>
         </mat-card>
       </div>
     </mat-tab>
