@@ -17,13 +17,13 @@
     </style>
 <body style="background-color: black " class="test" >
 <br>
-<form  style="display: inline">
+<form style="display: inline" >
   <mat-form-field style="width: 70%; margin-left: 3%" >
     <mat-label class="test">Искать фильм</mat-label>
-    <input matInput placeholder="" value="" class="test">
+    <input matInput placeholder="" value="" class="test" [(ngModel)]="userIn" name="userIn">
   </mat-form-field>
 </form>
-<button mat-button  class="test" >Поиск</button>
+<button mat-button  class="test" (click)="postUserSearchOptions()">Поиск</button>
 <button mat-button class="test" >
   <div style="">Сбросить</div>
 </button>
@@ -45,8 +45,8 @@
       <button mat-button  style="width: 80%; margin-left: 2%; margin-top: 3%; display: inline-block" class="test1" (click)="goFilmPage(film.id)">Смотреть</button>
     </mat-card>
   </div>
-  <div style="display:table-cell; width: 30%; vertical-align: top; margin-top: 25%; " align="left" class="test">
-    <mat-checkbox style="display:block;margin-top: 5%; margin-left:3%" class="test" *ngFor="let filter of this.catalog.filters; index as i">{{filter}}</mat-checkbox>
+  <div style="display:table-cell; width: 30%; vertical-align: top; margin-top: 25%; " align="left" class="test" [formGroup]="filterFormGroup">
+      <mat-checkbox style="display:block;margin-top: 5%; margin-left:3%" class="test" *ngFor="let filter of this.catalog.filters; index as i" (change)="onChange($event)" [value]="filter" >{{filter}}</mat-checkbox>
   </div>
 </div>
 </body>
