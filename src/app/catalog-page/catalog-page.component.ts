@@ -57,7 +57,6 @@ catalog : CatalogInt;
   postUserSearchOptions(){
     this.apiPost.postCommand(this.filterFormGroup.value.filters, this.userIn)
                    .subscribe((data: CatalogInt) => {
-                   console.log(data);
                      if( data == null){
                        this.catalog;
                      }else{
