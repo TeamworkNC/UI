@@ -29,27 +29,24 @@
 </button>
 <div style="display:table; width: 90%; margin-top: 1%; margin-left: 1%; margin-right: 1%; margin-bottom: 1%" align="center">
   <div style="display:table-cell; width: 80%; margin-bottom: 1%">
-    <mat-card class="test" style="width: 20%; margin-left: 3%; margin-top: 3%; display: inline-block; color: black; margin-bottom: 1%" *ngFor="let film of dataSource; index as i">
+    <mat-card class="test" style="width: 20%; margin-left: 3%; margin-top: 3%; display: inline-block; color: black; margin-bottom: 1%" *ngFor="let film of catalog.films; index as i">
       <div align="left">
         <div style="display: inline">
           <img src="assets/resource/rate.png" style="margin-top: 1%; margin-right: 2%; margin-left: 2%; width: 10%; float:inherit;" align="left">
         </div>
-        <div style="display: inline;" align="left">{{film.filmRate}}</div>
+        <div style="display: inline;" align="left">{{film.rating}}</div>
         <div style="display: inline">
           <img src="assets/resource/age.png" style="margin-top: 1%; margin-right: 2%; margin-left: 2%; width: 10%; float:inherit;" align="left">
         </div>
-        <div style="display: inline;" align="left">{{film.filmAge}}+</div>
+        <div style="display: inline;" align="left">{{film.ageRestrictions}}+</div>
       </div>
-      <img src={{film.filmImg}} style="margin-top: 2%; margin-right: 2%; margin-left: 2%; width: 90%; height: 80%">
-      <div style="font-weight: bold; margin-left: 3%; margin-top:3%; margin-right: 3%;">{{film.filmName}}</div>
-      <button mat-button  style="width: 80%; margin-left: 2%; margin-top: 3%; display: inline-block" class="test1" (click)="goFilmPage()">Смотреть</button>
+      <img src={{film.logo}} style="margin-top: 2%; margin-right: 2%; margin-left: 2%; width: 90%; height: 80%">
+      <div style="font-weight: bold; margin-left: 3%; margin-top:3%; margin-right: 3%;">{{film.name}}</div>
+      <button mat-button  style="width: 80%; margin-left: 2%; margin-top: 3%; display: inline-block" class="test1" (click)="goFilmPage(film.id)">Смотреть</button>
     </mat-card>
   </div>
-  <div style="display:table-cell; width: 30%; vertical-align: top; " class="test">
-    <mat-checkbox style="display:block;margin-top: 15%;" class="test">Фильтр 1</mat-checkbox>
-    <mat-checkbox style="display:block" class="test">Фильтр 2</mat-checkbox>
-    <mat-checkbox style="display:block" class="test">Фильтр 3</mat-checkbox>
-    <mat-checkbox style="display:block" class="test">Фильтр 4</mat-checkbox>
+  <div style="display:table-cell; width: 30%; vertical-align: top; margin-top: 25%; " align="left" class="test">
+    <mat-checkbox style="display:block;margin-top: 5%; margin-left:3%" class="test" *ngFor="let filter of this.catalog.filters; index as i">{{filter}}</mat-checkbox>
   </div>
 </div>
 </body>
