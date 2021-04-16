@@ -21,6 +21,7 @@ font-family: 'Cormorant Infant', serif;
         <button class="main" mat-button (click)="goAuthorizationPage()">Авторизация</button>
         <button class="main" mat-button (click)="goRegistrationPage()">Регистрация</button>
         <button class="main" mat-button (click)="goFilmPage()">Фильм</button>
+        <button class="main" mat-button (click)="goRoomPage()">Комната</button>
       </div>
       <div style="display: table-cell;">
         <img  class="ava" align="right" style="margin-right: 1%; margin-left : 0.5%" src="https://avatars.mds.yandex.net/get-ott/374297/2a000001616b87458162c9216ccd5144e94d/678x380">
@@ -38,18 +39,19 @@ font-family: 'Cormorant Infant', serif;
 
   </nb-layout>
 
+  <div *ngIf="router.url.substring(0, 6) !== '/room/'">
+    <app-recommendation-chat-open-button
+      (click)="openChat()"of
+      *ngIf="!chatIsOpen"
+      class="open_button"
+    ></app-recommendation-chat-open-button>
 
-  <app-recommendation-chat-open-button
-    (click)="openChat()"of
-    *ngIf="!chatIsOpen"
-    class="open_button"
-  ></app-recommendation-chat-open-button>
-
-  <app-closable-recommendation-chat
-    (closeChat)="closeChat()"
-    *ngIf="chatIsOpen"
-    class="chat"
-  ></app-closable-recommendation-chat>
+    <app-closable-recommendation-chat
+      (closeChat)="closeChat()"
+      *ngIf="chatIsOpen"
+      class="chat"
+    ></app-closable-recommendation-chat>
+  </div>
   </body>
 </html>
 

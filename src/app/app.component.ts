@@ -9,7 +9,7 @@ import {Router} from "@angular/router";
 export class AppComponent {
   title = 'my-app111';
 
-  constructor( private router: Router) {
+  constructor( public router: Router) {
     }
 
   goHomePage() {
@@ -40,6 +40,10 @@ export class AppComponent {
                   this.router.navigate(
                     ['/film/'+1]);
                 }
+  goRoomPage(){
+                  this.router.navigate(
+                      ['/room/'+1]);
+  }
 
   chatIsOpen = false;
 

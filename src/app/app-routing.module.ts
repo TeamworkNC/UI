@@ -16,7 +16,7 @@ export const routes: Routes = [
   {path: 'catalog', component: CatalogPageComponent},
   {path: 'registration', component: RegistrationPageComponent },
   {path: 'authorization', component: AuthorizationPageComponent},
-  {path: 'room/:id', component: AuthorizationPageComponent},
+  {path: 'room/:id', component: RoomPageComponent},
 ];
 
 @NgModule({
