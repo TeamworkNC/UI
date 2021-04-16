@@ -50,8 +50,8 @@ date = new FormControl(moment());
 
 email = new FormControl('', [Validators.required, Validators.email, this.noWhitespaceValidator]);
 login = new FormControl('', [Validators.required, this.noWhitespaceValidator]);
-passFirst = new FormControl('', [Validators.required, this.noWhitespaceValidator]);
-passSecond = new FormControl('', [Validators.required, this.noWhitespaceValidator]);
+passFirst = new FormControl('', [Validators.required, this.noWhitespaceValidator, Validators.pattern("^.{5,}$")]);
+passSecond = new FormControl('', [Validators.required, this.noWhitespaceValidator, Validators.pattern("^.{5,}$")]);
 getErrorMessageEmail() {
     if (this.email.hasError('required') || this.email.value.trim()=='') {
       return 'Поле обязательно для заполнения';
@@ -70,6 +70,9 @@ getErrorMessagePassFirst() {
                    if (this.passFirst.hasError('required') || this.passFirst.value.trim()=='') {
                      return 'Поле обязательно для заполнения';
                    }
+                   else if (this.passFirst.invalid){
+                   return 'Пароль должен содержать не менее 5 символов';
+                   }
                    return '';
                  }
 
@@ -77,6 +80,9 @@ getErrorMessagePassSecond() {
           if (this.passSecond.hasError('required') || this.passSecond.value.trim()=='') {
             return 'Поле обязательно для заполнения';
           }
+          else if (this.passSecond.invalid){
+                             return 'Пароль должен содержать не менее 5 символов';
+                             }
           return '';
         }
 
