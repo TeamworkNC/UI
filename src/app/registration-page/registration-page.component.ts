@@ -36,6 +36,7 @@ export class RegistrationPageComponent implements OnInit {
 
 user: User;
 userData: RegistrationData;
+hidePass = true;
 constructor(private http: HttpClient, private api: Reg, public dialog: MatDialog, private activateRoute: ActivatedRoute, private router: Router) {
   this.user = {"userId":0};
   this.userData = {"firstName": '', "lastName":'', "email":'', "password": ''};

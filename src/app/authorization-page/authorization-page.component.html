@@ -25,7 +25,10 @@
 
     <mat-form-field class="test"  appearance="fill" style="width:80%;  display: inline-block; vertical-align: middle; " >
       <mat-label class="test" >Введите пароль</mat-label>
-      <input class="test"  matInput class = "login" placeholder="Пример - password12345*"  [formControl]="pass" required >
+      <input class="test"  matInput  [type]="hidePass ? 'password' : 'text'" class = "login" placeholder="Пример - password12345*"  [formControl]="pass" required >
+      <button mat-icon-button matSuffix (click)="hidePass = !hidePass" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePass">
+        <mat-icon>{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
+      </button>
       <mat-error class="test"  *ngIf="this.pass.invalid">{{getErrorMessagePass()}}</mat-error>
     </mat-form-field>
 

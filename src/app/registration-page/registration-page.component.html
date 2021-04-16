@@ -45,7 +45,10 @@ font-family: 'Cormorant Garamond', serif;
 
    <mat-form-field appearance="fill" style="width:80%;  display: inline-block; vertical-align: middle;">
       <mat-label class="test">Повторите пароль</mat-label>
-      <input matInput class="test" placeholder="Пример - password12345*" [formControl]="passSecond"  required>
+      <input matInput class="test"  [type]="hidePass ? 'password' : 'text'" placeholder="Пример - password12345*" [formControl]="passSecond"  required>
+     <button mat-icon-button matSuffix (click)="hidePass = !hidePass" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePass">
+       <mat-icon>{{hidePass ? 'visibility_off' : 'visibility'}}</mat-icon>
+     </button>
       <mat-error class="test" *ngIf="passSecond.invalid">{{getErrorMessagePassSecond()}}</mat-error>
     </mat-form-field>
     <div style="margin-bottom: 5%">

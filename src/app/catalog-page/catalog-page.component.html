@@ -46,7 +46,7 @@
     </mat-card>
   </div>
   <div style="display:table-cell; width: 30%; vertical-align: top; margin-top: 25%; " align="left" class="test" [formGroup]="filterFormGroup">
-      <mat-checkbox style="display:block;margin-top: 5%; margin-left:3%" class="test" *ngFor="let filter of this.catalog.filters; index as i" (change)="onChange($event)" [value]="filter" >{{filter}}</mat-checkbox>
+      <mat-checkbox class="example-margin" style="display:block;margin-top: 5%; margin-left:3%" class="test" *ngFor="let filter of this.catalog.filters; index as i" (change)="onChange($event)" [value]="filter" >{{filter}}</mat-checkbox>
   </div>
 </div>
 </body>

@@ -13,7 +13,7 @@ import {MatDialog, MatDialogRef, MatDialogModule} from "@angular/material/dialog
 })
 export class AuthorizationPageComponent implements OnInit {
   user: User;
-
+  hidePass = true;
   constructor(private http: HttpClient, private api: Autor, private activateRoute: ActivatedRoute, private router: Router, public dialog: MatDialog,) {
    this.user = {"userId":0};
    }
