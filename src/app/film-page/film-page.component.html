@@ -19,152 +19,128 @@ font-family: 'Cormorant Garamond', serif;
 </style>
 <body style="background-color: black " class="test">
 <br>
-<div style="width: 100%;">
-  <img src={{this.film.logo}} style="width:20%;float:left; margin-top: 5%" vspace="3" hspace="91">
+<div style="width: 100%; display: table; margin-top: 2%;">
+  <div style="width: 100%; display: table-row">
+    <div style="width: 20%; display: table-cell">
+      <img  align="bottom" src={{this.film.logo}} style="width:80%;margin-top: 5%;vertical-align: top; margin-left: 10%" >
+      <div style="margin-top: 5%;vertical-align: top;" align="center">
+        <button mat-button class="test" style="font-size: 150%">Смотреть</button>
+        <button mat-button class="test" style="font-size: 150%">В избранное</button>
+      </div>
 
-  <div style="color : #ffffff; width: 100%; " >
-    <div align="center" style="font-size: 200%; ">{{this.film.name}}</div>
-    <br>
-    <mat-tab-group style="color : #ffffff; " mat-align-tabs="center" class="test">
-      <mat-tab style="color : #ffffff;" class="test" label="Описание">
+    </div>
+    <div style="color : #ffffff;width: 60%; display: table-cell; ">
+        <div align="center" style="font-size: 200%; ">{{this.film.name}}</div>
 
-        <div style="display: table; width: 100%; margin-top: 3%;font-size: 150%;">
-          <div style="display: table-row;width: 100% ">
-            <div style="display: table-cell; width: 20%; color: #ccccff">Жанр:</div>
-            <div style="display: table-cell">{{this.film.genre}}</div>
-          </div>
+        <br>
+        <mat-tab-group style="color : #ffffff; width: 100%; " mat-align-tabs="center" class="test">
+          <mat-tab style="color : #ffffff;" class="test" label="Описание">
 
-          <div style="display: table-row">
-            <div style="display: table-cell; color: #ccccff">Режиссер:  </div>
-            <div style="display: table-cell">{{this.film.producer}}</div>
-          </div>
-
-          <div style="display: table-row">
-            <div style="display: table-cell; color: #ccccff">В ролях:</div>
-            <div style="display: table-cell">{{this.film.actors}}</div>
-          </div>
-
-          <div style="display: table-row">
-            <div style="display: table-cell; color: #ccccff">Рейтинг:</div>
-            <div style="display: table-cell">{{this.film.rating}}</div>
-          </div>
-
-          <div style="display: table-row">
-            <div style="display: table-cell; color: #ccccff">Возрастные ограничения:</div>
-            <div style="display: table-cell">{{this.film.ageRestrictions}}+</div>
-          </div>
-
-        </div>
-
-        <div style="width: 90%;font-size: 150%; margin-top: 2%" class="test">
-          {{this.film.description}}
-        </div>
-
-        <div style="width: 90%; margin-top:3%">
-          <ng-image-slider #nav
-                           [images]="this.film.imageObject"
-                           [infinite]="false"
-                           [autoSlide]="1"
-                           [imageSize]="{width: '28%', height: 200}"
-                           slideImage="1"></ng-image-slider>
-        </div>
-      </mat-tab>
-      <mat-tab style="color : #ffffff; width: 100%;" class="test" label="Трейлер">
-        <ng-template matTabContent>
-          <div style="margin-top: 3%; margin-left: 2%">
-            <youtube-player [width]=1000 [height]=500
-                            [videoId]="this.film.trailerId"
-                            (ready)="savePlayer($event)"
-                            (change)="onStateChange($event)"
-            ></youtube-player>
-          </div>
-        </ng-template>
-
-      </mat-tab>
-<!--      <mat-tab style="color : #ffffff;" class="test" label="Фильм">-->
-<!--        <ng-template matTabContent>-->
-
-<!--        <vg-player style="width: 90%; margin-top:1%; margin-left: 1%">-->
-<!--          <vg-overlay-play></vg-overlay-play>-->
-<!--          <vg-buffering></vg-buffering>-->
-
-<!--          <vg-scrub-bar>-->
-<!--            <vg-scrub-bar-current-time></vg-scrub-bar-current-time>-->
-<!--            <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>-->
-<!--          </vg-scrub-bar>-->
-
-<!--          <vg-controls>-->
-<!--            <vg-play-pause></vg-play-pause>-->
-<!--            <vg-playback-button></vg-playback-button>-->
-
-<!--            <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>-->
-
-<!--            <vg-scrub-bar style="pointer-events: none;"></vg-scrub-bar>-->
-
-<!--            <vg-time-display vgProperty="left" vgFormat="mm:ss"></vg-time-display>-->
-<!--            <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>-->
-
-<!--            <vg-mute></vg-mute>-->
-<!--            <vg-volume></vg-volume>-->
-
-<!--            <vg-fullscreen></vg-fullscreen>-->
-<!--          </vg-controls>-->
-
-<!--          <video [vgMedia]="$any(media)" #media id="singleVideo" preload="auto" crossorigin>-->
-<!--            <source src="http://static.videogular.com/assets/videos/videogular.mp4" type="video/mp4">-->
-<!--          </video>-->
-<!--        </vg-player>-->
-<!--        </ng-template>-->
-<!--      </mat-tab>-->
-      <mat-tab style="color : #ffffff;" class="test" label="Отзывы">
-        <div class="test1" style="width: 90%; margin-top: 3%; margin-right: 3%; margin-left: 3%">
-          <mat-card >
-
-            <form class="example-form">
-
-              <ngb-rating style="font-size:135%" [(rate)]="selected" (hover)="hovered=$event" required [formControl]="mark" (leave)="hovered=0" [readonly]="readonly"></ngb-rating>
-              <br>
-              <mat-form-field class="example-full-width" style="width: 100%;">
-                <mat-label class="test1" >Напишите ваш отзыв</mat-label>
-                <textarea matInput placeholder="" class="test1" [formControl]="textOtz" required></textarea>
-              </mat-form-field>
-
-              <div style="margin-bottom: 1%">
-                <button mat-button class="test1" *ngIf="this.textOtz.invalid || this.mark.invalid" [disabled]="true" type="submit"><div style="">Оставить отзыв</div></button>
-                <button mat-button  class="test1"  *ngIf="!this.textOtz.invalid && !this.mark.invalid" type="submit">
-<!--                        (click)="sendUserData()"-->
-                <div style="">Оставить отзыв</div></button>
+            <div style="display: table; width: 100%; margin-top: 3%;font-size: 150%;">
+              <div style="display: table-row;width: 100% ">
+                <div style="display: table-cell; width: 20%; color: #ccccff">Жанр:</div>
+                <div style="display: table-cell">{{this.film.genre}}</div>
               </div>
-            </form>
 
-          </mat-card>
-        </div>
-        <div style="width: 90%; margin-top: 3%; margin-right: 3%; margin-left: 3%; font-size: 130%">Отзывы о фильме:</div>
-        <div style="width: 90%; margin-top: 3%; margin-right: 3%; margin-left: 3%; font-size: 130%">
-          <mat-card *ngFor="let review of film.reviews; index as i" style = "margin-top: 1%">
-            <mat-card-header>
-              <img mat-card-avatar class="example-header-image" src={{review.logo}}>
-              <mat-card-title class="test1">{{review.login}}</mat-card-title>
-            </mat-card-header>
-            <mat-card-content style="margin-top:2%">
-              <ngb-rating style="font-size:135%"  [rate]="review.mark" [readonly]=true></ngb-rating>
-              <br>
-              <br>
-              <p class="test1" style="font-size: 137%">
-                {{review.text}}
-              </p>
-            </mat-card-content>
-            <mat-card-actions >
-              <button mat-button class="test1" style="font-size: 100%">Полезный отзыв</button>
-              <button mat-button class="test1" style="font-size: 100%">Бесполезный отзыв</button>
-            </mat-card-actions>
-          </mat-card>
-        </div>
+              <div style="display: table-row">
+                <div style="display: table-cell; color: #ccccff">Режиссер:  </div>
+                <div style="display: table-cell">{{this.film.producer}}</div>
+              </div>
 
-      </mat-tab>
-    </mat-tab-group>
+              <div style="display: table-row">
+                <div style="display: table-cell; color: #ccccff">В ролях:</div>
+                <div style="display: table-cell">{{this.film.actors}}</div>
+              </div>
+
+              <div style="display: table-row">
+                <div style="display: table-cell; color: #ccccff">Рейтинг:</div>
+                <div style="display: table-cell">{{this.film.rating}}</div>
+              </div>
+
+              <div style="display: table-row">
+                <div style="display: table-cell; color: #ccccff">Возрастные ограничения:</div>
+                <div style="display: table-cell">{{this.film.ageRestrictions}}+</div>
+              </div>
+
+            </div>
+
+            <div style="width: 90%;font-size: 150%; margin-top: 2%" class="test">
+              {{this.film.description}}
+            </div>
+
+            <div style="width: 90%; margin-top:3%">
+              <ng-image-slider #nav
+                               [images]="this.film.imageObject"
+                               [infinite]="false"
+                               [autoSlide]="1"
+                               [imageSize]="{width: '23%', height: 200}"
+                               slideImage="1"></ng-image-slider>
+            </div>
+          </mat-tab>
+          <mat-tab style="color : #ffffff; width: 100%;" class="test" label="Трейлер">
+            <ng-template matTabContent>
+              <div style="margin-top: 3%; margin-left: 2%">
+                <youtube-player [width]=1000 [height]=500
+                                [videoId]="this.film.trailerId"
+                                (ready)="savePlayer($event)"
+                                (change)="onStateChange($event)"
+                ></youtube-player>
+              </div>
+            </ng-template>
+
+          </mat-tab>
+          <mat-tab style="color : #ffffff;" class="test" label="Отзывы">
+            <div class="test1" style="width: 90%; margin-top: 3%; margin-right: 3%; margin-left: 3%">
+              <mat-card >
+
+                <form class="example-form">
+
+                  <ngb-rating style="font-size:135%" [(rate)]="selected" (hover)="hovered=$event" required [formControl]="mark" (leave)="hovered=0" [readonly]="readonly"></ngb-rating>
+                  <br>
+                  <mat-form-field class="example-full-width" style="width: 100%;">
+                    <mat-label class="test1" >Напишите ваш отзыв</mat-label>
+                    <textarea matInput placeholder="" class="test1" [formControl]="textOtz" required></textarea>
+                  </mat-form-field>
+
+                  <div style="margin-bottom: 1%">
+                    <button mat-button class="test1" *ngIf="this.textOtz.invalid || this.mark.invalid" [disabled]="true" type="submit"><div style="">Оставить отзыв</div></button>
+                    <button mat-button  class="test1"  *ngIf="!this.textOtz.invalid && !this.mark.invalid" type="submit">
+                      <!--                        (click)="sendUserData()"-->
+                      <div style="">Оставить отзыв</div></button>
+                  </div>
+                </form>
+
+              </mat-card>
+            </div>
+            <div style="width: 90%; margin-top: 3%; margin-right: 3%; margin-left: 3%; font-size: 130%">Отзывы о фильме:</div>
+            <div style="width: 90%; margin-top: 3%; margin-right: 3%; margin-left: 3%; font-size: 130%">
+              <mat-card *ngFor="let review of film.reviews; index as i" style = "margin-top: 1%">
+                <mat-card-header>
+                  <img mat-card-avatar class="example-header-image" src={{review.logo}}>
+                  <mat-card-title class="test1">{{review.login}}</mat-card-title>
+                </mat-card-header>
+                <mat-card-content style="margin-top:2%">
+                  <ngb-rating style="font-size:135%"  [rate]="review.mark" [readonly]=true></ngb-rating>
+                  <br>
+                  <br>
+                  <p class="test1" style="font-size: 137%">
+                    {{review.text}}
+                  </p>
+                </mat-card-content>
+                <mat-card-actions >
+                  <button mat-button class="test1" style="font-size: 100%">Полезный отзыв</button>
+                  <button mat-button class="test1" style="font-size: 100%">Бесполезный отзыв</button>
+                </mat-card-actions>
+              </mat-card>
+            </div>
+
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+
+    </div>
   </div>
-</div>
+
 
 
 </body>
