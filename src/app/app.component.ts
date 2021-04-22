@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {Router} from "@angular/router";
+import * as socketIo from 'socket.io-client';
 
 @Component({
   selector: 'app-root',
@@ -8,8 +9,16 @@ import {Router} from "@angular/router";
 })
 export class AppComponent {
   title = 'my-app111';
-
+ connectionOptions =  {
+            "force new connection" : true,
+            "reconnectionAttempts": "Infinity",
+            "timeout" : 10000,
+            "transports" : ['websocket', 'polling', 'flashsocket']
+        };
   constructor( public router: Router) {
+      const socket = socketIo('https://mac21-chat.herokuapp.com/ws/', this.connectionOptions);
+        socket.on('hello',(data) => console.log(data));
+
     }
 
   goHomePage() {
