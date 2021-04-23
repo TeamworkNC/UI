@@ -5,6 +5,7 @@ import {Subject, Subscription} from 'rxjs';
 import {FilmAll} from "src/app/filmAll";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FilmAllGet} from "src/app/req/filmAllGet";
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'ngbd-rating-events',
@@ -16,7 +17,7 @@ export class FilmPageComponent implements OnInit {
 private subscription: Subscription;
   filmId: number;
   film : FilmAll;
-  constructor(private activateRoute: ActivatedRoute, private api: FilmAllGet) {
+  constructor(private activateRoute: ActivatedRoute, private api: FilmAllGet, private _snackBar: MatSnackBar) {
   this.subscription = new Subscription();
   this.filmId = 0;
   this.film = {
@@ -113,4 +114,24 @@ private subscription: Subscription;
   formatLabel(value: number) {
       return value;
     }
+  durationInSeconds = 5;
+  toFavorites() {
+     this._snackBar.openFromComponent(PizzaPartyComponent, {
+       duration: this.durationInSeconds * 1000,
+     });
+
+}
+
+}
+
+@Component({
+  selector: 'snack-bar-component',
+  templateUrl: 'snack-bar-component.html',
+  styles: [`
+    .example-pizza-party {
+      color: hotpink;
+    }
+  `],
+})
+export class PizzaPartyComponent {
 }

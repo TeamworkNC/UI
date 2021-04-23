@@ -42,7 +42,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {MomentDateAdapter} from '@angular/material-moment-adapter';
 import { RoomPageComponent } from './room-page/room-page.component';
-
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -91,7 +91,7 @@ import { RoomPageComponent } from './room-page/room-page.component';
     MatNativeDateModule,
     MatRippleModule,
     MatDatepickerModule,
-
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

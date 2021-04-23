@@ -25,7 +25,7 @@ font-family: 'Cormorant Garamond', serif;
       <img  align="bottom" src={{this.film.logo}} style="width:80%;margin-top: 5%;vertical-align: top; margin-left: 10%" >
       <div style="margin-top: 5%;vertical-align: top;" align="center">
         <button mat-button class="test" style="font-size: 150%">Смотреть</button>
-        <button mat-button class="test" style="font-size: 150%">В избранное</button>
+        <button mat-button class="test" style="font-size: 150%" (click)="toFavorites()">В избранное</button>
       </div>
 
     </div>
