@@ -1,9 +1,13 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ChangeDetectorRef,OnDestroy } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {CatalogGet} from 'src/app/req/catalogGet';
 import {CatalogInt} from 'src/app/catalogInt';
 import {UserSearchFilm} from 'src/app/req/userSearchFilm';
 import {FormArray, FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {Observable} from 'rxjs';
+import {MatTableModule, MatTableDataSource} from '@angular/material/table';
+import {MatPaginatorModule, MatPaginator} from '@angular/material/paginator';
+import {FilmShort} from 'src/app/filmShort';
 
 @Component({
   selector: 'app-catalog-page',
@@ -13,7 +17,10 @@ import {FormArray, FormBuilder, FormControl, FormGroup} from "@angular/forms";
 export class CatalogPageComponent implements OnInit {
 catalog : CatalogInt;
 @Input() userIn: string;
-  constructor(private activateRoute: ActivatedRoute, private router: Router, private api: CatalogGet, private formBuilder: FormBuilder, private apiPost: UserSearchFilm) {
+@ViewChild(MatPaginator) paginator: MatPaginator;
+obs: Observable<any>;
+dataSource: MatTableDataSource<FilmShort>;
+  constructor(private activateRoute: ActivatedRoute, private router: Router, private api: CatalogGet, private formBuilder: FormBuilder, private apiPost: UserSearchFilm, private changeDetector: ChangeDetectorRef) {
     this.userIn="";
     this.catalog= {
       "films" : [],
@@ -23,9 +30,13 @@ catalog : CatalogInt;
     this.filterFormGroup = this.formBuilder.group({
               filters: this.formBuilder.array([])
             });
+    this.dataSource= new MatTableDataSource<FilmShort>(this.catalog.films);
+    console.log(this.dataSource);
   }
   filterFormGroup : FormGroup;
   ngOnInit(): void {
+    this.changeDetector.detectChanges();
+    console.log(this.obs);
   }
 
    getCatalogData(){
@@ -35,6 +46,9 @@ catalog : CatalogInt;
                    this.catalog;
                  }else{
                  this.catalog  = data;
+                 this.dataSource= new MatTableDataSource<FilmShort>(this.catalog.films);
+                 this.dataSource.paginator = this.paginator;
+                 this.obs = this.dataSource.connect();
                  }
                });
          }
@@ -64,5 +78,11 @@ catalog : CatalogInt;
                      }
                    });
   }
+
+  ngOnDestroy() {
+        if (this.dataSource) {
+          this.dataSource.disconnect();
+        }
+      }
 
 }

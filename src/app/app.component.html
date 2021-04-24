@@ -22,6 +22,7 @@ font-family: 'Cormorant Infant', serif;
         <button class="main" mat-button (click)="goRegistrationPage()">Регистрация</button>
         <button class="main" mat-button (click)="goFilmPage()">Фильм</button>
         <button class="main" mat-button (click)="goRoomPage()">Комната</button>
+        <button class="main" mat-button matBadge="7" [matBadgeHidden]="hidden" (click)="toggleBadgeVisibility()">Уведомления</button>
       </div>
       <div style="display: table-cell;">
         <img  class="ava" align="right" style="margin-right: 1%; margin-left : 0.5%" src="https://avatars.mds.yandex.net/get-ott/374297/2a000001616b87458162c9216ccd5144e94d/678x380">

@@ -11,7 +11,7 @@
         }
         .test1{
         font-family: 'Cormorant Garamond', serif;
-        font-size: 110%;
+        font-size: 100%;
         color : black;
         }
     </style>
@@ -21,97 +21,95 @@
   <div style="display: table-row; width: 100%; ">
     <div style="display: table-cell; width: 26%" align="center">
       <img src="https://st2.depositphotos.com/2234823/8317/i/600/depositphotos_83178060-stock-photo-digital-camera.jpg" style="width: 70%; margin-left: 5%; vertical-align: middle" align="center">
+      <input name="myFile" type="file" style="margin-top: 5%; margin-left: 20%" >
+      <br>
+      <button mat-button class="test" style="font-size: 100%">Отправить</button>
     </div>
     <div style="display: table-cell; width: 70%; vertical-align: top" align="center">
-      <div style="font-size: 100%">Добро пожаловать, {{this.user}}</div>
+      <div style="font-size: 120%">Добро пожаловать, {{this.user}}</div>
       <div style=" width: 70%; margin-top: 5%">
-        <mat-accordion>
-          <mat-expansion-panel hideToggle>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                Ваши личные данные
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-            <div style="text-align: center; display: inline-block; vertical-align: middle; width: 100%;">
-              <mat-form-field appearance="fill" style="width:80%;  display: inline-block; vertical-align: middle; color: black; " >
-                <mat-label class="test1">Придумайте логин</mat-label>
-                <input matInput class="test1" placeholder="Пример - ivan12345" [formControl]="login" >
-                <mat-error *ngIf="login.invalid" class="test1">{{getErrorMessageLogin()}}</mat-error>
-              </mat-form-field>
+        <mat-card>
+          <div style="text-align: center; display: inline-block; vertical-align: middle; width: 100%;font-size:65%">
+            <div class="test1" style="font-size:130%">Для измененения данных заполните форму:</div>
+            <mat-form-field appearance="fill" style="width:80%;  display: inline-block; vertical-align: middle; color: black; margin-top: 3%" >
+              <mat-label class="test1">Придумайте логин</mat-label>
+              <input matInput class="test1" placeholder="Пример - ivan12345" [formControl]="login" >
+              <mat-error *ngIf="login.invalid" class="test1">{{getErrorMessageLogin()}}</mat-error>
+            </mat-form-field>
 
-              <mat-form-field appearance="fill" style="width:80%;  display: inline-block; vertical-align: middle;">
-                <mat-label class="test1">Введите вашу почту</mat-label>
-                <input matInput class="test1" placeholder="Пример - ivan1234@mail.ru" [formControl]="email" >
-                <mat-error class="test1" *ngIf="email.invalid">{{getErrorMessageEmail()}}</mat-error>
-              </mat-form-field>
-              <mat-form-field appearance="fill" style="width:80%;  display: inline-block; vertical-align: middle;">
-                <mat-label class="test1">Введите пароль</mat-label>
-                <input matInput class="test1" placeholder="Пример - password12345*" [formControl]="passFirst"  >
-                <mat-error *ngIf="passFirst.invalid" class="test1">{{getErrorMessagePassFirst()}}</mat-error>
-              </mat-form-field>
-              <mat-form-field appearance="fill" style="width:80%;  display: inline-block; vertical-align: middle;">
-                <mat-label class="test1">Повторите пароль</mat-label>
-                <input matInput class="test1" placeholder="Пример - password12345*" [formControl]="passSecond" >
-                <mat-error class="test" *ngIf="passSecond.invalid">{{getErrorMessagePassSecond()}}</mat-error>
-              </mat-form-field>
-              <div style="margin-bottom: 2%">
-                <button mat-button class="test1" *ngIf="this.login.invalid || this.passSecond.invalid || this.passFirst.invalid || this.email.invalid" [disabled]="true" type="submit">
-                  <div style="">Изменить данные</div>
-                </button>
-                <button mat-button class="test1" *ngIf="!this.login.invalid  && !this.passSecond.invalid && !this.passFirst.invalid && !this.email.invalid" type="submit" (click)="sendUserData()">
-                  <div style="">Изменить данные</div>
-                </button>
+            <mat-form-field appearance="fill" style="width:80%;  display: inline-block; vertical-align: middle;">
+              <mat-label class="test1">Введите вашу почту</mat-label>
+              <input matInput class="test1" placeholder="Пример - ivan1234@mail.ru" [formControl]="email" >
+              <mat-error class="test1" *ngIf="email.invalid">{{getErrorMessageEmail()}}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill" style="width:80%;  display: inline-block; vertical-align: middle;">
+              <mat-label class="test1">Введите пароль</mat-label>
+              <input matInput class="test1" placeholder="Пример - password12345*" [formControl]="passFirst"  >
+              <mat-error *ngIf="passFirst.invalid" class="test1">{{getErrorMessagePassFirst()}}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="fill" style="width:80%;  display: inline-block; vertical-align: middle;">
+              <mat-label class="test1">Повторите пароль</mat-label>
+              <input matInput class="test1" placeholder="Пример - password12345*" [formControl]="passSecond" >
+              <mat-error class="test" *ngIf="passSecond.invalid">{{getErrorMessagePassSecond()}}</mat-error>
+            </mat-form-field>
+            <div style="margin-bottom: 2%">
+              <button mat-button class="test1" *ngIf="this.login.invalid || this.passSecond.invalid || this.passFirst.invalid || this.email.invalid" [disabled]="true" type="submit">
+                <div style="">Изменить данные</div>
+              </button>
+              <button mat-button class="test1" *ngIf="!this.login.invalid  && !this.passSecond.invalid && !this.passFirst.invalid && !this.email.invalid" type="submit" (click)="sendUserData()">
+                <div style="">Изменить данные</div>
+              </button>
+            </div>
+          </div>
+        </mat-card>
+
+        <mat-card style = 'margin-top: 3%'>
+          <div class="test1" style="font-size:90%">Избранное:</div>
+            <mat-card class="test1" style="width: 20%; margin-left: 3%; margin-top: 3%; display: inline-block; font-size: 80%" *ngFor="let film of obs | async">
+              <div align="left">
+                <div style="display: inline">
+                  <img src="assets/resource/rate.png" style="margin-top: 1%; margin-right: 2%; margin-left: 2%; width: 10%; float:inherit;" align="left">
+                </div>
+                <div style="display: inline;" align="left">{{film.filmRate}}</div>
+                <div style="display: inline">
+                  <img src="assets/resource/age.png" style="margin-top: 1%; margin-right: 2%; margin-left: 2%; width: 10%; float:inherit;" align="left">
+                </div>
+                <div style="display: inline;" align="left">{{film.filmAge}}+</div>
               </div>
-            </div>
-          </mat-expansion-panel>
-          <mat-expansion-panel hideToggle>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                Избранное
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-            <div style=" width: 100%; margin-top:1%; margin-bottom:1%" align="center" >
-              <mat-card class="test1" style="width: 20%; margin-left: 3%; margin-top: 3%; display: inline-block" *ngFor="let film of dataSource1; index as i">
-                <div align="left">
-                  <div style="display: inline">
-                    <img src="assets/resource/rate.png" style="margin-top: 1%; margin-right: 2%; margin-left: 2%; width: 10%; float:inherit;" align="left">
-                  </div>
-                  <div style="display: inline;" align="left">{{film.filmRate}}</div>
-                  <div style="display: inline">
-                    <img src="assets/resource/age.png" style="margin-top: 1%; margin-right: 2%; margin-left: 2%; width: 10%; float:inherit;" align="left">
-                  </div>
-                  <div style="display: inline;" align="left">{{film.filmAge}}+</div>
+              <img src={{film.filmImg}} style="margin-top: 2%; margin-right: 2%; margin-left: 2%; width: 90%">
+              <div style="font-weight: bold; margin-left: 3%; margin-top:3%; margin-right: 3%;">{{film.filmName}}</div>
+              <button mat-button  style="width: 100%; margin-left: 2%; margin-top: 3%; display: inline-block" class="test1" (click)="goFilmPage()">Смотреть</button>
+            </mat-card>
+
+        <mat-paginator
+                                 [pageSizeOptions]="[4]" >
+        </mat-paginator>
+
+        </mat-card>
+        <mat-card style = 'margin-top: 3%'>
+          <div class="test1" style="font-size:90%">Рекомендации:</div>
+            <mat-card class="test1" style="width: 20%; margin-left: 3%; margin-top: 3%; display: inline-block; font-size: 80%" *ngFor="let film of dataSource2">
+              <div align="left">
+                <div style="display: inline">
+                  <img src="assets/resource/rate.png" style="margin-top: 1%; margin-right: 2%; margin-left: 2%; width: 10%; float:inherit;" align="left">
                 </div>
-                <img src={{film.filmImg}} style="margin-top: 2%; margin-right: 2%; margin-left: 2%; width: 90%">
-                <div style="font-weight: bold; margin-left: 3%; margin-top:3%; margin-right: 3%;">{{film.filmName}}</div>
-                <button mat-button  style="width: 100%; margin-left: 2%; margin-top: 3%; display: inline-block" class="test1" (click)="goFilmPage()">Смотреть</button>
-              </mat-card>
-            </div>
-          </mat-expansion-panel>
-          <mat-expansion-panel hideToggle>
-            <mat-expansion-panel-header>
-              <mat-panel-title >
-                История
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-            <div style=" width: 100%; margin-top:1%; margin-bottom:1%" align="center" >
-              <mat-card class="test1" style="width: 20%; margin-left: 3%; margin-top: 3%; display: inline-block" *ngFor="let film of dataSource1; index as i">
-                <div align="left">
-                  <div style="display: inline">
-                    <img src="assets/resource/rate.png" style="margin-top: 1%; margin-right: 2%; margin-left: 2%; width: 10%; float:inherit;" align="left">
-                  </div>
-                  <div style="display: inline;" align="left">{{film.filmRate}}</div>
-                  <div style="display: inline">
-                    <img src="assets/resource/age.png" style="margin-top: 1%; margin-right: 2%; margin-left: 2%; width: 10%; float:inherit;" align="left">
-                  </div>
-                  <div style="display: inline;" align="left">{{film.filmAge}}+</div>
+                <div style="display: inline;" align="left">{{film.filmRate}}</div>
+                <div style="display: inline">
+                  <img src="assets/resource/age.png" style="margin-top: 1%; margin-right: 2%; margin-left: 2%; width: 10%; float:inherit;" align="left">
                 </div>
-                <img src={{film.filmImg}} style="margin-top: 2%; margin-right: 2%; margin-left: 2%; width: 90%">
-                <div style="font-weight: bold; margin-left: 3%; margin-top:3%; margin-right: 3%;">{{film.filmName}}</div>
-                <button mat-button  style="width: 100%; margin-left: 2%; margin-top: 3%; display: inline-block" class="test1" (click)="goFilmPage()">Смотреть</button>
-              </mat-card>
-            </div>
-          </mat-expansion-panel>
+                <div style="display: inline;" align="left">{{film.filmAge}}+</div>
+              </div>
+              <img src={{film.filmImg}} style="margin-top: 2%; margin-right: 2%; margin-left: 2%; width: 90%">
+              <div style="font-weight: bold; margin-left: 3%; margin-top:3%; margin-right: 3%;">{{film.filmName}}</div>
+              <button mat-button  style="width: 100%; margin-left: 2%; margin-top: 3%; display: inline-block" class="test1" (click)="goFilmPage()">Смотреть</button>
+            </mat-card>
+          <mat-paginator
+            [pageSizeOptions]="[4]" >
+          </mat-paginator>
+        </mat-card>
+
+        <mat-accordion>
+
           <mat-expansion-panel hideToggle>
             <mat-expansion-panel-header>
               <mat-panel-title>
@@ -139,30 +137,6 @@
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
               <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
-          </mat-expansion-panel>
-          <mat-expansion-panel hideToggle>
-            <mat-expansion-panel-header>
-              <mat-panel-title >
-                Рекомендации
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-            <div style=" width: 100%; margin-top:1%; margin-bottom:1%" align="center" >
-              <mat-card class="test1" style="width: 20%; margin-left: 3%; margin-top: 3%; display: inline-block" *ngFor="let film of dataSource1; index as i">
-                <div align="left">
-                  <div style="display: inline">
-                    <img src="assets/resource/rate.png" style="margin-top: 1%; margin-right: 2%; margin-left: 2%; width: 10%; float:inherit;" align="left">
-                  </div>
-                  <div style="display: inline;" align="left">{{film.filmRate}}</div>
-                  <div style="display: inline">
-                    <img src="assets/resource/age.png" style="margin-top: 1%; margin-right: 2%; margin-left: 2%; width: 10%; float:inherit;" align="left">
-                  </div>
-                  <div style="display: inline;" align="left">{{film.filmAge}}+</div>
-                </div>
-                <img src={{film.filmImg}} style="margin-top: 2%; margin-right: 2%; margin-left: 2%; width: 90%">
-                <div style="font-weight: bold; margin-left: 3%; margin-top:3%; margin-right: 3%;">{{film.filmName}}</div>
-                <button mat-button  style="width: 100%; margin-left: 2%; margin-top: 3%; display: inline-block" class="test1" (click)="goFilmPage()">Смотреть</button>
-              </mat-card>
-            </div>
           </mat-expansion-panel>
         </mat-accordion>
       </div>

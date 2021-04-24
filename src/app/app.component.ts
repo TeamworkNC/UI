@@ -16,8 +16,6 @@ export class AppComponent {
             "transports" : ['websocket', 'polling', 'flashsocket']
         };
   constructor( public router: Router) {
-      const socket = socketIo('https://mac21-chat.herokuapp.com/ws/', this.connectionOptions);
-        socket.on('hello',(data) => console.log(data));
 
     }
 
@@ -63,4 +61,10 @@ export class AppComponent {
     closeChat(): void {
       this.chatIsOpen = false;
     }
+   hidden = false;
+
+  toggleBadgeVisibility() {
+    this.hidden = !this.hidden;
+  }
+
 }

@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef,OnDestroy } from '@angular/core';
 import {User} from 'src/app/user';
 import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {ProfileInfo} from 'src/app/req/profileInfo';
 import {ActivatedRoute, Router} from "@angular/router";
-import {Subject, Subscription} from 'rxjs';
+import {Subject, Subscription, Observable} from 'rxjs';
 import {FormControl, Validators} from '@angular/forms';
 import {MatDialog, MatDialogRef, MatDialogModule} from "@angular/material/dialog";
 import {Reg} from 'src/app/req/reg';
-import {MatTableModule} from '@angular/material/table';
+import {MatTableModule, MatTableDataSource} from '@angular/material/table';
 import {FilmMain} from 'src/app/filmMain';
+import {MatPaginatorModule, MatPaginator} from '@angular/material/paginator';
 
 const ELEMENT_DATA1: FilmMain[] = [
   {filmId: 1, filmName: 'Омерзительная восьмерка', filmRate: 7.2, filmImg: 'https://avatars.mds.yandex.net/get-kinopoisk-image/1900788/0bf728af-ce48-4c0e-9da3-f20ee81bc276/960x960', filmAge: 18},
@@ -43,17 +44,25 @@ const ELEMENT_DATA: PeriodicElement[] = [
   templateUrl: './user-page.component.html',
   styleUrls: ['./user-page.component.scss']
 })
-export class UserPageComponent implements OnInit {
+export class UserPageComponent implements OnInit, OnDestroy {
 user: User;
 userId1 : number;
 private subscription: Subscription;
 displayedColumns: string[] = ['position', 'name', 'weight'];
 dataSource1 = ELEMENT_DATA1;
+dataSource2 = ELEMENT_DATA1;
 dataSource = ELEMENT_DATA;
-  constructor(private http: HttpClient, private api: ProfileInfo, private api1: Reg, private activateRoute: ActivatedRoute,  public dialog: MatDialog,  private router: Router) {
+@ViewChild(MatPaginator) paginator: MatPaginator;
+@ViewChild(MatPaginator) paginatorRec: MatPaginator;
+obs: Observable<any>;
+dataSource3: MatTableDataSource<FilmMain> = new MatTableDataSource<FilmMain>(this.dataSource1);
+obsRec: Observable<any>;
+dataSourceRec: MatTableDataSource<FilmMain> = new MatTableDataSource<FilmMain>(this.dataSource2);
+  constructor(private http: HttpClient, private api: ProfileInfo, private api1: Reg, private activateRoute: ActivatedRoute,  public dialog: MatDialog,  private router: Router, private changeDetectorRef: ChangeDetectorRef) {
     this.user = {"userId":0};
     this.subscription = new Subscription();
     this.userId1 = 0;
+
   }
   date = new FormControl();
   email = new FormControl('', [Validators.required, Validators.email, this.noWhitespaceValidator]);
@@ -94,8 +103,18 @@ dataSource = ELEMENT_DATA;
         this.userId1 = params['id'];
         this.getUserData(this.userId1);
       });
-
+  this.changeDetectorRef.detectChanges();
+  this.dataSource3.paginator = this.paginator;
+  this.obs = this.dataSource3.connect();
+  this.dataSourceRec.paginator = this.paginatorRec;
+  this.obsRec = this.dataSourceRec.connect();
+  console.log(this.obs);
   }
+  ngOnDestroy() {
+      if (this.dataSource3) {
+        this.dataSource3.disconnect();
+      }
+    }
 openDialog(){
     this.dialog.open(NotEq);
   }
@@ -155,6 +174,7 @@ sendUserData(){
             }
           });
     }
+
 }
 
 @Component({
