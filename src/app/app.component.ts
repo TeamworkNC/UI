@@ -52,6 +52,16 @@ export class AppComponent {
                       ['/room/'+1]);
   }
 
+  goFriendsPage(){
+                    this.router.navigate(
+                        ['/friends/'+1]);
+    }
+
+  goOtherUserPage(){
+                      this.router.navigate(
+                          ['/otheruser/'+1]);
+      }
+
   chatIsOpen = false;
 
     openChat(): void {

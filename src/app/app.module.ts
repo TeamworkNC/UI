@@ -46,6 +46,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
+import { UserFrendsComponent } from './user-frends/user-frends.component';
+import { OtherUserComponent } from './other-user/other-user.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +58,9 @@ import {MatSortModule} from '@angular/material/sort';
     CatalogPageComponent,
     RegistrationPageComponent,
     AuthorizationPageComponent,
-    RoomPageComponent
+    RoomPageComponent,
+    UserFrendsComponent,
+    OtherUserComponent
   ],
   imports: [
     BrowserModule,

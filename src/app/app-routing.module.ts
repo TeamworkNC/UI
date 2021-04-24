@@ -7,6 +7,8 @@ import {CatalogPageComponent} from './catalog-page/catalog-page.component';
 import { RegistrationPageComponent } from './registration-page/registration-page.component';
 import { AuthorizationPageComponent } from './authorization-page/authorization-page.component';
 import { RoomPageComponent } from './room-page/room-page.component';
+import { UserFrendsComponent } from './user-frends/user-frends.component';
+import { OtherUserComponent } from './other-user/other-user.component';
 
 export const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -17,6 +19,8 @@ export const routes: Routes = [
   {path: 'registration', component: RegistrationPageComponent },
   {path: 'authorization', component: AuthorizationPageComponent},
   {path: 'room/:id', component: RoomPageComponent},
+  {path: 'otheruser/:id', component: OtherUserComponent},
+  {path: 'friends/:id', component: UserFrendsComponent},
 ];
 
 @NgModule({

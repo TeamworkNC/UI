@@ -80,7 +80,7 @@
                 </div>
                 <img src={{film.filmImg}} style="margin-top: 2%; margin-right: 2%; margin-left: 2%; width: 90%">
                 <div style="font-weight: bold; margin-left: 3%; margin-top:3%; margin-right: 3%;">{{film.filmName}}</div>
-                <button mat-button  style="width: 100%; margin-left: 2%; margin-top: 3%; display: inline-block" class="test1" (click)="goFilmPage()">Смотреть</button>
+                <button mat-button  style="width: 100%; margin-left: 2%; margin-top: 3%; display: inline-block" class="test1" (click)="goFilmPage(film.filmId)">Смотреть</button>
               </mat-card>
               <mat-paginator #MatPaginator1
                              [pageSizeOptions]="[4]" >
@@ -103,7 +103,7 @@
                 </div>
                 <img src={{film.filmImg}} style="margin-top: 2%; margin-right: 2%; margin-left: 2%; width: 90%">
                 <div style="font-weight: bold; margin-left: 3%; margin-top:3%; margin-right: 3%;">{{film.filmName}}</div>
-                <button mat-button  style="width: 100%; margin-left: 2%; margin-top: 3%; display: inline-block" class="test1" (click)="goFilmPage()">Смотреть</button>
+                <button mat-button  style="width: 100%; margin-left: 2%; margin-top: 3%; display: inline-block" class="test1" (click)="goFilmPage(film.filmId)">Смотреть</button>
               </mat-card>
               <mat-paginator #MatPaginator2
                              [pageSizeOptions]="[4]" >

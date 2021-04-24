@@ -158,9 +158,9 @@ sendUserData(){
       }
     }
 
-    goFilmPage() {
+    goFilmPage(filmId: number) {
                         this.router.navigate(
-                          ['/film']);
+                          ['/film/'+ filmId]);
                       }
 
     goToProfile() {
