@@ -81,14 +81,14 @@
               <button mat-button  style="width: 100%; margin-left: 2%; margin-top: 3%; display: inline-block" class="test1" (click)="goFilmPage()">Смотреть</button>
             </mat-card>
 
-        <mat-paginator
+        <mat-paginator #MatPaginator1
                                  [pageSizeOptions]="[4]" >
         </mat-paginator>
 
         </mat-card>
         <mat-card style = 'margin-top: 3%'>
           <div class="test1" style="font-size:90%">Рекомендации:</div>
-            <mat-card class="test1" style="width: 20%; margin-left: 3%; margin-top: 3%; display: inline-block; font-size: 80%" *ngFor="let film of dataSource2">
+            <mat-card class="test1" style="width: 20%; margin-left: 3%; margin-top: 3%; display: inline-block; font-size: 80%" *ngFor="let film of obsRec | async">
               <div align="left">
                 <div style="display: inline">
                   <img src="assets/resource/rate.png" style="margin-top: 1%; margin-right: 2%; margin-left: 2%; width: 10%; float:inherit;" align="left">
@@ -103,14 +103,14 @@
               <div style="font-weight: bold; margin-left: 3%; margin-top:3%; margin-right: 3%;">{{film.filmName}}</div>
               <button mat-button  style="width: 100%; margin-left: 2%; margin-top: 3%; display: inline-block" class="test1" (click)="goFilmPage()">Смотреть</button>
             </mat-card>
-          <mat-paginator
+          <mat-paginator #MatPaginator2
             [pageSizeOptions]="[4]" >
           </mat-paginator>
         </mat-card>
 
-        <mat-accordion>
+        <mat-accordion >
 
-          <mat-expansion-panel hideToggle>
+          <mat-expansion-panel hideToggle style = 'margin-top: 3%'>
             <mat-expansion-panel-header>
               <mat-panel-title>
                 Ссылки на комнаты
