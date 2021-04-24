@@ -6,7 +6,7 @@
 <style>
       .test{
       font-family: 'Cormorant Garamond', serif;
-      font-size: 170%;
+      font-size: 130%;
       color : #ffffff;
       }
       .test1{
@@ -23,7 +23,19 @@
 
     </div>
     <div style="display: table-cell; width: 70%; vertical-align: top" align="center">
+      <form style="display: inline" >
+        <mat-form-field style="width: 70%; margin-left: 3%" >
+          <mat-label class="test">Искать по логину</mat-label>
+          <input matInput placeholder="" value="" class="test">
+<!--                 [(ngModel)]="userIn" name="userIn"-->
 
+        </mat-form-field>
+      </form>
+      <button mat-button  class="test" >Поиск</button>
+<!--      (click)="postUserSearchOptions()"-->
+      <button mat-button class="test" >
+        <div style="">Сбросить</div>
+      </button>
     </div>
   </div>
 </div>
