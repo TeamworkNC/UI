@@ -4,17 +4,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&display=swap" rel="stylesheet">
 </head>
 <style>
-        .test{
-        font-family: 'Cormorant Garamond', serif;
-        font-size: 170%;
-        color : #ffffff;
-        }
-        .test1{
-        font-family: 'Cormorant Garamond', serif;
-        font-size: 100%;
-        color : black;
-        }
-    </style>
+      .test{
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 170%;
+      color : #ffffff;
+      }
+      .test1{
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 100%;
+      color : black;
+      }
+   </style>
 <body style="background-image: url(https://images.unsplash.com/photo-1486492440844-ebc195542a40?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1267&q=80); background-size: 100%;  " class="test" >
 <br>
 <div style="display: table; width: 100%; ">
@@ -28,117 +28,143 @@
     <div style="display: table-cell; width: 70%; vertical-align: top" align="center">
       <div style="font-size: 120%">Добро пожаловать, {{this.user}}</div>
       <div style=" width: 70%; margin-top: 5%">
-        <mat-card>
-          <div style="text-align: center; display: inline-block; vertical-align: middle; width: 100%;font-size:65%">
-            <div class="test1" style="font-size:130%">Для измененения данных заполните форму:</div>
-            <mat-form-field appearance="fill" style="width:80%;  display: inline-block; vertical-align: middle; color: black; margin-top: 3%" >
-              <mat-label class="test1">Придумайте логин</mat-label>
-              <input matInput class="test1" placeholder="Пример - ivan12345" [formControl]="login" >
-              <mat-error *ngIf="login.invalid" class="test1">{{getErrorMessageLogin()}}</mat-error>
-            </mat-form-field>
-
-            <mat-form-field appearance="fill" style="width:80%;  display: inline-block; vertical-align: middle;">
-              <mat-label class="test1">Введите вашу почту</mat-label>
-              <input matInput class="test1" placeholder="Пример - ivan1234@mail.ru" [formControl]="email" >
-              <mat-error class="test1" *ngIf="email.invalid">{{getErrorMessageEmail()}}</mat-error>
-            </mat-form-field>
-            <mat-form-field appearance="fill" style="width:80%;  display: inline-block; vertical-align: middle;">
-              <mat-label class="test1">Введите пароль</mat-label>
-              <input matInput class="test1" placeholder="Пример - password12345*" [formControl]="passFirst"  >
-              <mat-error *ngIf="passFirst.invalid" class="test1">{{getErrorMessagePassFirst()}}</mat-error>
-            </mat-form-field>
-            <mat-form-field appearance="fill" style="width:80%;  display: inline-block; vertical-align: middle;">
-              <mat-label class="test1">Повторите пароль</mat-label>
-              <input matInput class="test1" placeholder="Пример - password12345*" [formControl]="passSecond" >
-              <mat-error class="test" *ngIf="passSecond.invalid">{{getErrorMessagePassSecond()}}</mat-error>
-            </mat-form-field>
-            <div style="margin-bottom: 2%">
-              <button mat-button class="test1" *ngIf="this.login.invalid || this.passSecond.invalid || this.passFirst.invalid || this.email.invalid" [disabled]="true" type="submit">
-                <div style="">Изменить данные</div>
-              </button>
-              <button mat-button class="test1" *ngIf="!this.login.invalid  && !this.passSecond.invalid && !this.passFirst.invalid && !this.email.invalid" type="submit" (click)="sendUserData()">
-                <div style="">Изменить данные</div>
-              </button>
-            </div>
-          </div>
-        </mat-card>
-
-        <mat-card style = 'margin-top: 3%'>
-          <div class="test1" style="font-size:90%">Избранное:</div>
-            <mat-card class="test1" style="width: 20%; margin-left: 3%; margin-top: 3%; display: inline-block; font-size: 80%" *ngFor="let film of obs | async">
-              <div align="left">
-                <div style="display: inline">
-                  <img src="assets/resource/rate.png" style="margin-top: 1%; margin-right: 2%; margin-left: 2%; width: 10%; float:inherit;" align="left">
+        <mat-tab-group mat-align-tabs="center">
+          <mat-tab label="Редактирование" >
+            <mat-card style="margin-top: 3%">
+              <div style="text-align: center; display: inline-block; vertical-align: middle; width: 100%;font-size:65%; ">
+                <div class="test1" style="font-size:130%">Для измененения данных заполните форму:</div>
+                <mat-form-field appearance="fill" style="width:80%;  display: inline-block; vertical-align: middle; color: black; margin-top: 3%" >
+                  <mat-label class="test1">Придумайте логин</mat-label>
+                  <input matInput class="test1" placeholder="Пример - ivan12345" [formControl]="login" >
+                  <mat-error *ngIf="login.invalid" class="test1">{{getErrorMessageLogin()}}</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" style="width:80%;  display: inline-block; vertical-align: middle;">
+                  <mat-label class="test1">Введите вашу почту</mat-label>
+                  <input matInput class="test1" placeholder="Пример - ivan1234@mail.ru" [formControl]="email" >
+                  <mat-error class="test1" *ngIf="email.invalid">{{getErrorMessageEmail()}}</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" style="width:80%;  display: inline-block; vertical-align: middle;">
+                  <mat-label class="test1">Введите пароль</mat-label>
+                  <input matInput class="test1" placeholder="Пример - password12345*" [formControl]="passFirst"  >
+                  <mat-error *ngIf="passFirst.invalid" class="test1">{{getErrorMessagePassFirst()}}</mat-error>
+                </mat-form-field>
+                <mat-form-field appearance="fill" style="width:80%;  display: inline-block; vertical-align: middle;">
+                  <mat-label class="test1">Повторите пароль</mat-label>
+                  <input matInput class="test1" placeholder="Пример - password12345*" [formControl]="passSecond" >
+                  <mat-error class="test" *ngIf="passSecond.invalid">{{getErrorMessagePassSecond()}}</mat-error>
+                </mat-form-field>
+                <div style="margin-bottom: 2%">
+                  <button mat-button class="test1" *ngIf="this.login.invalid || this.passSecond.invalid || this.passFirst.invalid || this.email.invalid" [disabled]="true" type="submit">
+                    <div style="">Изменить данные</div>
+                  </button>
+                  <button mat-button class="test1" *ngIf="!this.login.invalid  && !this.passSecond.invalid && !this.passFirst.invalid && !this.email.invalid" type="submit" (click)="sendUserData()">
+                    <div style="">Изменить данные</div>
+                  </button>
                 </div>
-                <div style="display: inline;" align="left">{{film.filmRate}}</div>
-                <div style="display: inline">
-                  <img src="assets/resource/age.png" style="margin-top: 1%; margin-right: 2%; margin-left: 2%; width: 10%; float:inherit;" align="left">
-                </div>
-                <div style="display: inline;" align="left">{{film.filmAge}}+</div>
               </div>
-              <img src={{film.filmImg}} style="margin-top: 2%; margin-right: 2%; margin-left: 2%; width: 90%">
-              <div style="font-weight: bold; margin-left: 3%; margin-top:3%; margin-right: 3%;">{{film.filmName}}</div>
-              <button mat-button  style="width: 100%; margin-left: 2%; margin-top: 3%; display: inline-block" class="test1" (click)="goFilmPage()">Смотреть</button>
             </mat-card>
-
-        <mat-paginator #MatPaginator1
-                                 [pageSizeOptions]="[4]" >
-        </mat-paginator>
-
-        </mat-card>
-        <mat-card style = 'margin-top: 3%'>
-          <div class="test1" style="font-size:90%">Рекомендации:</div>
-            <mat-card class="test1" style="width: 20%; margin-left: 3%; margin-top: 3%; display: inline-block; font-size: 80%" *ngFor="let film of obsRec | async">
-              <div align="left">
-                <div style="display: inline">
-                  <img src="assets/resource/rate.png" style="margin-top: 1%; margin-right: 2%; margin-left: 2%; width: 10%; float:inherit;" align="left">
+          </mat-tab>
+          <mat-tab label="Избранное">
+            <mat-card style = 'margin-top: 3%'>
+              <!--            <div class="test1" style="font-size:90%">Избранное:</div>-->
+              <mat-card class="test1" style="width: 20%; margin-left: 3%; margin-top: 3%; display: inline-block; font-size: 80%" *ngFor="let film of obs | async">
+                <div align="left">
+                  <div style="display: inline">
+                    <img src="assets/resource/rate.png" style="margin-top: 1%; margin-right: 2%; margin-left: 2%; width: 10%; float:inherit;" align="left">
+                  </div>
+                  <div style="display: inline;" align="left">{{film.filmRate}}</div>
+                  <div style="display: inline">
+                    <img src="assets/resource/age.png" style="margin-top: 1%; margin-right: 2%; margin-left: 2%; width: 10%; float:inherit;" align="left">
+                  </div>
+                  <div style="display: inline;" align="left">{{film.filmAge}}+</div>
                 </div>
-                <div style="display: inline;" align="left">{{film.filmRate}}</div>
-                <div style="display: inline">
-                  <img src="assets/resource/age.png" style="margin-top: 1%; margin-right: 2%; margin-left: 2%; width: 10%; float:inherit;" align="left">
-                </div>
-                <div style="display: inline;" align="left">{{film.filmAge}}+</div>
-              </div>
-              <img src={{film.filmImg}} style="margin-top: 2%; margin-right: 2%; margin-left: 2%; width: 90%">
-              <div style="font-weight: bold; margin-left: 3%; margin-top:3%; margin-right: 3%;">{{film.filmName}}</div>
-              <button mat-button  style="width: 100%; margin-left: 2%; margin-top: 3%; display: inline-block" class="test1" (click)="goFilmPage()">Смотреть</button>
+                <img src={{film.filmImg}} style="margin-top: 2%; margin-right: 2%; margin-left: 2%; width: 90%">
+                <div style="font-weight: bold; margin-left: 3%; margin-top:3%; margin-right: 3%;">{{film.filmName}}</div>
+                <button mat-button  style="width: 100%; margin-left: 2%; margin-top: 3%; display: inline-block" class="test1" (click)="goFilmPage()">Смотреть</button>
+              </mat-card>
+              <mat-paginator #MatPaginator1
+                             [pageSizeOptions]="[4]" >
+              </mat-paginator>
             </mat-card>
-          <mat-paginator #MatPaginator2
-            [pageSizeOptions]="[4]" >
-          </mat-paginator>
-        </mat-card>
-
-        <mat-accordion >
-
-          <mat-expansion-panel hideToggle style = 'margin-top: 3%'>
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                Ссылки на комнаты
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%">
-              <!--- Note that these columns can be defined in any order.
-                  The actual rendered columns are set as a property on the row definition" -->
-              <!-- Position Column -->
-              <ng-container matColumnDef="position">
-                <th mat-header-cell *matHeaderCellDef> No. </th>
-                <td mat-cell *matCellDef="let element">  {{element.position}} </td>
-              </ng-container>
-              <!-- Name Column -->
-              <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef> Name </th>
-                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-              </ng-container>
-              <!-- Weight Column -->
-              <ng-container matColumnDef="weight">
-                <th mat-header-cell *matHeaderCellDef> Weight </th>
-                <td mat-cell *matCellDef="let element">  {{element.weight}}</td>
-              </ng-container>
-              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table>
-          </mat-expansion-panel>
-        </mat-accordion>
+          </mat-tab>
+          <mat-tab label="Рекомендации">
+            <mat-card style = 'margin-top: 3%'>
+              <!--              <div class="test1" style="font-size:90%">Рекомендации:</div>-->
+              <mat-card class="test1" style="width: 20%; margin-left: 3%; margin-top: 3%; display: inline-block; font-size: 80%" *ngFor="let film of obsRec | async">
+                <div align="left">
+                  <div style="display: inline">
+                    <img src="assets/resource/rate.png" style="margin-top: 1%; margin-right: 2%; margin-left: 2%; width: 10%; float:inherit;" align="left">
+                  </div>
+                  <div style="display: inline;" align="left">{{film.filmRate}}</div>
+                  <div style="display: inline">
+                    <img src="assets/resource/age.png" style="margin-top: 1%; margin-right: 2%; margin-left: 2%; width: 10%; float:inherit;" align="left">
+                  </div>
+                  <div style="display: inline;" align="left">{{film.filmAge}}+</div>
+                </div>
+                <img src={{film.filmImg}} style="margin-top: 2%; margin-right: 2%; margin-left: 2%; width: 90%">
+                <div style="font-weight: bold; margin-left: 3%; margin-top:3%; margin-right: 3%;">{{film.filmName}}</div>
+                <button mat-button  style="width: 100%; margin-left: 2%; margin-top: 3%; display: inline-block" class="test1" (click)="goFilmPage()">Смотреть</button>
+              </mat-card>
+              <mat-paginator #MatPaginator2
+                             [pageSizeOptions]="[4]" >
+              </mat-paginator>
+            </mat-card>
+          </mat-tab>
+          <mat-tab label="Комнаты">
+            <mat-card style = 'margin-top: 3%; font-size: 100%;'>
+              <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%">
+                <!--- Note that these columns can be defined in any order.
+                   The actual rendered columns are set as a property on the row definition" -->
+                <!-- Position Column -->
+                <ng-container matColumnDef="position">
+                  <th mat-header-cell *matHeaderCellDef>Владелец</th>
+                  <td mat-cell *matCellDef="let element">  {{element.position}} </td>
+                </ng-container>
+                <!-- Name Column -->
+                <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef>Название комнаты</th>
+                  <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                </ng-container>
+                <!-- Weight Column -->
+                <ng-container matColumnDef="weight">
+                  <th mat-header-cell *matHeaderCellDef>Ссылка</th>
+                  <td mat-cell *matCellDef="let element">
+                    <button mat-button class="test1" (click)="goToRoom(element.weight)">Перейти</button>
+                  </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+            </mat-card>
+          </mat-tab>
+          <mat-tab label="Уведомления">
+            <mat-card style = 'margin-top: 3%; font-size: 100%;'>
+              <table mat-table [dataSource]="dataForNotifications" class="mat-elevation-z8" style="width: 100%">
+                <!--- Note that these columns can be defined in any order.
+                   The actual rendered columns are set as a property on the row definition" -->
+                <!-- Position Column -->
+                <ng-container matColumnDef="position">
+                  <th mat-header-cell *matHeaderCellDef>Отправитель</th>
+                  <td mat-cell *matCellDef="let element">  {{element.position}} </td>
+                </ng-container>
+                <!-- Name Column -->
+                <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef>Текст сообщения</th>
+                  <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                </ng-container>
+                <!-- Weight Column -->
+                <ng-container matColumnDef="weight">
+                  <th mat-header-cell *matHeaderCellDef>Ссылка</th>
+                  <td mat-cell *matCellDef="let element">
+                    <button mat-button class="test1" (click)="goToRoom(element.weight)">Прочитано</button>
+                  </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              </table>
+            </mat-card>
+          </mat-tab>
+        </mat-tab-group>
       </div>
     </div>
   </div>

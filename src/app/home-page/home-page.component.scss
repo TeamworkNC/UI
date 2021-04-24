@@ -6,7 +6,7 @@
                                  }
 ::ng-deep  :focus {outline:none;}
 
-::ng-deep .mat-tab-label {
+:host ::ng-deep .mat-tab-label {
   color : #ffffff;
   font-family: 'Cormorant Garamond', serif;
   font-size: 150%

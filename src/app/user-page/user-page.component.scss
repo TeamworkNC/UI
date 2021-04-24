@@ -10,3 +10,30 @@
 ::ng-deep  .mat-table {
     font-family: 'Cormorant Garamond', serif;
 }
+
+:host ::ng-deep .mat-tab-label {
+  color : #ffffff;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 100%
+}
+::ng-deep .mat-tab-group.mat-primary .mat-ink-bar {
+  background-color: #ccccff;
+}
+
+::ng-deep .nb-theme-default body {
+   line-height: normal;
+}
+:host ::ng-deep .mat-tab-body-content {
+    height: auto;
+}
+::ng-deep .nb-theme-default a {
+    color: black;
+    text-decoration: none;
+}
+
+::ng-deep .mat-cell {
+    font-size: 80%;
+}
+::ng-deep  .mat-header-cell {
+    font-size: 80%;
+}
