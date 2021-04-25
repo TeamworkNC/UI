@@ -1,85 +1,109 @@
-<html>
-<head>
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&display=swap" rel="stylesheet">
-</head>
-<style>
-        .test{
-        font-family: 'Cormorant Garamond', serif;
-        font-size: 110%;
-        color : #ffffff;
-        }
-        .test1{
-        font-family: 'Cormorant Garamond', serif;
-        font-size: 110%;
-        color : black;
-        }
-    </style>
-<body style="background-color: black; width: 100% " class="test" >
-<br>
-<div style="font-size: 150%; margin-top: 1%" align="center">Название фильма</div>
-<div style="display: table; width: 100%; margin-top: 3%; margin-right: 3%;">
-  <div style="display: table-row;">
-    <div style="display: table-cell; width: 70%">
-      <vg-player style="width: 90%; margin-top:1%; margin-left: 1%">
-        <vg-overlay-play></vg-overlay-play>
-        <vg-buffering></vg-buffering>
+<!-- тестовые кнопки, потом уберу -->
+<button (click)="onConnectAsAdminButtonClick()">connect as admin</button>
+<button (click)="onConnectAsGuestButtonClick()">connect as guest</button>
 
-        <vg-scrub-bar>
-          <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
-          <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
-        </vg-scrub-bar>
-
-        <vg-controls>
-          <vg-play-pause></vg-play-pause>
-          <vg-playback-button></vg-playback-button>
-
-          <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
-
-          <vg-scrub-bar style="pointer-events: none;"></vg-scrub-bar>
-
-          <vg-time-display vgProperty="left" vgFormat="mm:ss"></vg-time-display>
-          <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
-
-          <vg-mute></vg-mute>
-          <vg-volume></vg-volume>
-
-          <vg-fullscreen></vg-fullscreen>
-        </vg-controls>
-
-        <video [vgMedia]="$any(media)" #media id="singleVideo" preload="auto" crossorigin>
-          <source src="http://static.videogular.com/assets/videos/videogular.mp4" type="video/mp4">
-        </video>
-      </vg-player>
-    </div>
-    <div style="display: table-cell; width: 27%; margin-right: 3%;">
-        dsfsdfsdf
-    </div>
-  </div>
+<!-- player -->
+<div>
+  <video #player
+         (pause)="onPauseVideoButtonClick()"
+         (play)="onPlayVideoButtonClick()"
+         (seeked)="onVideoTimeSeeked()"
+         controls>
+  </video>
+  <!-- тестовые кнопки, потом уберу -->
 </div>
 
-<div style="display: table; border-spacing: 70px 10px;">
-  <!--    потом переделаю на ngFor-->
-  <div style="display: table-cell">
-    <img  class="ava" align="center" style="margin-right: 1%; margin-left : 0.5%; margin-top: 1%" src="https://avatars.mds.yandex.net/get-ott/374297/2a000001616b87458162c9216ccd5144e94d/678x380">
-    <div style="display: block">
-      sdfsdf sdfsfdsf
-    </div>
-  </div>
-  <div style="display: table-cell">
-    <img  class="ava" align="center" style="margin-right: 1%; margin-left : 0.5%; margin-top: 1%" src="https://avatars.mds.yandex.net/get-ott/374297/2a000001616b87458162c9216ccd5144e94d/678x380">
-    <div style="display: block">
-      sdfsdf sdfsfdsf
-    </div>
-  </div>
-  <div style="display: table-cell">
-    <img  class="ava" style="margin-right: 1%; margin-left : 0.5%; margin-top: 2%" src="https://avatars.mds.yandex.net/get-ott/374297/2a000001616b87458162c9216ccd5144e94d/678x380">
-    <div style="display: block">
-      sdfsdf sdfsfdsf
-    </div>
+<!-- chat -->
+<div>
+  <div>
+    <input type="text">
+    <button>send</button>
   </div>
 </div>
 
 
-</body>
-</html>
+<!--<html>-->
+<!--<head>-->
+<!--  <link rel="preconnect" href="https://fonts.gstatic.com">-->
+<!--  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond&display=swap" rel="stylesheet">-->
+<!--</head>-->
+<!--<style>-->
+<!--        .test{-->
+<!--        font-family: 'Cormorant Garamond', serif;-->
+<!--        font-size: 110%;-->
+<!--        color : #ffffff;-->
+<!--        }-->
+<!--        .test1{-->
+<!--        font-family: 'Cormorant Garamond', serif;-->
+<!--        font-size: 110%;-->
+<!--        color : black;-->
+<!--        }-->
+<!--    </style>-->
+<!--<body style="background-color: black; width: 100% " class="test" >-->
+<!--<br>-->
+<!--<div style="font-size: 150%; margin-top: 1%" align="center">Название фильма</div>-->
+<!--<div style="display: table; width: 100%; margin-top: 3%; margin-right: 3%;">-->
+<!--  <div style="display: table-row;">-->
+<!--    <div style="display: table-cell; width: 70%">-->
+<!--      <vg-player style="width: 90%; margin-top:1%; margin-left: 1%">-->
+<!--        <vg-overlay-play></vg-overlay-play>-->
+<!--        <vg-buffering></vg-buffering>-->
+
+<!--        <vg-scrub-bar>-->
+<!--          <vg-scrub-bar-current-time></vg-scrub-bar-current-time>-->
+<!--          <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>-->
+<!--        </vg-scrub-bar>-->
+
+<!--        <vg-controls>-->
+<!--          <vg-play-pause></vg-play-pause>-->
+<!--          <vg-playback-button></vg-playback-button>-->
+
+<!--          <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>-->
+
+<!--          <vg-scrub-bar style="pointer-events: none;"></vg-scrub-bar>-->
+
+<!--          <vg-time-display vgProperty="left" vgFormat="mm:ss"></vg-time-display>-->
+<!--          <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>-->
+
+<!--          <vg-mute></vg-mute>-->
+<!--          <vg-volume></vg-volume>-->
+
+<!--          <vg-fullscreen></vg-fullscreen>-->
+<!--        </vg-controls>-->
+
+<!--        <video [vgMedia]="$any(media)" #media id="singleVideo" preload="auto" crossorigin>-->
+<!--          <source src="http://static.videogular.com/assets/videos/videogular.mp4" type="video/mp4">-->
+<!--        </video>-->
+<!--      </vg-player>-->
+<!--    </div>-->
+<!--    <div style="display: table-cell; width: 27%; margin-right: 3%;">-->
+<!--        dsfsdfsdf-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<!--<div style="display: table; border-spacing: 70px 10px;">-->
+<!--  &lt;!&ndash;    потом переделаю на ngFor&ndash;&gt;-->
+<!--  <div style="display: table-cell">-->
+<!--    <img  class="ava" align="center" style="margin-right: 1%; margin-left : 0.5%; margin-top: 1%" src="https://avatars.mds.yandex.net/get-ott/374297/2a000001616b87458162c9216ccd5144e94d/678x380">-->
+<!--    <div style="display: block">-->
+<!--      sdfsdf sdfsfdsf-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div style="display: table-cell">-->
+<!--    <img  class="ava" align="center" style="margin-right: 1%; margin-left : 0.5%; margin-top: 1%" src="https://avatars.mds.yandex.net/get-ott/374297/2a000001616b87458162c9216ccd5144e94d/678x380">-->
+<!--    <div style="display: block">-->
+<!--      sdfsdf sdfsfdsf-->
+<!--    </div>-->
+<!--  </div>-->
+<!--  <div style="display: table-cell">-->
+<!--    <img  class="ava" style="margin-right: 1%; margin-left : 0.5%; margin-top: 2%" src="https://avatars.mds.yandex.net/get-ott/374297/2a000001616b87458162c9216ccd5144e94d/678x380">-->
+<!--    <div style="display: block">-->
+<!--      sdfsdf sdfsfdsf-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+
+<!--</body>-->
+<!--</html>-->
