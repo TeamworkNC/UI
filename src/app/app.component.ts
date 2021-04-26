@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
-import {Router} from "@angular/router";
-import * as socketIo from 'socket.io-client';
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,25 +8,19 @@ import * as socketIo from 'socket.io-client';
 })
 export class AppComponent {
   title = 'my-app111';
- connectionOptions =  {
-            "force new connection" : true,
-            "reconnectionAttempts": "Infinity",
-            "timeout" : 10000,
-            "transports" : ['websocket', 'polling', 'flashsocket']
-        };
-  constructor( public router: Router) {
 
-    }
+  constructor(public router: Router) {
+  }
 
   goHomePage() {
-      this.router.navigate(
-        ['/home']);
-    }
+    this.router.navigate(
+      ['/home']);
+  }
 
   goUserPage() {
-          this.router.navigate(
-            ['/user/'+1]); //убрать
-        }
+    this.router.navigate(
+      ['/user/' + 1]); //убрать
+  }
 
   goCatalogPage() {
             this.router.navigate(
