@@ -50,6 +50,7 @@ export class RoomPageComponent implements AfterViewInit {
     console.log('onConnectAsGuestButtonClick');
     // this.userId = userIdInputRef.value;
     this.isAdmin = true;
+    this.playerRef.nativeElement.controls = true;
     this.connectToSession();
   }
 
