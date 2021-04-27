@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef,OnDestroy } from '@angular/core';
+import {UserProfile} from "src/app/userprofile";
 import {User} from 'src/app/user';
 import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {ProfileInfo} from 'src/app/req/profileInfo';
@@ -49,6 +50,7 @@ const ELEMENT_DATA3: PeriodicElement[] = [
   styleUrls: ['./user-page.component.scss']
 })
 export class UserPageComponent implements OnInit, OnDestroy {
+userprofile: UserProfile;
 user: User;
 userId1 : number;
 private subscription: Subscription;
@@ -64,7 +66,6 @@ dataSource3: MatTableDataSource<FilmMain> = new MatTableDataSource<FilmMain>(thi
 obsRec: Observable<any>;
 dataSourceRec: MatTableDataSource<FilmMain> = new MatTableDataSource<FilmMain>(this.dataSource2);
   constructor(private http: HttpClient, private api: ProfileInfo, private api1: Reg, private activateRoute: ActivatedRoute,  public dialog: MatDialog,  private router: Router, private changeDetectorRef: ChangeDetectorRef) {
-    this.user = {"userId":0};
     this.subscription = new Subscription();
     this.userId1 = 0;
 
@@ -74,6 +75,7 @@ dataSourceRec: MatTableDataSource<FilmMain> = new MatTableDataSource<FilmMain>(t
   login = new FormControl('', [Validators.required, this.noWhitespaceValidator]);
   passFirst = new FormControl('', [Validators.required, this.noWhitespaceValidator]);
   passSecond = new FormControl('', [Validators.required, this.noWhitespaceValidator]);
+
 
   getErrorMessageEmail() {
       if (this.email.hasError('required') || this.email.value.trim()=='') {
@@ -170,12 +172,15 @@ sendUserData(){
   getUserData(userId: number){
 
       this.api.postCommand(userId)
-          .subscribe((data: User) => {
+          .subscribe((data: UserProfile) => {
 
             if( data == null){
-              this.user = {"userId":0};
+              this.userprofile = {"userId":0, "birthday": "", "description":"", "email": "", "login": "", "logoUrl": "","registrationDate":"" };
             }else{
-            this.user = data;
+            this.userprofile = data;
+            this.login.setValue(data.login);
+            this.email.setValue(data.email);
+            this.date.setValue(data.birthday);
             }
           });
     }
