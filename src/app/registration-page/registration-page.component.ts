@@ -9,6 +9,7 @@ import {MatDialog, MatDialogRef, MatDialogModule} from "@angular/material/dialog
 import {ActivatedRoute, Router} from "@angular/router";
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
 import {MomentDateAdapter} from '@angular/material-moment-adapter';
+import {LocalStorageService} from "src/app/local-storage-service";
 import * as _moment from "moment";
 const moment = _moment;
 var headers = new HttpHeaders();
@@ -37,7 +38,7 @@ export class RegistrationPageComponent implements OnInit {
 user: User;
 userData: RegistrationData;
 hidePass = true;
-constructor(private http: HttpClient, private api: Reg, public dialog: MatDialog, private activateRoute: ActivatedRoute, private router: Router) {
+constructor(private http: HttpClient, private api: Reg, public dialog: MatDialog, private activateRoute: ActivatedRoute, private router: Router,public localStorageService: LocalStorageService) {
   this.user = {"userId":0};
   this.userData = {"firstName": '', "lastName":'', "email":'', "password": ''};
 }
@@ -119,6 +120,7 @@ getErrorMessagePassSecond() {
               }
 
               if (data.status == 200){
+                this.localStorageService.setItem("userId",  this.user.userId+"");
                 this.goToProfile();
               }
             },

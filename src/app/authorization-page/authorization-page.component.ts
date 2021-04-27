@@ -65,7 +65,7 @@ noWhitespaceValidator(control: FormControl) {
             if (data.status == 200){
                             this.goToProfile();
                             this.localStorageService.setItem("userId",  this.user.userId+"");
-                            console.log(this.localStorageService.getItem("userId"));
+                            console.log(data.headers.keys());
                           }
           },
 

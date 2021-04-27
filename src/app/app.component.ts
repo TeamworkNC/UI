@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
+import {LocalStorageService} from "src/app/local-storage-service";
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,7 @@ import {Router} from '@angular/router';
 export class AppComponent {
   title = 'my-app111';
 
-  constructor(public router: Router) {
+  constructor(public router: Router, public localStorageService: LocalStorageService) {
   }
 
   goHomePage() {
@@ -68,6 +69,10 @@ export class AppComponent {
 
   toggleBadgeVisibility() {
     this.hidden = !this.hidden;
+  }
+
+  logoff(){
+    this.localStorageService.removeItem("userId");
   }
 
 }
