@@ -5,6 +5,7 @@ import {User} from 'src/app/user';
 import {Autor} from 'src/app/req/autor';
 import {ActivatedRoute, Router} from "@angular/router";
 import {MatDialog, MatDialogRef, MatDialogModule} from "@angular/material/dialog";
+import {LocalStorageService} from "src/app/local-storage-service";
 
 @Component({
   selector: 'app-authorization-page',
@@ -14,7 +15,7 @@ import {MatDialog, MatDialogRef, MatDialogModule} from "@angular/material/dialog
 export class AuthorizationPageComponent implements OnInit {
   user: User;
   hidePass = true;
-  constructor(private http: HttpClient, private api: Autor, private activateRoute: ActivatedRoute, private router: Router, public dialog: MatDialog,) {
+  constructor(private http: HttpClient, private api: Autor, private activateRoute: ActivatedRoute, private router: Router, public dialog: MatDialog,public localStorageService: LocalStorageService) {
    this.user = {"userId":0};
    }
 noWhitespaceValidator(control: FormControl) {
@@ -63,6 +64,8 @@ noWhitespaceValidator(control: FormControl) {
             }
             if (data.status == 200){
                             this.goToProfile();
+                            this.localStorageService.setItem("userId",  this.user.userId+"");
+                            console.log(this.localStorageService.getItem("userId"));
                           }
           },
 
