@@ -50,8 +50,7 @@
           <img *ngIf="user.logoUrl && user.logoUrl.length>8" src={{user.logoUrl}} style="margin-top: 2%; margin-right: 2%; margin-left: 2%; width: 90%; height: 80%">
           <img *ngIf="!user.logoUrl || user.logoUrl.length<=8" src="assets/resource/nophoto.jpg" style="margin-top: 2%; margin-right: 2%; margin-left: 2%; width: 90%; height: 80%">
           <div style="font-weight: bold; margin-left: 3%; margin-top:3%; margin-right: 3%;">{{user.login}}</div>
-          <button mat-button  style="width: 80%; margin-left: 2%; margin-top: 3%; display: inline-block" class="test1" >Перейти</button>
-<!--          (click)="goFilmPage(film.id)"-->
+          <button mat-button  style="width: 80%; margin-left: 2%; margin-top: 3%; display: inline-block" class="test1" (click)="goOtherUserPage(user.userId)" >Перейти</button>
         </mat-card>
         <mat-paginator
           [pageSizeOptions]="[4,8]" >
