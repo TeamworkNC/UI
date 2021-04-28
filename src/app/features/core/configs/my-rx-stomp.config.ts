@@ -2,7 +2,7 @@ import {InjectableRxStompConfig} from '@stomp/ng2-stompjs';
 
 export const myRxStompConfig: InjectableRxStompConfig = {
   // Which server?
-  brokerURL: 'ws://mac21-chat.herokuapp.com/ws/websocket',
+  brokerURL: 'wss://mac21-chat.herokuapp.com/ws/websocket',
 
   // How often to heartbeat?
   // Interval in milliseconds, set to 0 to disable
