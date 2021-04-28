@@ -1,23 +1,14 @@
-<!-- тестовые кнопки, потом уберу -->
-<button (click)="onConnectAsAdminButtonClick()">connect as admin</button>
-<button (click)="onConnectAsGuestButtonClick()">connect as guest</button>
-
-<!-- player -->
 <div>
-  <video #player
-         (pause)="onPauseVideoButtonClick()"
-         (play)="onPlayVideoButtonClick()"
-         (seeked)="onVideoTimeSeeked()">
-  </video>
-  <!-- тестовые кнопки, потом уберу -->
+  <app-player
+    [creatorId]="creatorId"
+    [sessionId]="sessionId"
+    [userId]="userId"
+    [videoUrl]="videoUrl"
+  ></app-player>
 </div>
 
-<!-- chat -->
 <div>
-  <div>
-    <input type="text">
-    <button>send</button>
-  </div>
+  <app-chat [chatId]="chatId" [userId]="userId"></app-chat>
 </div>
 
 
