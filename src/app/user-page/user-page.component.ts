@@ -11,6 +11,7 @@ import {Reg} from 'src/app/req/reg';
 import {MatTableModule, MatTableDataSource} from '@angular/material/table';
 import {FilmMain} from 'src/app/filmMain';
 import {MatPaginatorModule, MatPaginator} from '@angular/material/paginator';
+import {LocalStorageService} from "src/app/local-storage-service";
 
 const ELEMENT_DATA1: FilmMain[] = [
   {filmId: 1, filmName: 'Омерзительная восьмерка', filmRate: 7.2, filmImg: 'https://avatars.mds.yandex.net/get-kinopoisk-image/1900788/0bf728af-ce48-4c0e-9da3-f20ee81bc276/960x960', filmAge: 18},
@@ -65,7 +66,7 @@ obs: Observable<any>;
 dataSource3: MatTableDataSource<FilmMain> = new MatTableDataSource<FilmMain>(this.dataSource1);
 obsRec: Observable<any>;
 dataSourceRec: MatTableDataSource<FilmMain> = new MatTableDataSource<FilmMain>(this.dataSource2);
-  constructor(private http: HttpClient, private api: ProfileInfo, private api1: Reg, private activateRoute: ActivatedRoute,  public dialog: MatDialog,  private router: Router, private changeDetectorRef: ChangeDetectorRef) {
+  constructor(private http: HttpClient, private api: ProfileInfo, private api1: Reg, private activateRoute: ActivatedRoute,  public dialog: MatDialog,  private router: Router, private changeDetectorRef: ChangeDetectorRef, public localStorageService: LocalStorageService) {
     this.subscription = new Subscription();
     this.userId1 = 0;
 
@@ -178,6 +179,7 @@ sendUserData(){
               this.userprofile = {"userId":0, "birthday": "", "description":"", "email": "", "login": "", "logoUrl": "","registrationDate":"" };
             }else{
             this.userprofile = data;
+            this.localStorageService.setItem("logoUrl", data.logoUrl);
             this.login.setValue(data.login);
             this.email.setValue(data.email);
             this.date.setValue(data.birthday);

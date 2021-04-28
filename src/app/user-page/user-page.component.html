@@ -20,7 +20,8 @@
 <div style="display: table; width: 100%; ">
   <div style="display: table-row; width: 100%; ">
     <div style="display: table-cell; width: 26%" align="center">
-      <img src="https://st2.depositphotos.com/2234823/8317/i/600/depositphotos_83178060-stock-photo-digital-camera.jpg" style="width: 70%; margin-left: 5%; vertical-align: middle" align="center">
+      <img *ngIf="userprofile.logoUrl.length>8" src={{userprofile.logoUrl}} style="width: 70%; margin-left: 5%; vertical-align: middle" align="center">
+      <img *ngIf="userprofile.logoUrl.length<=8" src="assets/resource/nophoto.jpg" style="width: 70%; margin-left: 5%; vertical-align: middle" align="center">
       <input name="myFile" type="file" style="margin-top: 5%; margin-left: 20%" >
       <br>
       <button mat-button class="test" style="font-size: 100%">Отправить</button>
@@ -35,7 +36,7 @@
                 <div class="test1" style="font-size:130%">Для измененения данных заполните форму:</div>
                 <mat-form-field appearance="fill" style="width:80%;  display: inline-block; vertical-align: middle; color: black; margin-top: 3%" >
                   <mat-label class="test1">Придумайте логин</mat-label>
-                  <input matInput class="test1" value="Sushi" [formControl]="login"  >
+                  <input matInput class="test1" [formControl]="login"  >
                   <mat-error *ngIf="login.invalid" class="test1">{{getErrorMessageLogin()}}</mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="fill" style="width:80%;  display: inline-block; vertical-align: middle;">

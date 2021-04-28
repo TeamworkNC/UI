@@ -6,7 +6,7 @@ import {map} from "rxjs/operators";
 
 var headers = new HttpHeaders();
 headers.append('Content-Type', 'application/json');
-const localUrl1 = 'https://mac21-portal-backend.herokuapp.com/api/v1/users';
+const localUrl1 = 'https://mac21-portal-backend.herokuapp.com/api/v1/users/full';
 
 @Injectable({
   providedIn: 'root'

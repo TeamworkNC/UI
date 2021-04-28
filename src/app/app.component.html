@@ -27,7 +27,8 @@ font-family: 'Cormorant Infant', serif;
         <button class="main" *ngIf='localStorageService.getItem("userId")' mat-button matBadge="7" [matBadgeHidden]="hidden" (click)="toggleBadgeVisibility()">Уведомления</button>
       </div>
       <div style="display: table-cell;">
-        <img *ngIf='localStorageService.getItem("userId")' class="ava" align="right" style="margin-right: 1%; margin-left : 0.5%" src="https://avatars.mds.yandex.net/get-ott/374297/2a000001616b87458162c9216ccd5144e94d/678x380">
+        <img *ngIf='localStorageService.getItem("userId") && localStorageService.getItem("logoUrl").length>8' class="ava" align="right" style="margin-right: 1%; margin-left : 0.5%" src="{{localStorageService.getItem('logoUrl')}}">
+        <img *ngIf='localStorageService.getItem("userId") && localStorageService.getItem("logoUrl").length<=8' class="ava" align="right" style="margin-right: 1%; margin-left : 0.5%" src="assets/resource/nophoto.jpg">
       </div>
     </div>
 
