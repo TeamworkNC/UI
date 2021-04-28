@@ -69,6 +69,7 @@ export class AppComponent {
   logoff(){
     this.localStorageService.removeItem("userId");
     this.localStorageService.removeItem("logoUrl");
+    this.goHomePage();
   }
 
 }
