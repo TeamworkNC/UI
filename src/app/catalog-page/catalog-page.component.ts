@@ -49,6 +49,7 @@ dataSource: MatTableDataSource<FilmShort>;
                  this.obs = this.dataSource.connect();
                  }
                });
+
          }
 
   goFilmPage(id : number) {
