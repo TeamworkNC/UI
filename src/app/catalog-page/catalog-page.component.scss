@@ -1,29 +1,28 @@
-.mat-input-element {
+.host .mat-input-element {
     caret-color: white;
     color: white;
 }
-::ng-deep .mat-focused  {
+.host ::ng-deep .mat-focused  {
   color: white !important;
  }
-
- ::ng-deep .mat-form-field-label {
+.host ::ng-deep .mat-form-field-label {
    color: white !important;
   }
 
- ::ng-deep.mat-form-field-underline {
+.host ::ng-deep.mat-form-field-underline {
   /*change color of underline*/
   background-color: white !important;
 }
 
-::ng-deep.mat-form-field-ripple {
+.host ::ng-deep.mat-form-field-ripple {
  /*change color of underline when focused*/
  background-color: white !important;
 }
 
-::ng-deep .mat-checkbox  {
+.host ::ng-deep .mat-checkbox  {
   border-color: white;
 }
-::ng-deep .mat-checkbox-frame {
+.host ::ng-deep .mat-checkbox-frame {
   border-color: white;
 }
 
