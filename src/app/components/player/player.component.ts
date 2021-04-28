@@ -1,7 +1,6 @@
 import {AfterViewInit, ChangeDetectorRef, Component, Input, ViewChild} from '@angular/core';
 import Hls from 'hls.js';
 import {RxStompService} from '@stomp/ng2-stompjs';
-import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-player',
@@ -27,13 +26,13 @@ export class PlayerComponent implements AfterViewInit {
   constructor(
     private readonly rxStompService: RxStompService,
     private readonly cd: ChangeDetectorRef,
-    private readonly http: HttpClient,
   ) {
   }
 
 
   ngAfterViewInit(): void {
     this.initPlayer();
+    this.connectToSession();
     this.cd.detectChanges();
   }
 
