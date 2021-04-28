@@ -20,7 +20,7 @@ export class AppComponent {
 
   goUserPage() {
     this.router.navigate(
-      ['/user/' + 1]); //убрать
+      ['/user/' + this.localStorageService.getItem("userId")]);
   }
 
   goCatalogPage() {
@@ -36,11 +36,6 @@ export class AppComponent {
                 this.router.navigate(
                   ['/authorization']);
               }
-
-  goFilmPage() {
-                  this.router.navigate(
-                    ['/film/'+1]);
-                }
   goRoomPage(){
                   this.router.navigate(
                       ['/room/'+1]);

@@ -31,12 +31,10 @@ dataSource: MatTableDataSource<FilmShort>;
               filters: this.formBuilder.array([])
             });
     this.dataSource= new MatTableDataSource<FilmShort>(this.catalog.films);
-    console.log(this.dataSource);
   }
   filterFormGroup : FormGroup;
   ngOnInit(): void {
     this.changeDetector.detectChanges();
-    console.log(this.obs);
   }
 
    getCatalogData(){

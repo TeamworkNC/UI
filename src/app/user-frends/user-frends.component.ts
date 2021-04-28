@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild, ChangeDetectorRef,OnDestroy } from '@angular/core';
+import { OtherUserGet } from 'src/app/req/otherUserGet';
+import { OtherUser, OtherUserArray } from 'src/app/other-user';
+import {Observable} from 'rxjs';
+import {MatTableModule, MatTableDataSource} from '@angular/material/table';
+import {MatPaginatorModule, MatPaginator} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-user-frends',
@@ -6,10 +11,31 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-frends.component.scss']
 })
 export class UserFrendsComponent implements OnInit {
-
-  constructor() { }
+@ViewChild(MatPaginator) paginator: MatPaginator;
+obs: Observable<any>;
+users: OtherUserArray;
+dataSource: MatTableDataSource<OtherUser>;
+  constructor(private api: OtherUserGet, private changeDetector: ChangeDetectorRef ) {
+    this.getOtherUserData();
+  }
 
   ngOnInit(): void {
+    this.changeDetector.detectChanges();
   }
+
+  getOtherUserData(){
+             this.api.getCommand()
+                 .subscribe((data: OtherUserArray) => {
+                   if( data == null){
+                     this.users;
+                   }else{
+                   this.users = data;
+                   console.log(this.users);
+                   this.dataSource= new MatTableDataSource<OtherUser>(this.users.users);
+                   this.dataSource.paginator = this.paginator;
+                   this.obs = this.dataSource.connect();
+                   }
+                 });
+           }
 
 }
