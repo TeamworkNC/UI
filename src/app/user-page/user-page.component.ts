@@ -70,6 +70,19 @@ dataSourceRec: MatTableDataSource<FilmMain> = new MatTableDataSource<FilmMain>(t
     this.subscription = new Subscription();
     this.userId1 = 0;
 
+    this.subscription = this.activateRoute.params.subscribe(params => {
+            this.userId1 = params['id'];
+            this.getUserData(this.userId1);
+          });
+    this.userprofile = {
+            birthday: "",
+            description: "",
+            email: "",
+            login: "",
+            logoUrl: "",
+            registrationDate : "",
+            userId: this.userId1
+        }
   }
   date = new FormControl();
   email = new FormControl('', [Validators.required, Validators.email, this.noWhitespaceValidator]);
@@ -107,16 +120,7 @@ dataSourceRec: MatTableDataSource<FilmMain> = new MatTableDataSource<FilmMain>(t
           }
 
   ngOnInit(): void {
-  this.subscription = this.activateRoute.params.subscribe(params => {
-        this.userId1 = params['id'];
-        this.getUserData(this.userId1);
-      });
-  this.changeDetectorRef.detectChanges();
-  this.dataSource3.paginator = this.paginator;
-  this.obs = this.dataSource3.connect();
-  this.dataSourceRec.paginator = this.paginatorRec;
-  this.obsRec = this.dataSourceRec.connect();
-  console.log(this.obs);
+
   }
   ngOnDestroy() {
       if (this.dataSource3) {
@@ -179,6 +183,11 @@ sendUserData(){
               this.userprofile = {"userId":0, "birthday": "", "description":"", "email": "", "login": "", "logoUrl": "","registrationDate":"" };
             }else{
             this.userprofile = data;
+            this.changeDetectorRef.detectChanges();
+            this.dataSource3.paginator = this.paginator;
+            this.obs = this.dataSource3.connect();
+            this.dataSourceRec.paginator = this.paginatorRec;
+            this.obsRec = this.dataSourceRec.connect();
             this.localStorageService.setItem("logoUrl", data.logoUrl);
             this.login.setValue(data.login);
             this.email.setValue(data.email);

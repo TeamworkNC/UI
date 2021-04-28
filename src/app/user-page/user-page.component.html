@@ -20,14 +20,14 @@
 <div style="display: table; width: 100%; ">
   <div style="display: table-row; width: 100%; ">
     <div style="display: table-cell; width: 26%" align="center">
-      <img *ngIf="userprofile.logoUrl.length>8" src={{userprofile.logoUrl}} style="width: 70%; margin-left: 5%; vertical-align: middle" align="center">
-      <img *ngIf="userprofile.logoUrl.length<=8" src="assets/resource/nophoto.jpg" style="width: 70%; margin-left: 5%; vertical-align: middle" align="center">
+      <img *ngIf="userprofile && userprofile.logoUrl.length>8" src={{userprofile.logoUrl}} style="width: 70%; margin-left: 5%; vertical-align: middle" align="center">
+      <img *ngIf="userprofile && userprofile.logoUrl.length<=8" src="assets/resource/nophoto.jpg" style="width: 70%; margin-left: 5%; vertical-align: middle" align="center">
       <input name="myFile" type="file" style="margin-top: 5%; margin-left: 20%" >
       <br>
       <button mat-button class="test" style="font-size: 100%">Отправить</button>
     </div>
     <div style="display: table-cell; width: 70%; vertical-align: top" align="center">
-      <div style="font-size: 120%">Добро пожаловать, {{this.userprofile.login}}</div>
+      <div style="font-size: 120%">Добро пожаловать, {{userprofile.login}}</div>
       <div style=" width: 70%; margin-top: 5%">
         <mat-tab-group mat-align-tabs="center">
           <mat-tab label="Редактирование" >
