@@ -25,7 +25,7 @@ font-family: 'Cormorant Garamond', serif;
       <img  align="bottom" src={{this.film.logo}} style="width:80%;margin-top: 5%;vertical-align: top; margin-left: 10%" >
       <div style="margin-top: 5%;vertical-align: top;" align="center">
         <button mat-button class="test" style="font-size: 150%">Смотреть</button>
-        <button mat-button class="test" style="font-size: 150%" (click)="toFavorites()">В избранное</button>
+        <button mat-button class="test" style="font-size: 150%" (click)="toFavorites(filmId, this.localStorageService.getItem('userId'))">В избранное</button>
       </div>
 
     </div>
@@ -105,7 +105,6 @@ font-family: 'Cormorant Garamond', serif;
                   <div style="margin-bottom: 1%">
                     <button mat-button class="test1" *ngIf="this.textOtz.invalid || this.mark.invalid" [disabled]="true" type="submit"><div style="">Оставить отзыв</div></button>
                     <button mat-button  class="test1"  *ngIf="!this.textOtz.invalid && !this.mark.invalid" type="submit">
-                      <!--                        (click)="sendUserData()"-->
                       <div style="">Оставить отзыв</div></button>
                   </div>
                 </form>
@@ -127,10 +126,6 @@ font-family: 'Cormorant Garamond', serif;
                     {{review.text}}
                   </p>
                 </mat-card-content>
-<!--                <mat-card-actions >-->
-<!--                  <button mat-button class="test1" style="font-size: 100%">Полезный отзыв</button>-->
-<!--                  <button mat-button class="test1" style="font-size: 100%">Бесполезный отзыв</button>-->
-<!--                </mat-card-actions>-->
               </mat-card>
             </div>
 
