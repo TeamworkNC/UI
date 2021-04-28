@@ -43,7 +43,7 @@ export class AppComponent {
 
   goFriendsPage(){
                     this.router.navigate(
-                        ['/friends/'+1]);
+                        ['/friends/'+ this.localStorageService.getItem("userId")]);
     }
 
   goOtherUserPage(){
