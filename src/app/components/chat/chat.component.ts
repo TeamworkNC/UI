@@ -47,6 +47,7 @@ export class ChatComponent implements OnInit {
       userId: this.userId,
       text,
     };
+    console.log(data);
     this.rxStompService.publish({destination: topic, body: JSON.stringify(data)});
     this.inputMessageForm.setValue('');
   }
