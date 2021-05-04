@@ -48,24 +48,26 @@ export class FilmAllGet {
 
    let reviews = [];
    for(let r in i.reviews){
-      let reviewObject = {"mark": 0, "text": "" };
-      reviewObject.mark =i.reviews[r].rating_film;
+      let reviewObject = {"mark": 0, "text": "", "logo":"", "login":"" };
+      reviewObject.mark =i.reviews[r].ratingFilm;
       reviewObject.text =i.reviews[r].review;
+      reviewObject.login =i.reviews[r].user.login;
+      reviewObject.logo =i.reviews[r].user.logoUrl;
       reviews.push(reviewObject);
    }
    console.log(reviews);
 
     return {
      id: i.id_film,
-     logo: i.film_poster,
-     name : i.film_title,
+     logo: i.filmPoster,
+     name : i.filmTitle,
      genre : genre[0].toUpperCase() + genre.slice(1).substr(0, genre.length - 3),
      producer: producers.substr(0, producers.length - 2),
      description: i.description,
      actors: actors.substr(0, actors.length - 2),
      rating : rating.substr(0,4),
      ageRestrictions : i.ageLimit.title,
-     trailerId : i.film_trailer,
+     trailerId : i.filmTrailer,
      imageObject : carusel,
      reviews : reviews
      };}));
