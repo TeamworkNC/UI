@@ -1,17 +1,17 @@
 <div>
   <app-player
     *ngIf="!playerDisabled"
-    [creatorId]="creatorId"
+    [creatorId]="session.organizerID"
     [sessionId]="sessionId"
     [userId]="userId"
-    [videoUrl]="videoUrl">
+    [videoUrl]="film.filmVideo">
   </app-player>
 </div>
 
 <div>
   <app-chat
     *ngIf="!chatDisabled"
-    [chatId]="chatId"
+    [chatId]="session.chatID"
     [userId]="userId"></app-chat>
 </div>
 
