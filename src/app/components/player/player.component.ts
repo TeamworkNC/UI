@@ -1,13 +1,15 @@
-import {AfterViewInit, ChangeDetectorRef, Component, Input, ViewChild} from '@angular/core';
-import Hls from 'hls.js';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {RxStompService} from '@stomp/ng2-stompjs';
+import {Player} from '@vime/angular';
 
 @Component({
   selector: 'app-player',
   templateUrl: './player.component.html',
   styleUrls: ['./player.component.css']
 })
-export class PlayerComponent implements AfterViewInit {
+export class PlayerComponent implements OnInit {
+
+  @ViewChild('player') player!: Player;
 
   @Input()
   public userId: number;
@@ -21,34 +23,23 @@ export class PlayerComponent implements AfterViewInit {
   @Input()
   public sessionId: number;
 
-  @ViewChild('player') playerRef;
+  enabled = false;
+  currentTime = 0;
+  hasControls: boolean;
 
   constructor(
-    private readonly rxStompService: RxStompService,
-    private readonly cd: ChangeDetectorRef,
-  ) {
+    private readonly rxStompService: RxStompService) {
   }
 
-
-  ngAfterViewInit(): void {
+  ngOnInit(): void {
     this.initPlayer();
     this.connectToSession();
-    this.cd.detectChanges();
+    this.enabled = true;
   }
 
 
   initPlayer(): void {
-    if (Hls.isSupported()) {
-      const hls = new Hls();
-      hls.loadSource(this.videoUrl);
-      hls.attachMedia(this.playerRef?.nativeElement);
-    } else {
-      alert('hls is not supported');
-    }
-
-    if (this.getIsAdmin()) {
-      this.playerRef.nativeElement.controls = true;
-    }
+    this.hasControls = this.getIsAdmin();
   }
 
 // ui handlers
@@ -68,8 +59,8 @@ export class PlayerComponent implements AfterViewInit {
     if (message.type === 'join') {
       console.log('join');
       if (this.getIsAdmin()) {
-        const status = this.playerRef?.nativeElement.paused ? 'paused' : 'played';
-        const data = {type: 'info', status, time: this.playerRef?.nativeElement.currentTime};
+        const status = this.player.paused ? 'paused' : 'played';
+        const data = {type: 'info', status, time: this.player.currentTime};
         this.sendMessage(data);
       }
     }
@@ -79,12 +70,12 @@ export class PlayerComponent implements AfterViewInit {
         const time = message.time;
         const status = message.status;
         console.log(time, status);
-        this.playerRef.nativeElement.currentTime = time;
+        this.player.currentTime = time;
         if (status === 'played') {
-          this.playerRef?.nativeElement.play().catch(reason => console.log(reason));
+          this.player.play().catch(reason => console.log(reason));
         }
         if (status === 'paused') {
-          this.playerRef?.nativeElement.pause();
+          this.player.pause();
         }
       }
     }
@@ -100,24 +91,30 @@ export class PlayerComponent implements AfterViewInit {
   onPlayVideoButtonClick(): void {
     console.log('onPlayVideoButtonClick');
     if (this.getIsAdmin()) {
-      this.playerRef?.nativeElement.play().catch(reason => console.log(reason));
-      this.sendMessage({type: 'status', status: 'played', time: this.playerRef?.nativeElement.currentTime});
+      this.player.play().catch(reason => console.log(reason));
+      this.sendMessage({type: 'status', status: 'played', time: this.player.currentTime});
     }
   }
 
-  onPauseVideoButtonClick(): void {
+  onPausedChange(event: CustomEvent<boolean>): void {
+    if (event.detail) {
+      this.onVideoPaused();
+    }
+  }
+
+  onVideoPaused(): void {
     console.log('onPauseVideoButtonClick');
     if (this.getIsAdmin()) {
-      this.playerRef?.nativeElement.pause();
-      this.sendMessage({type: 'status', status: 'paused', time: this.playerRef?.nativeElement.currentTime});
+      this.player.pause();
+      this.sendMessage({type: 'status', status: 'paused', time: this.player.currentTime});
     }
   }
 
   onVideoTimeSeeked(): void {
     console.log('onVideoTimeUpdate');
     if (this.getIsAdmin()) {
-      const status = this.playerRef?.nativeElement.paused ? 'paused' : 'played';
-      this.sendMessage({type: 'status', status, time: this.playerRef?.nativeElement.currentTime});
+      const status = this.player.paused ? 'paused' : 'played';
+      this.sendMessage({type: 'status', status, time: this.player.currentTime});
     }
   }
 

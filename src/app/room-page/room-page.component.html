@@ -1,4 +1,4 @@
-<div>
+<div class="left-column">
   <app-player
     *ngIf="!playerDisabled"
     [creatorId]="session.organizerID"
@@ -8,11 +8,12 @@
   </app-player>
 </div>
 
-<div>
+<div class="right-column">
   <app-chat
     *ngIf="!chatDisabled"
     [chatId]="session.chatID"
-    [userId]="userId"></app-chat>
+    [userId]="userId">
+  </app-chat>
 </div>
 
 

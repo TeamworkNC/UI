@@ -1,5 +1,14 @@
-<video #player
-       (pause)="onPauseVideoButtonClick()"
-       (play)="onPlayVideoButtonClick()"
-       (seeked)="onVideoTimeSeeked()">
-</video>
+<vm-player
+  #player
+  (vmPausedChange)="onPausedChange($event)"
+  (vmPlay)="onPlayVideoButtonClick()"
+  (vmSeeked)="onVideoTimeSeeked()">
+
+  <vm-hls>
+    <source src="https://moviescontainerhls.s3-us-west-2.amazonaws.com/sintel/sintel.m3u8"/>
+  </vm-hls>
+
+
+  <vm-default-ui *ngIf="getIsAdmin()">
+  </vm-default-ui>
+</vm-player>
