@@ -12,6 +12,7 @@ import {MatTableModule, MatTableDataSource} from '@angular/material/table';
 import {FilmMain} from 'src/app/filmMain';
 import {MatPaginatorModule, MatPaginator} from '@angular/material/paginator';
 import {LocalStorageService} from "src/app/local-storage-service";
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 const ELEMENT_DATA1: FilmMain[] = [
   {filmId: 1, filmName: 'Омерзительная восьмерка', filmRate: 7.2, filmImg: 'https://avatars.mds.yandex.net/get-kinopoisk-image/1900788/0bf728af-ce48-4c0e-9da3-f20ee81bc276/960x960', filmAge: 18},
@@ -66,30 +67,15 @@ obs: Observable<any>;
 dataSource3: MatTableDataSource<FilmMain> = new MatTableDataSource<FilmMain>(this.dataSource1);
 obsRec: Observable<any>;
 dataSourceRec: MatTableDataSource<FilmMain> = new MatTableDataSource<FilmMain>(this.dataSource2);
-  constructor(private http: HttpClient, private api: ProfileInfo, private api1: Reg, private activateRoute: ActivatedRoute,  public dialog: MatDialog,  private router: Router, private changeDetectorRef: ChangeDetectorRef, public localStorageService: LocalStorageService) {
-    this.subscription = new Subscription();
-    this.userId1 = 0;
+  constructor(private http: HttpClient,private _snackBar: MatSnackBar, private api: ProfileInfo, private api1: Reg, private activateRoute: ActivatedRoute,  public dialog: MatDialog,  private router: Router, private changeDetectorRef: ChangeDetectorRef, public localStorageService: LocalStorageService) {
 
-    this.subscription = this.activateRoute.params.subscribe(params => {
-            this.userId1 = params['id'];
-            this.getUserData(this.userId1);
-          });
-    this.userprofile = {
-            birthday: "",
-            description: "",
-            email: "",
-            login: "",
-            logoUrl: "",
-            registrationDate : "",
-            userId: this.userId1
-        }
   }
   date = new FormControl();
   email = new FormControl('', [Validators.required, Validators.email, this.noWhitespaceValidator]);
   login = new FormControl('', [Validators.required, this.noWhitespaceValidator]);
   passFirst = new FormControl('', [Validators.required, this.noWhitespaceValidator]);
   passSecond = new FormControl('', [Validators.required, this.noWhitespaceValidator]);
-
+  passOld = new FormControl('', [Validators.required, this.noWhitespaceValidator]);
 
   getErrorMessageEmail() {
       if (this.email.hasError('required') || this.email.value.trim()=='') {
@@ -118,9 +104,53 @@ dataSourceRec: MatTableDataSource<FilmMain> = new MatTableDataSource<FilmMain>(t
             }
             return '';
           }
+  getErrorMessagePassOld() {
+              if (this.passOld.hasError('required') || this.passOld.value.trim()=='') {
+                return 'Поле обязательно для заполнения';
+              }
+              return '';
+            }
+  durationInSeconds = 5;
+  changePass(){
+
+     if (this.passSecond.value!=this.passFirst.value) {
+                      this.openDialog();
+                    }
+
+        if(this.passSecond.value==this.passFirst.value){
+        let body = {
+                oldPassword: this.passOld.value,
+                newPassword : this.passFirst.value
+              };
+        this.http.put("https://mac21-portal-backend.herokuapp.com/api/v1/users/" + this.userId1 + "/password", body, {
+                      observe: 'response'
+                    }).subscribe((data: any) => {
+                    this._snackBar.openFromComponent(ChangePass , {
+                                                           duration: this.durationInSeconds * 1000,
+                                                         });
+                },
+                (err) => {this.failRegistrationDialog();}
+                );
+          }
+  }
 
   ngOnInit(): void {
+      this.subscription = new Subscription();
+        this.userId1 = 0;
 
+        this.subscription = this.activateRoute.params.subscribe(params => {
+                this.userId1 = params['id'];
+                this.getUserData(this.userId1);
+              });
+        this.userprofile = {
+                birthday: "",
+                description: "",
+                email: "",
+                login: "",
+                logoUrl: "",
+                registrationDate : "",
+                userId: this.userId1
+            }
   }
   ngOnDestroy() {
       if (this.dataSource3) {
@@ -142,27 +172,24 @@ openDialog(){
   }
 
 sendUserData(){
-  if (this.passSecond.value!=this.passFirst.value) {
-                  this.openDialog();
-                }
-
-    if(this.passSecond.value==this.passFirst.value){
-    this.api1.postCommand(this.login.value.trim(),this.email.value.trim(),this.passFirst.value, this.date.value)
-            .subscribe((data: HttpResponse<User>) => {
-
-              if( data.body == null){
-                this.user = {"userId":0};
-              }else{
-              this.user = data.body;
-              }
-
+    let body = {
+      "login": this.login.value,
+      "email": this.email.value,
+      "birthday": this.date.value
+    };
+    this.http.put("https://mac21-portal-backend.herokuapp.com/api/v1/users/" + this.userId1, body, {
+                          observe: 'response'
+                        }).subscribe((data: HttpResponse<any>) => {
+                        console.log(data.status);
               if (data.status == 200){
-                this.goToProfile();
+              this._snackBar.openFromComponent(ChangeData, {
+                                                                         duration: this.durationInSeconds * 1000,
+                                                                       });
+                this.ngOnInit();
               }
             },
             (err) => {this.failRegistrationDialog();}
             );
-      }
     }
 
     goFilmPage(filmId: number) {
@@ -172,7 +199,7 @@ sendUserData(){
 
     goToProfile() {
             this.router.navigate(
-              ['/user', this.user.userId]);
+              ['/user', this.userId1]);
           }
   getUserData(userId: number){
 
@@ -199,6 +226,17 @@ sendUserData(){
     goToRoom( roomId : number ){
       console.log(roomId);
     }
+    selectedFile: File;
+    onFileChanged(event) {
+        this.selectedFile = event.target.files[0];
+      }
+
+    onUpload() {
+    console.log("dsfdfsdfsdfsdf");
+       this.http.post('https://mac21-portal-backend.herokuapp.com/api/v1/users/1/logo', this.selectedFile).subscribe((data:any) => {});
+      }
+
+    hidePass = false;
 
 }
 
@@ -225,4 +263,28 @@ constructor(public dialogRef: MatDialogRef<FailRegistration>) {
 close(){
    this.dialogRef.close(true);
 }
+}
+
+@Component({
+  selector: 'snack-bar-component',
+  templateUrl: 'snack-bar-component.html',
+  styles: [`
+    .example-pizza-party {
+      color: hotpink;
+    }
+  `],
+})
+export class ChangePass {
+}
+
+@Component({
+  selector: 'snack-bar-component',
+  templateUrl: 'snack-userdata-change.html',
+  styles: [`
+    .example-pizza-party {
+      color: hotpink;
+    }
+  `],
+})
+export class ChangeData {
 }
