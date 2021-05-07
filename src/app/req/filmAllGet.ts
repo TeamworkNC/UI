@@ -69,7 +69,7 @@ export class FilmAllGet {
      ageRestrictions : i.ageLimit.title,
      trailerId : i.filmTrailer,
      imageObject : carusel,
-     reviews : reviews
+     reviews : reviews.reverse()
      };}));
   }
 }

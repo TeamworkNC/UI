@@ -24,7 +24,7 @@ font-family: 'Cormorant Garamond', serif;
     <div style="width: 20%; display: table-cell">
       <img  align="bottom" src={{this.film.logo}} style="width:80%;margin-top: 5%;vertical-align: top; margin-left: 10%" >
       <div style="margin-top: 5%;vertical-align: top;" align="center">
-        <button mat-button class="test" style="font-size: 150%">Смотреть</button>
+        <button mat-button class="test" style="font-size: 150%" (click)="goRoomPage()">Смотреть</button>
         <button mat-button class="test" style="font-size: 150%" (click)="toFavorites(filmId, this.localStorageService.getItem('userId'))">В избранное</button>
       </div>
 
@@ -105,7 +105,7 @@ font-family: 'Cormorant Garamond', serif;
                   <div style="margin-bottom: 1%">
                     <button mat-button class="test1" *ngIf="this.textOtz.invalid || this.mark.invalid" [disabled]="true" type="submit"><div style="">Оставить отзыв</div></button>
                     <button mat-button  class="test1"  *ngIf="!this.textOtz.invalid && !this.mark.invalid" type="submit">
-                      <div style="">Оставить отзыв</div></button>
+                      <div style="" (click)="postReview()">Оставить отзыв</div></button>
                   </div>
                 </form>
 
@@ -115,7 +115,8 @@ font-family: 'Cormorant Garamond', serif;
             <div style="width: 90%; margin-top: 3%; margin-right: 3%; margin-left: 3%; font-size: 130%">
               <mat-card *ngFor="let review of film.reviews; index as i" style = "margin-top: 1%">
                 <mat-card-header>
-                  <img mat-card-avatar class="example-header-image" src={{review.logo}}>
+                  <img mat-card-avatar *ngIf="review.logo && review.logo.length>8" class="example-header-image" src={{review.logo}}>
+                  <img mat-card-avatar *ngIf="!review.logo || review.logo.length<=8" src="assets/resource/nophoto.jpg">
                   <mat-card-title class="test1">{{review.login}}</mat-card-title>
                 </mat-card-header>
                 <mat-card-content style="margin-top:2%">

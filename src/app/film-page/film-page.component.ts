@@ -8,6 +8,8 @@ import {FilmAllGet} from "src/app/req/filmAllGet";
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {FavouritePost} from 'src/app/req/favouritePost';
 import {LocalStorageService} from "src/app/local-storage-service";
+import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'ngbd-rating-events',
@@ -19,7 +21,7 @@ export class FilmPageComponent implements OnInit {
 private subscription: Subscription;
   filmId: number;
   film : FilmAll;
-  constructor(private activateRoute: ActivatedRoute, private api: FilmAllGet, private _snackBar: MatSnackBar, private api1: FavouritePost, public localStorageService: LocalStorageService) {
+  constructor(public datepipe: DatePipe , public router: Router,private http: HttpClient, private activateRoute: ActivatedRoute, private api: FilmAllGet, private _snackBar: MatSnackBar, private api1: FavouritePost, public localStorageService: LocalStorageService) {
   this.subscription = new Subscription();
   this.filmId = 0;
   this.film = {
@@ -112,6 +114,31 @@ private subscription: Subscription;
         }
         return '';
       }
+
+    goRoomPage(){
+                      this.router.navigate(
+                          ['/room/'+1]);
+      }
+
+    postReview(){
+    let today = new Date();
+        let body = {
+                     "ratingFilm": this.mark.value,
+                     "review": this.textOtz.value,
+                     "reviewDate": this.datepipe.transform(today, 'yyyy-MM-dd'),
+                     "idUser": parseInt(this.localStorageService.getItem("userId"))
+                   };
+        this.http.post<any>("https://mac21-portal-backend.herokuapp.com/api/v1/reviews/addToFilm/"+this.filmId, body, {
+              observe: 'response'
+            }).subscribe((data: any) => {
+
+                          if( data == null){
+
+                          }else{
+                          this.ngOnInit();
+                          }
+                        });;
+    }
 
   formatLabel(value: number) {
       return value;
