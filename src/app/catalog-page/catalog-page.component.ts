@@ -30,10 +30,10 @@ dataSource: MatTableDataSource<FilmShort>;
     this.filterFormGroup = this.formBuilder.group({
               filters: this.formBuilder.array([])
             });
-    this.dataSource= new MatTableDataSource<FilmShort>(this.catalog.films);
   }
   filterFormGroup : FormGroup;
   ngOnInit(): void {
+    this.getCatalogData();
     this.changeDetector.detectChanges();
   }
 
@@ -43,7 +43,7 @@ dataSource: MatTableDataSource<FilmShort>;
                  if( data == null){
                    this.catalog;
                  }else{
-                 this.catalog  = data;
+                 this.catalog.films  = data.films;
                  this.dataSource= new MatTableDataSource<FilmShort>(this.catalog.films);
                  this.dataSource.paginator = this.paginator;
                  this.obs = this.dataSource.connect();

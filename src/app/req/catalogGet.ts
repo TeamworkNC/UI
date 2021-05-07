@@ -6,7 +6,7 @@ import {map} from "rxjs/operators";
 
 var headers = new HttpHeaders();
 headers.append('Content-Type', 'application/json; charset=utf-8');
-const localUrl1 = 'http://localhost:8080/catalog';//поменять потом
+const localUrl1 = 'https://mac21-portal-backend.herokuapp.com/api/v1/films/allpage';//поменять потом
 
 @Injectable({
   providedIn: 'root'
@@ -16,11 +16,10 @@ export class CatalogGet {
   constructor(private http: HttpClient) {
   }
 
-  getCommand(): Observable <CatalogInt> {
+  getCommand(): Observable <any> {
 
     return this.http.get(localUrl1 ).pipe(map(function (i: any) { return {
-     films: i.films,
-     filters: i.filters
+     films: i
      };}));
   }
 }
