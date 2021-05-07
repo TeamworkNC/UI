@@ -6,6 +6,7 @@ export class UserProfile{
     logoUrl: string;
     registrationDate : string;
     userId: number;
+    favoriteFilms: [];
     constructor() {
        this.birthday = "";
        this.description= "";
@@ -14,6 +15,7 @@ export class UserProfile{
        this.logoUrl = "";
        this.registrationDate = "";
        this.userId = 0;
+       this.favoriteFilms = [];
     }
 }
 // "achievements": [

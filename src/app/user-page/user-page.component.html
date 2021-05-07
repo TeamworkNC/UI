@@ -108,15 +108,15 @@
                   <div style="display: inline">
                     <img src="assets/resource/rate.png" style="margin-top: 1%; margin-right: 2%; margin-left: 2%; width: 10%; float:inherit;" align="left">
                   </div>
-                  <div style="display: inline;" align="left">{{film.filmRate}}</div>
+                  <div style="display: inline;" align="left">{{film.rating}}</div>
                   <div style="display: inline">
                     <img src="assets/resource/age.png" style="margin-top: 1%; margin-right: 2%; margin-left: 2%; width: 10%; float:inherit;" align="left">
                   </div>
                   <div style="display: inline;" align="left">{{film.filmAge}}+</div>
                 </div>
-                <img src={{film.filmImg}} style="margin-top: 2%; margin-right: 2%; margin-left: 2%; width: 90%">
-                <div style="font-weight: bold; margin-left: 3%; margin-top:3%; margin-right: 3%;">{{film.filmName}}</div>
-                <button mat-button  style="width: 100%; margin-left: 2%; margin-top: 3%; display: inline-block" class="test1" (click)="goFilmPage(film.filmId)">Смотреть</button>
+                <img src={{film.filmPoster}} style="margin-top: 2%; margin-right: 2%; margin-left: 2%; width: 90%">
+                <div style="font-weight: bold; margin-left: 3%; margin-top:3%; margin-right: 3%;">{{film.filmTitle}}</div>
+                <button mat-button  style="width: 100%; margin-left: 2%; margin-top: 3%; display: inline-block" class="test1" (click)="goFilmPage(film.idFilm)">Смотреть</button>
               </mat-card>
               <mat-paginator #MatPaginator1
                              [pageSizeOptions]="[4]" >

@@ -3,6 +3,7 @@ import {UserProfile} from "src/app/userprofile";
 import {User} from 'src/app/user';
 import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
 import {ProfileInfo} from 'src/app/req/profileInfo';
+import {FavoritesFilmGet} from 'src/app/req/favoritesFilmGet';
 import {ActivatedRoute, Router} from "@angular/router";
 import {Subject, Subscription, Observable} from 'rxjs';
 import {FormControl, Validators} from '@angular/forms';
@@ -64,7 +65,7 @@ dataForNotifications = ELEMENT_DATA3;
 @ViewChild('MatPaginator1') paginator: MatPaginator;
 @ViewChild('MatPaginator2') paginatorRec: MatPaginator;
 obs: Observable<any>;
-dataSource3: MatTableDataSource<FilmMain> = new MatTableDataSource<FilmMain>(this.dataSource1);
+dataSource3: MatTableDataSource<FilmMain>;
 obsRec: Observable<any>;
 dataSourceRec: MatTableDataSource<FilmMain> = new MatTableDataSource<FilmMain>(this.dataSource2);
   constructor(private http: HttpClient,private _snackBar: MatSnackBar, private api: ProfileInfo, private api1: Reg, private activateRoute: ActivatedRoute,  public dialog: MatDialog,  private router: Router, private changeDetectorRef: ChangeDetectorRef, public localStorageService: LocalStorageService) {
@@ -149,7 +150,8 @@ dataSourceRec: MatTableDataSource<FilmMain> = new MatTableDataSource<FilmMain>(t
                 login: "",
                 logoUrl: "",
                 registrationDate : "",
-                userId: this.userId1
+                userId: this.userId1,
+                favoriteFilms:[]
             }
   }
   ngOnDestroy() {
@@ -207,10 +209,11 @@ sendUserData(){
           .subscribe((data: UserProfile) => {
 
             if( data == null){
-              this.userprofile = {"userId":0, "birthday": "", "description":"", "email": "", "login": "", "logoUrl": "","registrationDate":"" };
+              this.userprofile = {"userId":0, "birthday": "", "description":"", "email": "", "login": "", "logoUrl": "","registrationDate":"", "favoriteFilms":[] };
             }else{
             this.userprofile = data;
             this.changeDetectorRef.detectChanges();
+            this.dataSource3 =  new MatTableDataSource<any>(data.favoriteFilms);
             this.dataSource3.paginator = this.paginator;
             this.obs = this.dataSource3.connect();
             this.dataSourceRec.paginator = this.paginatorRec;
