@@ -11,6 +11,7 @@ import {LocalStorageService} from "src/app/local-storage-service";
 import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { FavoritesFilmGet } from 'src/app/req/favoritesFilmGet';
+import { DeleteFromFavorites } from 'src/app/req/deleteFromFavorites';
 
 @Component({
   selector: 'ngbd-rating-events',
@@ -23,7 +24,7 @@ private subscription: Subscription;
   filmId: number;
   film : FilmAll;
   arrOfUserFavoriteFilms: string[];
-  constructor(public datepipe: DatePipe , public router: Router,private http: HttpClient, private activateRoute: ActivatedRoute, private api: FilmAllGet, private _snackBar: MatSnackBar, private api1: FavouritePost, private api2: FavoritesFilmGet, public localStorageService: LocalStorageService) {
+  constructor(public datepipe: DatePipe , public router: Router,private http: HttpClient, private activateRoute: ActivatedRoute, private api: FilmAllGet, private _snackBar: MatSnackBar, private api1: FavouritePost, private api2: FavoritesFilmGet, private api3: DeleteFromFavorites, public localStorageService: LocalStorageService) {
   this.subscription = new Subscription();
   this.filmId = 0;
   this.arrOfUserFavoriteFilms = [];
@@ -163,8 +164,12 @@ private subscription: Subscription;
                   }
                 });
   }
-  deleteFromFavourite(){
-//     console.log(typeof(Number.parseInt(this.filmId)));
+  deleteFromFavourite(userId: number, filmId: string){
+
+    this.api3.deleteCommand(userId, filmId)
+              .subscribe((data: any) => {
+               this.ngOnInit();
+              });
   }
   toFavorites(filmId: number, userId:  string) {
 
@@ -174,6 +179,7 @@ private subscription: Subscription;
                   this._snackBar.openFromComponent(PizzaPartyComponent, {
                        duration: this.durationInSeconds * 1000,
                      });
+                  this.ngOnInit();
                 }
 
                 else{
