@@ -10,6 +10,7 @@ import {FavouritePost} from 'src/app/req/favouritePost';
 import {LocalStorageService} from "src/app/local-storage-service";
 import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import { DatePipe } from '@angular/common';
+import { FavoritesFilmGet } from 'src/app/req/favoritesFilmGet';
 
 @Component({
   selector: 'ngbd-rating-events',
@@ -21,9 +22,11 @@ export class FilmPageComponent implements OnInit {
 private subscription: Subscription;
   filmId: number;
   film : FilmAll;
-  constructor(public datepipe: DatePipe , public router: Router,private http: HttpClient, private activateRoute: ActivatedRoute, private api: FilmAllGet, private _snackBar: MatSnackBar, private api1: FavouritePost, public localStorageService: LocalStorageService) {
+  arrOfUserFavoriteFilms: string[];
+  constructor(public datepipe: DatePipe , public router: Router,private http: HttpClient, private activateRoute: ActivatedRoute, private api: FilmAllGet, private _snackBar: MatSnackBar, private api1: FavouritePost, private api2: FavoritesFilmGet, public localStorageService: LocalStorageService) {
   this.subscription = new Subscription();
   this.filmId = 0;
+  this.arrOfUserFavoriteFilms = [];
   this.film = {
              "id" : 0,
              "logo": "",
@@ -57,6 +60,7 @@ private subscription: Subscription;
             this.filmId = params['id'];
             this.getFilmData(this.filmId);
           });
+    this.getUserFavourite();
   }
 
   getFilmData(filmId: number){
@@ -144,6 +148,24 @@ private subscription: Subscription;
       return value;
     }
   durationInSeconds = 5;
+
+  getUserFavourite(){
+  this.api2.getCommand(parseInt(this.localStorageService.getItem("userId")))
+                .subscribe((data: any) => {
+
+                  if(data.arrOfFilmId){
+                     this.arrOfUserFavoriteFilms = data.arrOfFilmId;
+                     console.log(this.arrOfUserFavoriteFilms );
+                  }
+
+                  else{
+
+                  }
+                });
+  }
+  deleteFromFavourite(){
+//     console.log(typeof(Number.parseInt(this.filmId)));
+  }
   toFavorites(filmId: number, userId:  string) {
 
   this.api1.postCommand(filmId, userId)

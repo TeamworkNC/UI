@@ -5,7 +5,7 @@ import {map} from "rxjs/operators";
 
 var headers = new HttpHeaders();
 headers.append('Content-Type', 'application/json; charset=utf-8');
-const localUrl1 = 'https://mac21-portal-backend.herokuapp.com/api/v1/users/s';//поменять потом
+const localUrl1 = 'https://mac21-portal-backend.herokuapp.com/api/v1/users/';//поменять потом
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +17,14 @@ export class FavoritesFilmGet {
 
   getCommand(userId : number): Observable <any> {
 
-    return this.http.get(localUrl1+ userId + "/favorite-film" ).pipe(map(function (i: any) { return {
-     favorite  : i
+    return this.http.get(localUrl1+ userId + "/favorite-films" ).pipe(map(function (i: any) {
+    let arrOfFilmId = [];
+    for(let f in i){
+      arrOfFilmId.push(i[f].idFilm+"");
+    }
+    return {
+     favorite  : i,
+     arrOfFilmId : arrOfFilmId
      };}));
   }
 }
