@@ -1,11 +1,12 @@
 <vm-player
   #player
-  (vmPausedChange)="onPausedChange($event)"
+  (vmPausedChange)="onPausedChange($event) //noinspection ValidateTypes"
+  (vmPlaybackReady)="onPlaybackReady()"
   (vmPlay)="onPlayVideoButtonClick()"
   (vmSeeked)="onVideoTimeSeeked()">
 
   <vm-hls>
-    <source src="https://moviescontainerhls.s3-us-west-2.amazonaws.com/sintel/sintel.m3u8"/>
+    <source src="{{videoUrl}}"/>
   </vm-hls>
 
 

@@ -12,20 +12,19 @@ export class PlayerComponent implements OnInit {
   @ViewChild('player') player!: Player;
 
   @Input()
-  public userId: number;
+  public userId!: number;
 
   @Input()
-  public creatorId: number;
+  public creatorId!: number;
 
   @Input()
-  public videoUrl: string;
+  public videoUrl!: string;
 
   @Input()
-  public sessionId: number;
+  public sessionId!: number;
 
-  enabled = false;
-  currentTime = 0;
-  hasControls: boolean;
+  playerDisplayed = false;
+  playerHasControls = false;
 
   constructor(
     private readonly rxStompService: RxStompService) {
@@ -34,15 +33,13 @@ export class PlayerComponent implements OnInit {
   ngOnInit(): void {
     this.initPlayer();
     this.connectToSession();
-    this.enabled = true;
+    this.sendMessage({type: 'join'});
   }
-
 
   initPlayer(): void {
-    this.hasControls = this.getIsAdmin();
+    this.playerHasControls = this.getIsAdmin();
   }
 
-// ui handlers
   connectToSession(): void {
     console.log('connectToSession');
     const topic = '/topic/sessions/' + this.sessionId;
@@ -50,7 +47,6 @@ export class PlayerComponent implements OnInit {
     this.rxStompService.watch(topic).subscribe(message => {
       this.onMessageReceived(JSON.parse(message.body));
     });
-    this.sendMessage({type: 'join'});
   }
 
   onMessageReceived(message): void {
@@ -88,6 +84,11 @@ export class PlayerComponent implements OnInit {
     this.rxStompService.publish({destination: topic, body: JSON.stringify(message)});
   }
 
+  getIsAdmin(): boolean {
+    return this.userId === this.creatorId;
+  }
+
+  // ui handlers
   onPlayVideoButtonClick(): void {
     console.log('onPlayVideoButtonClick');
     if (this.getIsAdmin()) {
@@ -103,22 +104,24 @@ export class PlayerComponent implements OnInit {
   }
 
   onVideoPaused(): void {
-    console.log('onPauseVideoButtonClick');
+    console.log('onVideoPaused');
     if (this.getIsAdmin()) {
-      this.player.pause();
-      this.sendMessage({type: 'status', status: 'paused', time: this.player.currentTime});
+      this.player.pause()
+        .then(() => {
+          this.sendMessage({type: 'status', status: 'paused', time: this.player.currentTime});
+        });
     }
   }
 
   onVideoTimeSeeked(): void {
-    console.log('onVideoTimeUpdate');
+    console.log('onVideoTimeSeeked');
     if (this.getIsAdmin()) {
       const status = this.player.paused ? 'paused' : 'played';
       this.sendMessage({type: 'status', status, time: this.player.currentTime});
     }
   }
 
-  getIsAdmin(): boolean {
-    return this.userId === this.creatorId;
+  onPlaybackReady(): void {
+    this.playerDisplayed = true;
   }
 }
