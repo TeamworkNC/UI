@@ -52,6 +52,5 @@ export class RoomPageComponent implements OnInit {
     return this.http.get<Film>(url).toPromise();
   }
 
-
 }
 

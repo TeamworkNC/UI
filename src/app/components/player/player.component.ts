@@ -33,6 +33,7 @@ export class PlayerComponent implements OnInit {
   ngOnInit(): void {
     this.initPlayer();
     this.connectToSession();
+    console.log('sending join...');
     this.sendMessage({type: 'join'});
   }
 

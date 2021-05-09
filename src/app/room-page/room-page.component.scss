@@ -5,9 +5,20 @@
 }
 
 .left-column {
-  flex: 1;
+  width: 70%;
 }
 
 .right-column {
   width: 400px;
+}
+
+.content {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.chat {
+  width: 400px;
+  height: 560px;
 }
