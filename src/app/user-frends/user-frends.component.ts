@@ -5,6 +5,8 @@ import {Observable} from 'rxjs';
 import {MatTableModule, MatTableDataSource} from '@angular/material/table';
 import {MatPaginatorModule, MatPaginator} from '@angular/material/paginator';
 import {Router} from '@angular/router';
+import {UserFriendsGet} from 'src/app/req/userFriendsGet';
+import {LocalStorageService} from "src/app/local-storage-service";
 
 @Component({
   selector: 'app-user-frends',
@@ -15,8 +17,9 @@ export class UserFrendsComponent implements OnInit {
 @ViewChild(MatPaginator) paginator: MatPaginator;
 obs: Observable<any>;
 users: OtherUserArray;
+friends: OtherUserArray;
 dataSource: MatTableDataSource<OtherUser>;
-  constructor(private api: OtherUserGet, private changeDetector: ChangeDetectorRef , public router: Router) {
+  constructor(private api: OtherUserGet, private api1: UserFriendsGet, private changeDetector: ChangeDetectorRef , public router: Router, public localStorageService: LocalStorageService) {
     this.getOtherUserData();
   }
 
@@ -37,6 +40,15 @@ dataSource: MatTableDataSource<OtherUser>;
                    this.obs = this.dataSource.connect();
                    }
                  });
+
+             this.api1.getCommand(this.localStorageService.getItem("userId"))
+                              .subscribe((data: any) => {
+                                if( data == null){
+                                  this.friends;
+                                }else{
+                                this.friends = data.friends;
+                                }
+                              });
            }
 
   goOtherUserPage(otherUserId : number){
