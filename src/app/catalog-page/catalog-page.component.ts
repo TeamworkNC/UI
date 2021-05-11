@@ -9,6 +9,7 @@ import {MatTableModule, MatTableDataSource} from '@angular/material/table';
 import {MatPaginatorModule, MatPaginator} from '@angular/material/paginator';
 import {FilmShort} from 'src/app/filmShort';
 import {GenresGet} from "src/app/req/genresGet";
+import {AgeLimitsGet} from "src/app/req/ageLimitsGet";
 
 @Component({
   selector: 'app-catalog-page',
@@ -21,11 +22,12 @@ catalog : CatalogInt;
 @ViewChild(MatPaginator) paginator: MatPaginator;
 obs: Observable<any>;
 dataSource: MatTableDataSource<FilmShort>;
-  constructor(private activateRoute: ActivatedRoute, private router: Router, private api: CatalogGet, private api1: GenresGet, private formBuilder: FormBuilder, private apiPost: UserSearchFilm, private changeDetector: ChangeDetectorRef) {
+  constructor(private activateRoute: ActivatedRoute, private router: Router, private api: CatalogGet, private api1: GenresGet, private api2: AgeLimitsGet, private formBuilder: FormBuilder, private apiPost: UserSearchFilm, private changeDetector: ChangeDetectorRef) {
     this.userIn="";
     this.catalog= {
       "films" : [],
-      "filters" : []
+      "filters" : [],
+      "ageLimits" : []
     }
     this.getCatalogData();
     this.filterFormGroup = this.formBuilder.group({
@@ -52,12 +54,17 @@ dataSource: MatTableDataSource<FilmShort>;
                });
 
            this.api1.getCommand()
-                          .subscribe((data: any) => {
-                            if( data == null){
+                  .subscribe((data: any) => {
+                  if( data == null){
                             }else{
                             this.catalog.filters  = data.genres;
                             }
                           });
+           this.api2.getCommand()
+                  .subscribe((data: any) => {
+                  if( data == null){}
+                  else{ this.catalog.ageLimits  = data.ageLimits; }
+                                     });
 
          }
 
