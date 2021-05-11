@@ -48,6 +48,7 @@ import {UserFrendsComponent} from './user-frends/user-frends.component';
 import {OtherUserComponent} from './other-user/other-user.component';
 import {ChatComponent} from './components/chat/chat.component';
 import {PlayerComponent} from './components/player/player.component';
+import {VimeModule} from '@vime/angular';
 import { DatePipe } from '@angular/common';
 
 @NgModule({
