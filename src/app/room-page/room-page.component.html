@@ -1,18 +1,39 @@
-<div>
-  <app-player
-    *ngIf="!playerDisabled"
-    [creatorId]="creatorId"
-    [sessionId]="sessionId"
-    [userId]="userId"
-    [videoUrl]="videoUrl">
-  </app-player>
-</div>
+<div class="content">
 
-<div>
-  <app-chat
-    *ngIf="!chatDisabled"
-    [chatId]="chatId"
-    [userId]="userId"></app-chat>
+  <!--  right column-->
+  <div class="left-column">
+    <div class="player">
+      <app-player
+        #player
+        *ngIf="!playerDisabled"
+        [creatorId]="session.organizerID"
+        [sessionId]="sessionId"
+        [userId]="userId"
+        [videoUrl]="film.filmVideo">
+      </app-player>
+    </div>
+
+    <!--    название фильма-->
+    <div *ngIf="film">
+      {{film.filmTitle}}
+    </div>
+
+    <div>
+      <button color="primary" mat-button>add friend</button>
+    </div>
+  </div>
+
+  <!--  right column-->
+  <div class="right-column">
+    <div class="chat">
+      <app-chat
+        #chat
+        *ngIf="!chatDisabled"
+        [chatId]="session.chatID"
+        [userId]="userId">
+      </app-chat>
+    </div>
+  </div>
 </div>
 
 

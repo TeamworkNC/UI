@@ -1,5 +1,15 @@
-<video #player
-       (pause)="onPauseVideoButtonClick()"
-       (play)="onPlayVideoButtonClick()"
-       (seeked)="onVideoTimeSeeked()">
-</video>
+<vm-player
+  #player
+  (vmPausedChange)="onPausedChange($event) //noinspection ValidateTypes"
+  (vmPlaybackReady)="onPlaybackReady()"
+  (vmPlay)="onPlayVideoButtonClick()"
+  (vmSeeked)="onVideoTimeSeeked()">
+
+  <vm-hls>
+    <source src="{{videoUrl}}"/>
+  </vm-hls>
+
+
+  <vm-default-ui *ngIf="getIsAdmin()">
+  </vm-default-ui>
+</vm-player>

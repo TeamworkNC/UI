@@ -15,3 +15,7 @@ $nb-themes: nb-register-theme((
   // color-primary-900: #091c7a,
 
 ), default, default);
+
+
+/* Default theme. ~960B */
+@import '~@vime/core/themes/default.css';

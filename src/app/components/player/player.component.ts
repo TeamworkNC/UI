@@ -1,57 +1,46 @@
-import {AfterViewInit, ChangeDetectorRef, Component, Input, ViewChild} from '@angular/core';
-import Hls from 'hls.js';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {RxStompService} from '@stomp/ng2-stompjs';
+import {Player} from '@vime/angular';
 
 @Component({
   selector: 'app-player',
   templateUrl: './player.component.html',
   styleUrls: ['./player.component.css']
 })
-export class PlayerComponent implements AfterViewInit {
+export class PlayerComponent implements OnInit {
+
+  @ViewChild('player') player!: Player;
 
   @Input()
-  public userId: number;
+  public userId!: number;
 
   @Input()
-  public creatorId: number;
+  public creatorId!: number;
 
   @Input()
-  public videoUrl: string;
+  public videoUrl!: string;
 
   @Input()
-  public sessionId: number;
+  public sessionId!: number;
 
-  @ViewChild('player') playerRef;
+  playerDisplayed = false;
+  playerHasControls = false;
 
   constructor(
-    private readonly rxStompService: RxStompService,
-    private readonly cd: ChangeDetectorRef,
-  ) {
+    private readonly rxStompService: RxStompService) {
   }
 
-
-  ngAfterViewInit(): void {
+  ngOnInit(): void {
     this.initPlayer();
     this.connectToSession();
-    this.cd.detectChanges();
+    console.log('sending join...');
+    this.sendMessage({type: 'join'});
   }
-
 
   initPlayer(): void {
-    if (Hls.isSupported()) {
-      const hls = new Hls();
-      hls.loadSource(this.videoUrl);
-      hls.attachMedia(this.playerRef?.nativeElement);
-    } else {
-      alert('hls is not supported');
-    }
-
-    if (this.getIsAdmin()) {
-      this.playerRef.nativeElement.controls = true;
-    }
+    this.playerHasControls = this.getIsAdmin();
   }
 
-// ui handlers
   connectToSession(): void {
     console.log('connectToSession');
     const topic = '/topic/sessions/' + this.sessionId;
@@ -59,7 +48,6 @@ export class PlayerComponent implements AfterViewInit {
     this.rxStompService.watch(topic).subscribe(message => {
       this.onMessageReceived(JSON.parse(message.body));
     });
-    this.sendMessage({type: 'join'});
   }
 
   onMessageReceived(message): void {
@@ -68,8 +56,8 @@ export class PlayerComponent implements AfterViewInit {
     if (message.type === 'join') {
       console.log('join');
       if (this.getIsAdmin()) {
-        const status = this.playerRef?.nativeElement.paused ? 'paused' : 'played';
-        const data = {type: 'info', status, time: this.playerRef?.nativeElement.currentTime};
+        const status = this.player.paused ? 'paused' : 'played';
+        const data = {type: 'info', status, time: this.player.currentTime};
         this.sendMessage(data);
       }
     }
@@ -79,12 +67,12 @@ export class PlayerComponent implements AfterViewInit {
         const time = message.time;
         const status = message.status;
         console.log(time, status);
-        this.playerRef.nativeElement.currentTime = time;
+        this.player.currentTime = time;
         if (status === 'played') {
-          this.playerRef?.nativeElement.play().catch(reason => console.log(reason));
+          this.player.play().catch(reason => console.log(reason));
         }
         if (status === 'paused') {
-          this.playerRef?.nativeElement.pause();
+          this.player.pause();
         }
       }
     }
@@ -97,31 +85,44 @@ export class PlayerComponent implements AfterViewInit {
     this.rxStompService.publish({destination: topic, body: JSON.stringify(message)});
   }
 
+  getIsAdmin(): boolean {
+    return this.userId === this.creatorId;
+  }
+
+  // ui handlers
   onPlayVideoButtonClick(): void {
     console.log('onPlayVideoButtonClick');
     if (this.getIsAdmin()) {
-      this.playerRef?.nativeElement.play().catch(reason => console.log(reason));
-      this.sendMessage({type: 'status', status: 'played', time: this.playerRef?.nativeElement.currentTime});
+      this.player.play().catch(reason => console.log(reason));
+      this.sendMessage({type: 'status', status: 'played', time: this.player.currentTime});
     }
   }
 
-  onPauseVideoButtonClick(): void {
-    console.log('onPauseVideoButtonClick');
+  onPausedChange(event: CustomEvent<boolean>): void {
+    if (event.detail) {
+      this.onVideoPaused();
+    }
+  }
+
+  onVideoPaused(): void {
+    console.log('onVideoPaused');
     if (this.getIsAdmin()) {
-      this.playerRef?.nativeElement.pause();
-      this.sendMessage({type: 'status', status: 'paused', time: this.playerRef?.nativeElement.currentTime});
+      this.player.pause()
+        .then(() => {
+          this.sendMessage({type: 'status', status: 'paused', time: this.player.currentTime});
+        });
     }
   }
 
   onVideoTimeSeeked(): void {
-    console.log('onVideoTimeUpdate');
+    console.log('onVideoTimeSeeked');
     if (this.getIsAdmin()) {
-      const status = this.playerRef?.nativeElement.paused ? 'paused' : 'played';
-      this.sendMessage({type: 'status', status, time: this.playerRef?.nativeElement.currentTime});
+      const status = this.player.paused ? 'paused' : 'played';
+      this.sendMessage({type: 'status', status, time: this.player.currentTime});
     }
   }
 
-  getIsAdmin(): boolean {
-    return this.userId === this.creatorId;
+  onPlaybackReady(): void {
+    this.playerDisplayed = true;
   }
 }

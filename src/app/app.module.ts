@@ -105,7 +105,8 @@ import { DatePipe } from '@angular/common';
     MatSnackBarModule,
     MatBadgeModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    VimeModule,
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]

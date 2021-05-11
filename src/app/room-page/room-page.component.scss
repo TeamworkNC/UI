@@ -1,8 +1,24 @@
-.ava {
-    height: 40px;
-    width: 40px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    object-fit: cover;
+:host {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
 }
 
+.left-column {
+  width: 70%;
+}
+
+.right-column {
+  width: 400px;
+}
+
+.content {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.chat {
+  width: 400px;
+  height: 560px;
+}
