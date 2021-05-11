@@ -21,7 +21,8 @@ dataSource: MatTableDataSource<OtherUser>;
   }
 
   ngOnInit(): void {
-    this.changeDetector.detectChanges();
+      this.getOtherUserData();
+      this.changeDetector.detectChanges();
   }
 
   getOtherUserData(){
@@ -31,7 +32,6 @@ dataSource: MatTableDataSource<OtherUser>;
                      this.users;
                    }else{
                    this.users = data;
-                   console.log(this.users);
                    this.dataSource= new MatTableDataSource<OtherUser>(this.users.users);
                    this.dataSource.paginator = this.paginator;
                    this.obs = this.dataSource.connect();
