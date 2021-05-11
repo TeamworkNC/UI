@@ -8,6 +8,8 @@ import {Observable} from 'rxjs';
 import {MatTableModule, MatTableDataSource} from '@angular/material/table';
 import {MatPaginatorModule, MatPaginator} from '@angular/material/paginator';
 import {FilmShort} from 'src/app/filmShort';
+import {GenresGet} from "src/app/req/genresGet";
+import {AgeLimitsGet} from "src/app/req/ageLimitsGet";
 
 @Component({
   selector: 'app-catalog-page',
@@ -20,20 +22,21 @@ catalog : CatalogInt;
 @ViewChild(MatPaginator) paginator: MatPaginator;
 obs: Observable<any>;
 dataSource: MatTableDataSource<FilmShort>;
-  constructor(private activateRoute: ActivatedRoute, private router: Router, private api: CatalogGet, private formBuilder: FormBuilder, private apiPost: UserSearchFilm, private changeDetector: ChangeDetectorRef) {
+  constructor(private activateRoute: ActivatedRoute, private router: Router, private api: CatalogGet, private api1: GenresGet, private api2: AgeLimitsGet, private formBuilder: FormBuilder, private apiPost: UserSearchFilm, private changeDetector: ChangeDetectorRef) {
     this.userIn="";
     this.catalog= {
       "films" : [],
-      "filters" : []
+      "filters" : [],
+      "ageLimits" : []
     }
     this.getCatalogData();
     this.filterFormGroup = this.formBuilder.group({
               filters: this.formBuilder.array([])
             });
-    this.dataSource= new MatTableDataSource<FilmShort>(this.catalog.films);
   }
   filterFormGroup : FormGroup;
   ngOnInit(): void {
+    this.getCatalogData();
     this.changeDetector.detectChanges();
   }
 
@@ -43,12 +46,25 @@ dataSource: MatTableDataSource<FilmShort>;
                  if( data == null){
                    this.catalog;
                  }else{
-                 this.catalog  = data;
+                 this.catalog.films  = data.films;
                  this.dataSource= new MatTableDataSource<FilmShort>(this.catalog.films);
                  this.dataSource.paginator = this.paginator;
                  this.obs = this.dataSource.connect();
                  }
                });
+
+           this.api1.getCommand()
+                  .subscribe((data: any) => {
+                  if( data == null){
+                            }else{
+                            this.catalog.filters  = data.genres;
+                            }
+                          });
+           this.api2.getCommand()
+                  .subscribe((data: any) => {
+                  if( data == null){}
+                  else{ this.catalog.ageLimits  = data.ageLimits; }
+                                     });
 
          }
 

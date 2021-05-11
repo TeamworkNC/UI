@@ -7,7 +7,7 @@ import {map} from "rxjs/operators";
 var headers = new HttpHeaders();
 headers.append('Content-Type', 'application/json; charset=utf-8');
 headers.append('Set-Cookie', 'session=eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIyMCIsImlhdCI6MTYxOTQ2OTYxNiwiZXhwIjoxNjE5NDc5NjE2fQ.04HIvGCwKGfM3DAg4nRl3XEhIx-WP30mGymloZ6g79yfdiIhPmKDda8g7HHCmwzf; Max-Age=10000000; Expires=Fri, 20-Aug-2021 14:26:56 GMT; Path=/');
-const localUrl1 = 'https://mac21-portal-backend.herokuapp.com/api/v1/films/full/%7BfilmId%7D?filmId=';//поменять потом
+const localUrl1 = 'https://mac21-portal-backend.herokuapp.com/api/v1/films/full/';//поменять потом
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
@@ -48,26 +48,28 @@ export class FilmAllGet {
 
    let reviews = [];
    for(let r in i.reviews){
-      let reviewObject = {"mark": 0, "text": "" };
-      reviewObject.mark =i.reviews[r].rating_film;
+      let reviewObject = {"mark": 0, "text": "", "logo":"", "login":"" };
+      reviewObject.mark =i.reviews[r].ratingFilm;
       reviewObject.text =i.reviews[r].review;
+      reviewObject.login =i.reviews[r].user.login;
+      reviewObject.logo =i.reviews[r].user.logoUrl;
       reviews.push(reviewObject);
    }
    console.log(reviews);
 
     return {
      id: i.id_film,
-     logo: i.film_poster,
-     name : i.film_title,
+     logo: i.filmPoster,
+     name : i.filmTitle,
      genre : genre[0].toUpperCase() + genre.slice(1).substr(0, genre.length - 3),
      producer: producers.substr(0, producers.length - 2),
      description: i.description,
      actors: actors.substr(0, actors.length - 2),
      rating : rating.substr(0,4),
      ageRestrictions : i.ageLimit.title,
-     trailerId : i.film_trailer,
+     trailerId : i.filmTrailer,
      imageObject : carusel,
-     reviews : reviews
+     reviews : reviews.reverse()
      };}));
   }
 }

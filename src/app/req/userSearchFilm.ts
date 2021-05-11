@@ -16,7 +16,7 @@ export class UserSearchFilm {
   constructor(private http: HttpClient) {
   }
 
-  postCommand(filters: string[], search : string): Observable <CatalogInt> {
+  postCommand(filters: string[], search : string): Observable <any> {
 
   const body = {
           filters: filters,

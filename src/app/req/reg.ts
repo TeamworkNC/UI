@@ -20,7 +20,7 @@ export class Reg {
         login: login,
         password : password,
         email : email,
-        date : date
+        birthday : date
       };
     return this.http.post<User>(localUrl1, body, {
       observe: 'response', headers: headers

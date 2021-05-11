@@ -49,6 +49,7 @@ import {OtherUserComponent} from './other-user/other-user.component';
 import {ChatComponent} from './components/chat/chat.component';
 import {PlayerComponent} from './components/player/player.component';
 import {VimeModule} from '@vime/angular';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -107,7 +108,7 @@ import {VimeModule} from '@vime/angular';
     MatSortModule,
     VimeModule,
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
