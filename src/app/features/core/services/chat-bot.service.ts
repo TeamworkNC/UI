@@ -12,11 +12,11 @@ export class ChatBotService {
   }
 
   // TODO: rename?
-  sendMessage(text: string, userId: number): Observable<RecommendationChatMessage> {
+  sendMessage(userId: number, text: string): Observable<RecommendationChatMessage> {
     const data = {
       userId,
       text
     };
-    return this.http.post<RecommendationChatMessage>(`/api/v1/recommendations/chat_bot`, data);
+    return this.http.post<RecommendationChatMessage>(`https://mac21-portal-backend.herokuapp.com/api/v1/chat-bot`, data);
   }
 }
