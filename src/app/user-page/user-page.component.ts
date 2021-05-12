@@ -1,26 +1,55 @@
-import { Component, OnInit, ViewChild, ChangeDetectorRef,OnDestroy } from '@angular/core';
-import {UserProfile} from "src/app/userprofile";
+import {ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {UserProfile} from 'src/app/userprofile';
 import {User} from 'src/app/user';
-import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
+import {HttpClient, HttpResponse} from '@angular/common/http';
 import {ProfileInfo} from 'src/app/req/profileInfo';
-import {FavoritesFilmGet} from 'src/app/req/favoritesFilmGet';
-import {ActivatedRoute, Router} from "@angular/router";
-import {Subject, Subscription, Observable} from 'rxjs';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Observable, Subscription} from 'rxjs';
 import {FormControl, Validators} from '@angular/forms';
-import {MatDialog, MatDialogRef, MatDialogModule} from "@angular/material/dialog";
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {Reg} from 'src/app/req/reg';
-import {MatTableModule, MatTableDataSource} from '@angular/material/table';
+import {MatTableDataSource} from '@angular/material/table';
 import {FilmMain} from 'src/app/filmMain';
-import {MatPaginatorModule, MatPaginator} from '@angular/material/paginator';
-import {LocalStorageService} from "src/app/local-storage-service";
+import {MatPaginator} from '@angular/material/paginator';
+import {LocalStorageService} from 'src/app/local-storage-service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
 const ELEMENT_DATA1: FilmMain[] = [
-  {filmId: 1, filmName: 'Омерзительная восьмерка', filmRate: 7.2, filmImg: 'https://avatars.mds.yandex.net/get-kinopoisk-image/1900788/0bf728af-ce48-4c0e-9da3-f20ee81bc276/960x960', filmAge: 18},
-  {filmId: 2, filmName: 'Земля кочевников', filmRate: 7.3, filmImg: 'http://kinohod.ru/o/c3/59/c359170a-76e0-11eb-941e-f50022a07b64.jfif', filmAge: 16},
-  {filmId: 3, filmName: 'Мавританец', filmRate: 6.0, filmImg: 'http://avatars.mds.yandex.net/get-kinopoisk-image/1777765/d5ed4630-56b3-4a09-a4e4-9f76e105c56e/600x900', filmAge: 18},
-  {filmId: 4, filmName: 'Любовное настроение', filmRate: 8.2, filmImg: 'http://avatars.mds.yandex.net/get-kinopoisk-image/1773646/b6161447-8412-4486-82e4-f2be8bd8d616/600x900', filmAge: 18},
-  {filmId: 5, filmName: 'Паразиты', filmRate: 9.2, filmImg: 'http://avatars.mds.yandex.net/get-kinopoisk-image/1599028/bbe02758-fec4-498f-a128-347ad15dc76c/600x900', filmAge: 18},
+  {
+    filmId: 1,
+    filmName: 'Омерзительная восьмерка',
+    filmRate: 7.2,
+    filmImg: 'https://avatars.mds.yandex.net/get-kinopoisk-image/1900788/0bf728af-ce48-4c0e-9da3-f20ee81bc276/960x960',
+    filmAge: 18
+  },
+  {
+    filmId: 2,
+    filmName: 'Земля кочевников',
+    filmRate: 7.3,
+    filmImg: 'http://kinohod.ru/o/c3/59/c359170a-76e0-11eb-941e-f50022a07b64.jfif',
+    filmAge: 16
+  },
+  {
+    filmId: 3,
+    filmName: 'Мавританец',
+    filmRate: 6.0,
+    filmImg: 'http://avatars.mds.yandex.net/get-kinopoisk-image/1777765/d5ed4630-56b3-4a09-a4e4-9f76e105c56e/600x900',
+    filmAge: 18
+  },
+  {
+    filmId: 4,
+    filmName: 'Любовное настроение',
+    filmRate: 8.2,
+    filmImg: 'http://avatars.mds.yandex.net/get-kinopoisk-image/1773646/b6161447-8412-4486-82e4-f2be8bd8d616/600x900',
+    filmAge: 18
+  },
+  {
+    filmId: 5,
+    filmName: 'Паразиты',
+    filmRate: 9.2,
+    filmImg: 'http://avatars.mds.yandex.net/get-kinopoisk-image/1599028/bbe02758-fec4-498f-a128-347ad15dc76c/600x900',
+    filmAge: 18
+  },
   {filmId: 6, filmName: 'Нечто', filmRate: 7.4, filmImg: 'https://upload.wikimedia.org/wikipedia/ru/c/c0/The_thing.jpg', filmAge: 18},
 ];
 
@@ -235,9 +264,12 @@ sendUserData(){
       }
 
     onUpload() {
-    console.log("dsfdfsdfsdfsdf");
-       this.http.post('https://mac21-portal-backend.herokuapp.com/api/v1/users/1/logo', this.selectedFile).subscribe((data:any) => {});
-      }
+      const fd = new FormData();
+      fd.append('file', this.selectedFile);
+      this.http.post('https://mac21-portal-backend.herokuapp.com/api/v1/users/1/logo', fd).subscribe(() => {
+        // TODO reload page
+      });
+    }
 
     hidePass = false;
 
