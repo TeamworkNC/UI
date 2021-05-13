@@ -1,4 +1,4 @@
 export interface Film {
-  name: string;
+  filmTitle: string;
   description: string;
 }
