@@ -14,11 +14,14 @@ import {LocalStorageService} from "src/app/local-storage-service";
   styleUrls: ['./user-frends.component.scss']
 })
 export class UserFrendsComponent implements OnInit {
-@ViewChild(MatPaginator) paginator: MatPaginator;
+@ViewChild('MatPaginator2') paginator: MatPaginator;
+@ViewChild('MatPaginator1') paginatorFriends: MatPaginator;
 obs: Observable<any>;
+obsFriends: Observable<any>;
 users: OtherUserArray;
 friends: OtherUserArray;
 dataSource: MatTableDataSource<OtherUser>;
+dataSourceFriends: MatTableDataSource<OtherUser>;
   constructor(private api: OtherUserGet, private api1: UserFriendsGet, private changeDetector: ChangeDetectorRef , public router: Router, public localStorageService: LocalStorageService) {
     this.getOtherUserData();
   }
@@ -46,7 +49,10 @@ dataSource: MatTableDataSource<OtherUser>;
                                 if( data == null){
                                   this.friends;
                                 }else{
-                                this.friends = data.friends;
+                                this.friends = data;
+                                this.dataSourceFriends= new MatTableDataSource<OtherUser>(this.friends.users);
+                                this.dataSourceFriends.paginator = this.paginatorFriends;
+                                this.obsFriends = this.dataSourceFriends.connect();
                                 }
                               });
            }

@@ -19,9 +19,25 @@
 <br>
 <div style="display: table; width: 100%; ">
   <div style="display: table-row; width: 100%; ">
-    <div style="display: table-cell; width: 26%;" align="center">
+    <div style="display: table-cell; width: 38%;" align="center">
       <mat-card style="margin-left:1%; margin-top:3%">
         <div class="test1">Друзья:</div>
+        <div *ngIf = "obsFriends">
+        <mat-card class="test" style="width: 20%; margin-left: 3%; margin-top: 3%; display: inline-block; color: black; margin-bottom: 1%" *ngFor="let user of obsFriends | async ">
+          <img *ngIf="user.logoUrl && user.logoUrl.length>8" src={{user.logoUrl}} style="margin-top: 2%; margin-right: 2%; margin-left: 2%; width: 90%; height: 80%">
+          <img *ngIf="!user.logoUrl || user.logoUrl.length<=8" src="assets/resource/nophoto.jpg" style="margin-top: 2%; margin-right: 2%; margin-left: 2%; width: 90%; height: 80%">
+          <div style="font-weight: bold; margin-left: 3%; margin-top:3%; margin-right: 3%; font-size: 80%">{{user.login}}</div>
+          <button mat-button  style="width: 80%; margin-left: 2%; margin-top: 3%; display: inline-block; font-size: 80%" class="test1" (click)="goOtherUserPage(user.userId)" >Перейти</button>
+        </mat-card>
+        <mat-paginator #MatPaginator1
+          [pageSizeOptions]="[8]" >
+        </mat-paginator>
+        </div>
+        <div *ngIf = "!obsFriends">
+          <mat-card style=" width: 78%; margin-bottom: 1%;">
+            <div class="test1">Пока у вас нет друзей</div>
+          </mat-card>
+        </div>
       </mat-card>
       <mat-card style="margin-left:1%; margin-top:3%">
         <div class="test1">Входящие заявки:</div>
@@ -30,7 +46,7 @@
         <div class="test1">Исходящие заявки:</div>
       </mat-card>
     </div>
-    <div style="display: table-cell; width: 70%; vertical-align: top" align="center">
+    <div style="display: table-cell; width:58%; vertical-align: top" align="center">
       <form style="display: inline" >
         <mat-form-field style="width: 70%; margin-left: 3%" >
           <mat-label class="test">Искать по логину</mat-label>
@@ -53,7 +69,7 @@
           <div style="font-weight: bold; margin-left: 3%; margin-top:3%; margin-right: 3%;">{{user.login}}</div>
           <button mat-button  style="width: 80%; margin-left: 2%; margin-top: 3%; display: inline-block" class="test1" (click)="goOtherUserPage(user.userId)" >Перейти</button>
         </mat-card>
-        <mat-paginator
+        <mat-paginator #MatPaginator2
           [pageSizeOptions]="[8]" >
         </mat-paginator>
       </mat-card>

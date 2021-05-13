@@ -18,7 +18,7 @@ export class UserFriendsGet {
   getCommand(userId : string): Observable <any> {
 
     return this.http.get(localUrl1 + userId + "/friends").pipe(map(function (i: any) { return {
-     friends: i
+     users: i
      };}));
   }
 }
