@@ -1,18 +1,17 @@
-import { Component, OnInit, ViewChild, ChangeDetectorRef,OnDestroy } from '@angular/core';
-import {UserProfile} from "src/app/userprofile";
+import {ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {UserProfile} from 'src/app/userprofile';
 import {User} from 'src/app/user';
-import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
+import {HttpClient, HttpResponse} from '@angular/common/http';
 import {ProfileInfo} from 'src/app/req/profileInfo';
-import {FavoritesFilmGet} from 'src/app/req/favoritesFilmGet';
-import {ActivatedRoute, Router} from "@angular/router";
-import {Subject, Subscription, Observable} from 'rxjs';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Observable, Subscription} from 'rxjs';
 import {FormControl, Validators} from '@angular/forms';
-import {MatDialog, MatDialogRef, MatDialogModule} from "@angular/material/dialog";
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {Reg} from 'src/app/req/reg';
-import {MatTableModule, MatTableDataSource} from '@angular/material/table';
+import {MatTableDataSource} from '@angular/material/table';
 import {FilmMain} from 'src/app/filmMain';
-import {MatPaginatorModule, MatPaginator} from '@angular/material/paginator';
-import {LocalStorageService} from "src/app/local-storage-service";
+import {MatPaginator} from '@angular/material/paginator';
+import {LocalStorageService} from 'src/app/local-storage-service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
 const ELEMENT_DATA1: FilmMain[] = [
@@ -235,9 +234,12 @@ sendUserData(){
       }
 
     onUpload() {
-    console.log("dsfdfsdfsdfsdf");
-       this.http.post('https://mac21-portal-backend.herokuapp.com/api/v1/users/1/logo', this.selectedFile).subscribe((data:any) => {});
-      }
+      const fd = new FormData();
+      fd.append('file', this.selectedFile);
+      this.http.post('https://mac21-portal-backend.herokuapp.com/api/v1/users/1/logo', fd).subscribe(() => {
+        // TODO reload page
+      });
+    }
 
     hidePass = false;
 
