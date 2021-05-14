@@ -5,6 +5,8 @@ import {ActivatedRoute} from '@angular/router';
 import {LocalStorageService} from '../local-storage-service';
 import {Session} from './session.model';
 import {Film} from './film.model';
+import {MatDialog} from '@angular/material/dialog';
+import {InviteFriendsDialog} from './components/invite-friends/invite-friends.dialog';
 
 @Component({
   selector: 'app-room-page',
@@ -27,8 +29,9 @@ export class RoomPageComponent implements OnInit {
     private readonly http: HttpClient,
     private readonly route: ActivatedRoute,
     private readonly localStorageService: LocalStorageService,
+    private readonly dialog: MatDialog,
   ) {
-    this.sessionId = route.snapshot.params.id;
+    this.sessionId = Number(route.snapshot.params.id);
     this.userId = Number(localStorageService.getItem('userId'));
   }
 
@@ -52,5 +55,12 @@ export class RoomPageComponent implements OnInit {
     return this.http.get<Film>(url).toPromise();
   }
 
+  onInviteFriendButtonClick(): void {
+    const dialogRef = this.dialog.open(InviteFriendsDialog, {
+      // height: '400px',
+      // width: '600px',
+      data: {sessionId: this.sessionId, userId: this.userId},
+    });
+  }
 }
 
