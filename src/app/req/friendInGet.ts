@@ -20,7 +20,7 @@ export class FriendInGet {
     return this.http.get(localUrl1 + userId + "/friend_requests").pipe(map(function (i: any) {
     let arr = [];
     for(let u in i){
-    arr.push(i[u].userId);
+    arr.push(i[u].userId+"");
     }
     return {
      users: arr

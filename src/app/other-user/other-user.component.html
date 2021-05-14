@@ -20,8 +20,17 @@
 <div style="display: table; width: 100%; ">
   <div style="display: table-row; width: 100%; ">
     <div style="display: table-cell; width: 26%" align="center">
-      <img *ngIf="userprofile && userprofile.logoUrl.length>8" src={{userprofile.logoUrl}} style="width: 70%; margin-left: 5%; vertical-align: middle" align="center">
-      <img *ngIf="userprofile && userprofile.logoUrl.length<=8" src="assets/resource/nophoto.jpg" style="width: 70%; margin-left: 5%; vertical-align: middle" align="center">
+      <div>
+        <img *ngIf="userprofile && userprofile.logoUrl.length>8" src={{userprofile.logoUrl}} style="width: 70%; margin-left: 5%; vertical-align: middle" align="center">
+        <img *ngIf="userprofile && userprofile.logoUrl.length<=8" src="assets/resource/nophoto.jpg" style="width: 70%; margin-left: 5%; vertical-align: middle" align="center">
+      </div>
+      <div>
+        <button *ngIf="!this.friends.includes(this.userId) && !this.friendsIn.includes(this.userId) && !this.friendsInUser.includes(this.localStorageService.getItem('userId'))" class="test" style="font-size: 80%; margin-top: 3%" mat-button>Отправить заявку</button>
+        <button *ngIf="!this.friends.includes(this.userId) && !this.friendsIn.includes(this.userId) && this.friendsInUser.includes(this.localStorageService.getItem('userId'))" class="test" style="font-size: 80%; margin-top: 3%" mat-button>Отозвать заявку</button>
+        <button *ngIf="!this.friends.includes(this.userId) && this.friendsIn.includes(this.userId)" class="test" style="font-size: 80%; margin-top: 3%" mat-button>Принять заявку</button>
+        <button *ngIf="!this.friends.includes(this.userId) && this.friendsIn.includes(this.userId)" class="test" style="font-size: 80%; margin-top: 3%" mat-button>Отклонить заявку</button>
+        <button *ngIf="this.friends.includes(this.userId)" class="test" style="font-size: 80%; margin-top: 3%" mat-button>Удалить</button>
+      </div>
     </div>
     <div style="display: table-cell; width: 70%; vertical-align: top" align="center">
       <div>login - {{userprofile.login}}</div>
