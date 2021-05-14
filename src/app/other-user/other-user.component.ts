@@ -30,6 +30,7 @@ friendsInUser: any[];
   }
 
   ngOnInit(): void {
+  this.getUserData(this.userId);
   }
   getUserData(userId: number){
 
@@ -80,7 +81,7 @@ friendsInUser: any[];
                                                              if( data == null){
 
                                                               }else{
-
+                                                                    this.ngOnInit();
                                                                     }
                                                               });
             }
