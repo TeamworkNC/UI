@@ -6,6 +6,7 @@ import {OtherUser} from "src/app/other-user";
 import {UserFriendsGet} from 'src/app/req/userFriendsGet';
 import {LocalStorageService} from "src/app/local-storage-service";
 import {FriendInGet} from "src/app/req/friendInGet";
+import {AddToFriend} from "src/app/req/addToFriend";
 
 @Component({
   selector: 'app-other-user',
@@ -19,7 +20,7 @@ private subscription: Subscription;
 friends: any[];
 friendsIn: any[];
 friendsInUser: any[];
-  constructor(private activateRoute: ActivatedRoute, private api: PeopleGet, private api1: UserFriendsGet, private api2: FriendInGet, public localStorageService: LocalStorageService) {
+  constructor(private activateRoute: ActivatedRoute, private api: PeopleGet, private api1: UserFriendsGet, private api2: FriendInGet, private api3: AddToFriend, public localStorageService: LocalStorageService) {
     this.subscription = new Subscription();
     this.userId = 0;
     this.subscription = this.activateRoute.params.subscribe(params => {
@@ -71,5 +72,16 @@ friendsInUser: any[];
                                                   console.log(this.friendsInUser);
                                                         }
                                                   });
+            }
+
+            addToFriend(){
+                    this.api3.postCommand(this.localStorageService.getItem("userId"), this.userId+"")
+                                                         .subscribe((data: any) => {
+                                                             if( data == null){
+
+                                                              }else{
+
+                                                                    }
+                                                              });
             }
 }
