@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {RxStompService} from '@stomp/ng2-stompjs';
 import {HttpClient} from '@angular/common/http';
-import {Message} from './message.model';
 import {FormControl} from '@angular/forms';
+import {Message} from './message.model';
 
 @Component({
   selector: 'app-chat',
@@ -28,6 +28,7 @@ export class ChatComponent implements OnInit {
   async ngOnInit(): Promise<any> {
     this.messages = await this.loadMessages();
     console.log(this.messages);
+
     this.rxStompService.watch('/topic/chats/' + this.chatId + '/messages').subscribe(value => {
       const message = JSON.parse(value.body);
       console.log(message);
@@ -39,7 +40,7 @@ export class ChatComponent implements OnInit {
     return this.http.get<Message[]>(this.apiUrl + 'chats/' + this.chatId + '/messages').toPromise();
   }
 
-  onSendButtonClick(): void {
+  onSend(): void {
     const topic = '/app/messages/send';
     const text = this.inputMessageForm.value;
     const data = {

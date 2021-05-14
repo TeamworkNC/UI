@@ -49,7 +49,8 @@ import {OtherUserComponent} from './other-user/other-user.component';
 import {ChatComponent} from './components/chat/chat.component';
 import {PlayerComponent} from './components/player/player.component';
 import {VimeModule} from '@vime/angular';
-import { DatePipe } from '@angular/common';
+import {DatePipe} from '@angular/common';
+import {InviteFriendsDialog} from './room-page/components/invite-friends/invite-friends.dialog';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { DatePipe } from '@angular/common';
     UserFrendsComponent,
     OtherUserComponent,
     ChatComponent,
-    PlayerComponent
+    PlayerComponent,
+    InviteFriendsDialog
   ],
   imports: [
     BrowserModule,

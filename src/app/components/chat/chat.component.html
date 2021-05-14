@@ -13,9 +13,9 @@
 
   <div class="form">
     <mat-form-field class="form-input">
-      <input [formControl]="inputMessageForm" matInput placeholder="message">
+      <input (keyup.enter)="onSend()" [formControl]="inputMessageForm" matInput placeholder="message">
     </mat-form-field>
-    <button (click)="onSendButtonClick()" class="form-button" mat-button>
+    <button (click)="onSend()" class="form-button" mat-button>
       <mat-icon class="material-icons-outlined">send</mat-icon>
     </button>
   </div>

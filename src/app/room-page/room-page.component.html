@@ -14,23 +14,23 @@
     </div>
 
     <!--    название фильма-->
-    <div *ngIf="film">
+    <h2 *ngIf="film">
       {{film.filmTitle}}
-    </div>
+    </h2>
 
     <div>
-      <button color="primary" mat-button>add friend</button>
+      <button (click)="onInviteFriendButtonClick()" color="primary" mat-button>add friends</button>
     </div>
   </div>
 
   <!--  right column-->
   <div class="right-column">
-    <div class="chat">
-      <app-chat
-        #chat
-        *ngIf="!chatDisabled"
-        [chatId]="session.chatID"
-        [userId]="userId">
+    <div class="chat" style="height: 560px; max-height: 560px;">
+      <app-chat #chat
+                *ngIf="!chatDisabled"
+                [chatId]="session.chatID"
+                [userId]="userId"
+                style="height: 560px; max-height: 560px;">
       </app-chat>
     </div>
   </div>
