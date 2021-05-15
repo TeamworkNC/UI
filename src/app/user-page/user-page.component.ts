@@ -237,7 +237,7 @@ sendUserData(){
       const fd = new FormData();
       fd.append('file', this.selectedFile);
       this.http.post('https://mac21-portal-backend.herokuapp.com/api/v1/users/' + this.localStorageService.getItem("userId") +  '/logo', fd).subscribe(() => {
-        // TODO reload page
+        this.ngOnInit();
       });
     }
 
