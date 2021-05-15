@@ -236,7 +236,7 @@ sendUserData(){
     onUpload() {
       const fd = new FormData();
       fd.append('file', this.selectedFile);
-      this.http.post('https://mac21-portal-backend.herokuapp.com/api/v1/users/1/logo', fd).subscribe(() => {
+      this.http.post('https://mac21-portal-backend.herokuapp.com/api/v1/users/' + this.localStorageService.getItem("userId") +  '/logo', fd).subscribe(() => {
         // TODO reload page
       });
     }
