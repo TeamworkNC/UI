@@ -1,12 +1,12 @@
 export class FilmSlider {
 id: number;
 name: string;
-logo: string;
+screen: string;
 description: string;
 constructor() {
   this.id = 0;
   this.name = '';
-  this.logo = '';
+  this.screen = '';
   this.description = '';
 }
 }

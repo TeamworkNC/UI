@@ -102,12 +102,12 @@
 
             <mat-card style = 'margin-top: 3%'>
               <div *ngIf = "this.userprofile.favoriteFilms.length>0">
-                <mat-card class="test1" style="width: 20%; margin-left: 3%; margin-top: 3%; display: inline-block; font-size: 80%" *ngFor="let film of obs | async">
+                <mat-card class="test1" style="width: 20%; margin-left: 3%; margin-top: 3%; display: inline-block; font-size: 80%;height:350px;vertical-align: middle" *ngFor="let film of obs | async">
                   <div align="left">
                     <div style="display: inline">
                       <img src="assets/resource/rate.png" style="margin-top: 1%; margin-right: 2%; margin-left: 2%; width: 10%; float:inherit;" align="left">
                     </div>
-                    <div style="display: inline;" align="left">{{film.rating}}</div>
+                    <div style="display: inline;" align="left">{{(film.rating+"").substring(0,4)}}</div>
                     <div style="display: inline">
                       <img src="assets/resource/age.png" style="margin-top: 1%; margin-right: 2%; margin-left: 2%; width: 10%; float:inherit;" align="left">
                     </div>
@@ -133,7 +133,7 @@
 <!--        <div *ngIf = "obsRec">-->
           <mat-card style = 'margin-top: 3%'>
             <!--              <div class="test1" style="font-size:90%">Рекомендации:</div>-->
-            <mat-card class="test1" style="width: 20%; margin-left: 3%; margin-top: 3%; display: inline-block; font-size: 80%" *ngFor="let film of obsRec | async">
+            <mat-card class="test1" style="width: 20%; margin-left: 3%; margin-top: 3%; display: inline-block; font-size: 80%;height:350px;vertical-align: middle" *ngFor="let film of obsRec | async">
               <div align="left">
                 <div style="display: inline">
                   <img src="assets/resource/rate.png" style="margin-top: 1%; margin-right: 2%; margin-left: 2%; width: 10%; float:inherit;" align="left">

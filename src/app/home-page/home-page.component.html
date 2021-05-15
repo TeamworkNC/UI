@@ -13,15 +13,15 @@
 <br>
 <div align="center"  class="test" style="color : #ffffff; font-size: 300%">Добро пожаловать в online кинотеатр Movie And Chill!</div>
 <br>
-<ngb-carousel style="margin-top: 3%; margin-bottom: 3%">
+<ngb-carousel style="margin-top: 3%; margin-bottom: 3%;height:350px;">
   <ng-template ngbSlide *ngFor="let film of home.slider; index as i">
     <div class="picsum-img-wrapper">
       <div >
-        <img src={{film.logo}} alt="Random first slide" style="width:20%;float:left;" vspace="3" hspace="91">
-        <div style="display: table; ">
+        <img src={{film.screen}} alt="Random first slide" style="width:30%; float:left;" vspace="3" hspace="91">
+        <div style="display: table; width:50% ">
           <div style="color : #ffffff; font-size: 200%; display: table-row" class="test">{{film.name}}</div>
           <br>
-          <div style="color : #ffffff; font-size: 150%; margin-left:2%; margin-right:2%; display: table-row " class="test">{{film.description}}</div>
+          <div style="color : #ffffff; font-size: 150%; margin-left:2%; margin-right:2%; display: table-row; " class="test">{{film.description}}</div>
           <br>
           <div style="display: table-row">
             <button mat-raised-button style="font-size: 150%" class="test" (click)="goFilmPage(film.id)">Смотреть</button>
@@ -37,12 +37,12 @@
   <mat-tab-group style="color : #ffffff;" mat-align-tabs="center" class="test">
     <mat-tab style="color : #ffffff;" class="test" label="Наши новинки">
       <div style=" width: 100%; margin-top:1%; margin-bottom:1%" align="center" >
-        <mat-card class="test" style="width: 20%; margin-left: 3%; margin-top: 3%; display: inline-block" *ngFor="let film of home.novelty; index as i" >
+        <mat-card class="test" style="width: 20%; margin-left: 3%; margin-top: 3%; display: inline-block; height:650px;vertical-align: middle" *ngFor="let film of home.novelty; index as i" >
           <div align="left">
             <div style="display: inline">
               <img src="assets/resource/rate.png" style="margin-top: 1%; margin-right: 2%; margin-left: 2%; width: 10%; float:inherit;" align="left">
             </div>
-            <div style="display: inline;" align="left">{{film.rating}}</div>
+            <div style="display: inline;" align="left">{{(film.rating+"").substring(0,4)}}</div>
             <div style="display: inline">
               <img src="assets/resource/age.png" style="margin-top: 1%; margin-right: 2%; margin-left: 2%; width: 10%; float:inherit;" align="left">
             </div>
@@ -56,12 +56,12 @@
     </mat-tab>
     <mat-tab style="color : #ffffff;" class="test" label="Самые популярные">
       <div style=" width: 100%; margin-top:1%; margin-bottom:1%" align="center" >
-        <mat-card class="test" style="width: 20%; margin-left: 3%; margin-top: 3%; display: inline-block" *ngFor="let film of home.recommendation; index as i">
+        <mat-card class="test" style="width: 20%; margin-left: 3%; margin-top: 3%; display: inline-block; height:650px;vertical-align: middle" *ngFor="let film of home.recommendation; index as i">
           <div align="left">
             <div style="display: inline">
               <img src="assets/resource/rate.png" style="margin-top: 1%; margin-right: 2%; margin-left: 2%; width: 10%; float:inherit;" align="left">
             </div>
-            <div style="display: inline;" align="left">{{film.rating}}</div>
+            <div style="display: inline;" align="left">{{(film.rating+"").substring(0,4)}}</div>
             <div style="display: inline">
               <img src="assets/resource/age.png" style="margin-top: 1%; margin-right: 2%; margin-left: 2%; width: 10%; float:inherit;" align="left">
             </div>
