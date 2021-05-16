@@ -12,6 +12,7 @@ import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { FavoritesFilmGet } from 'src/app/req/favoritesFilmGet';
 import { DeleteFromFavorites } from 'src/app/req/deleteFromFavorites';
+import { SeeFilm } from 'src/app/req/seeFilm';
 
 @Component({
   selector: 'ngbd-rating-events',
@@ -22,11 +23,13 @@ export class FilmPageComponent implements OnInit {
 
 private subscription: Subscription;
   filmId: number;
+  sessionId:number;
   film : FilmAll;
   arrOfUserFavoriteFilms: string[];
-  constructor(public datepipe: DatePipe , public router: Router,private http: HttpClient, private activateRoute: ActivatedRoute, private api: FilmAllGet, private _snackBar: MatSnackBar, private api1: FavouritePost, private api2: FavoritesFilmGet, private api3: DeleteFromFavorites, public localStorageService: LocalStorageService) {
+  constructor(public datepipe: DatePipe , public router: Router,private http: HttpClient, private activateRoute: ActivatedRoute, private api: FilmAllGet, private _snackBar: MatSnackBar, private api1: FavouritePost, private api2: FavoritesFilmGet, private api3: DeleteFromFavorites, public localStorageService: LocalStorageService, private api4: SeeFilm) {
   this.subscription = new Subscription();
   this.filmId = 0;
+  this.sessionId =0;
   this.arrOfUserFavoriteFilms = [];
   this.film = {
              "id" : 0,
@@ -121,8 +124,9 @@ private subscription: Subscription;
       }
 
     goRoomPage(){
-                      this.router.navigate(
-                          ['/room/'+1]);
+
+    this.createFilmSession();
+
       }
 
     postReview(){
@@ -171,6 +175,20 @@ private subscription: Subscription;
                this.ngOnInit();
               });
   }
+  createFilmSession(){
+   this.api4.postCommand(this.filmId, parseInt(this.localStorageService.getItem("userId")))
+            .subscribe((data: any) => {
+
+              if( data == null){
+
+              }else{
+
+                this.sessionId=data.body.sessionID;
+                this.router.navigate(['/room/'+this.sessionId]);
+              }
+            });
+  }
+
   toFavorites(filmId: number, userId:  string) {
 
   this.api1.postCommand(filmId, userId)
