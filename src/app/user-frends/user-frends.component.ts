@@ -25,7 +25,7 @@ obsFriendsIn: Observable<any>;
 users: OtherUserArray;
 friends: OtherUserArray;
 friendsIn: [];
-friendsInAll: OtherUser[];
+friendsInAll: any[];
 dataSource: MatTableDataSource<OtherUser>;
 dataSourceFriends: MatTableDataSource<OtherUser>;
 dataSourceFriendsIn: MatTableDataSource<OtherUser>;
@@ -50,6 +50,26 @@ dataSourceFriendsIn: MatTableDataSource<OtherUser>;
                    this.dataSource= new MatTableDataSource<OtherUser>(this.users.users);
                    this.dataSource.paginator = this.paginator;
                    this.obs = this.dataSource.connect();
+                   this.api2.getCommand(this.localStorageService.getItem("userId"))
+                                                              .subscribe((data: any) => {
+                                                                if( data == null){
+                                                                  this.friendsIn;
+                                                                }else{
+                                                                this.friendsIn = data.users;
+                                                                for(let u in this.friendsIn){
+
+                                                                   for(let o in this.users.users){
+                                                                       if (this.users.users[o].userId==this.friendsIn[u] && this.friendsInAll.filter(e => e.userId === this.users.users[o].userId).length ==0){
+                                                                       this.friendsInAll.push(this.users.users[o]);
+                                                                       }
+                                                                   }
+                                                                }
+                                                                   this.dataSourceFriendsIn= new MatTableDataSource<OtherUser>(this.friendsInAll);
+                                                                   this.dataSourceFriendsIn.paginator = this.paginatorFriendsIn;
+                                                                   this.obsFriendsIn = this.dataSourceFriendsIn.connect();
+
+                                                                }
+                                                              });
                    }
                  });
 
@@ -62,28 +82,10 @@ dataSourceFriendsIn: MatTableDataSource<OtherUser>;
                                 this.dataSourceFriends= new MatTableDataSource<OtherUser>(this.friends.users);
                                 this.dataSourceFriends.paginator = this.paginatorFriends;
                                 this.obsFriends = this.dataSourceFriends.connect();
+
                                 }
                               });
-             this.api2.getCommand(this.localStorageService.getItem("userId"))
-                                           .subscribe((data: any) => {
-                                             if( data == null){
-                                               this.friendsIn;
-                                             }else{
-                                             this.friendsIn = data.users;
-                                             for(let u in this.friendsIn){
 
-                                                for(let o in this.users.users){
-                                                    if (this.users.users[o].userId==this.friendsIn[u]){
-                                                    this.friendsInAll.push(new OtherUser(this.users.users[o].userId, this.users.users[o].login, this.users.users[o].email, this.users.users[o].birthday, this.users.users[o].logoUrl, this.users.users[o].description, this.users.users[o].registrationDate));
-                                                    }
-                                                }
-                                             }
-                                                this.dataSourceFriendsIn= new MatTableDataSource<OtherUser>(this.friendsInAll);
-                                                this.dataSourceFriendsIn.paginator = this.paginatorFriendsIn;
-                                                this.obsFriendsIn = this.dataSourceFriendsIn.connect();
-
-                                             }
-                                           });
            }
 
   goOtherUserPage(otherUserId : number){
@@ -103,6 +105,11 @@ dataSourceFriendsIn: MatTableDataSource<OtherUser>;
                              this.obs = this.dataSource.connect();
                              }
                            });
+        }
+
+        resetSearch(){
+        this.getOtherUserData();
+        this.userIn = '';
         }
 
 }
