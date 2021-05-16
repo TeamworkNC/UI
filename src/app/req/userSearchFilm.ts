@@ -24,7 +24,7 @@ export class UserSearchFilm {
     genres = idgenres;
   }
   if(idages){
-      genres = idages;
+      ages = idages;
     }
   const body = {
           idgenres: genres,

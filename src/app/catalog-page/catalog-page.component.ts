@@ -37,13 +37,15 @@ array1:any;
               filters: this.formBuilder.array([]),
               age : this.formBuilder.array([])
             });
-    this.array2 = <FormArray>this.filterFormGroup.get('age') as FormArray;
-    this.array1 = <FormArray>this.filterFormGroup.get('filters') as FormArray;
   }
   filterFormGroup : FormGroup;
 
   ngOnInit(): void {
     this.changeDetector.detectChanges();
+    this.filterFormGroup = this.formBuilder.group({
+                  filters: this.formBuilder.array([]),
+                  age : this.formBuilder.array([])
+                });
   }
 
    getCatalogData(){
@@ -82,20 +84,21 @@ array1:any;
   }
 
   onChange(event) {
+  const array1 = <FormArray>this.filterFormGroup.get('filters') as FormArray;
       if(event.checked) {
-        this.array1.push(new FormControl(event.source.value))
+        array1.push(new FormControl(event.source.value))
       } else {
-        const i = this.array1.controls.findIndex(x => x.value === event.source.value);
-        this.array1.removeAt(i);
+        const i = array1.controls.findIndex(x => x.value === event.source.value);
+        array1.removeAt(i);
       }
     }
   onChangeAge(event) {
-
+  const array2 = <FormArray>this.filterFormGroup.get('age') as FormArray;
         if(event.checked) {
-          this.array2.push(new FormControl(event.source.value))
+          array2.push(new FormControl(event.source.value))
         } else {
-          const i = this.array2.controls.findIndex(x => x.value === event.source.value);
-          this.array2.removeAt(i);
+          const i = array2.controls.findIndex(x => x.value === event.source.value);
+          array2.removeAt(i);
         }
       }
   postUserSearchOptions(){
@@ -130,8 +133,10 @@ array1:any;
                      });
           this.userIn='';
           this.getCatalogData();
-          this.filterFormGroup.reset();
-
+          this.filterFormGroup = this.formBuilder.group({
+                        filters: this.formBuilder.array([]),
+                        age : this.formBuilder.array([])
+                      });
     }
 
   ngOnDestroy() {
