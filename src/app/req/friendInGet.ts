@@ -23,7 +23,8 @@ export class FriendInGet {
     arr.push(i[u].userId+"");
     }
     return {
-     users: arr
+     users: arr,
+     all : i
      };}));
   }
 }

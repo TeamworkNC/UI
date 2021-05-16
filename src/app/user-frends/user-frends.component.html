@@ -42,7 +42,7 @@
       <mat-card style="margin-left:1%; margin-top:3%">
         <div class="test1">Входящие заявки:</div>
         <div *ngIf = "obsFriendsIn && this.friendsInAll.length>0">
-          <mat-card class="test" style="width: 20%; margin-left: 3%; margin-top: 3%; display: inline-block; color: black; margin-bottom: 1%; height:350px;vertical-align: middle" *ngFor="let user of obsFriendsIn | async ">
+          <mat-card class="test" style="width: 20%; margin-left: 3%; margin-top: 3%; display: inline-block; color: black; margin-bottom: 1%;" *ngFor="let user of obsFriendsIn | async ">
             <img *ngIf="user.logoUrl && user.logoUrl.length>8" src={{user.logoUrl}} style="margin-top: 2%; margin-right: 2%; margin-left: 2%; width: 90%; height: 80%">
             <img *ngIf="!user.logoUrl || user.logoUrl.length<=8" src="assets/resource/nophoto.jpg" style="margin-top: 2%; margin-right: 2%; margin-left: 2%; width: 90%; height: 80%">
             <div style="font-weight: bold; margin-left: 3%; margin-top:3%; margin-right: 3%; font-size: 80%">{{user.login}}</div>

@@ -26,10 +26,10 @@
       </div>
       <div>
         <button *ngIf="!this.friends.includes(this.userId) && !this.friendsIn.includes(this.userId) && !this.friendsInUser.includes(this.localStorageService.getItem('userId'))" (click)="addToFriend()" class="test" style="font-size: 80%; margin-top: 3%" mat-button>Отправить заявку</button>
-        <button *ngIf=" this.friendsInUser.includes(this.localStorageService.getItem('userId'))" class="test" style="font-size: 80%; margin-top: 3%" mat-button>Заявка отправлена</button>
-        <button *ngIf="!this.friends.includes(this.userId) && this.friendsIn.includes(this.userId)" class="test" style="font-size: 80%; margin-top: 3%" mat-button>Принять заявку</button>
-        <button *ngIf="!this.friends.includes(this.userId) && this.friendsIn.includes(this.userId)" class="test" style="font-size: 80%; margin-top: 3%" mat-button>Отклонить заявку</button>
-        <button *ngIf="this.friends.includes(this.userId)" class="test" style="font-size: 80%; margin-top: 3%" mat-button>Удалить</button>
+        <button *ngIf=" this.friendsInUser.includes(this.localStorageService.getItem('userId'))" class="test" style="font-size: 80%; margin-top: 3%; color : #ffffff;" mat-button disabled>Заявка отправлена</button>
+        <button *ngIf="!this.friends.includes(this.userId) && this.friendsIn.includes(this.userId)" class="test" style="font-size: 80%; margin-top: 3%" mat-button (click) ="acceptFriend()">Принять заявку</button>
+        <button *ngIf="!this.friends.includes(this.userId) && this.friendsIn.includes(this.userId)" class="test" style="font-size: 80%; margin-top: 3%" mat-button (click)="declineFriend()">Отклонить заявку</button>
+        <button *ngIf="this.friends.includes(this.userId)" class="test" style="font-size: 80%; margin-top: 3%" mat-button (click)="deleteFriend()">Удалить</button>
       </div>
     </div>
     <div style="display: table-cell; width: 70%; vertical-align: top" align="center">
