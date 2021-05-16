@@ -22,7 +22,7 @@ font-family: 'Cormorant Infant', serif;
         <button class="main" *ngIf='!localStorageService.getItem("userId")'mat-button (click)="goRegistrationPage()">Регистрация</button>
         <button class="main" *ngIf='localStorageService.getItem("userId")' mat-button (click)="goFriendsPage()">Друзья</button>
         <button class="main" *ngIf='localStorageService.getItem("userId")' mat-button (click)="logoff()">Выйти</button>
-        <button class="main" mat-button (click)="goRoomPage()">Комната</button>
+<!--        <button class="main" mat-button (click)="goRoomPage()">Комната</button>-->
       </div>
       <div style="display: table-cell;">
         <img *ngIf='localStorageService.getItem("userId") && localStorageService.getItem("logoUrl") && localStorageService.getItem("logoUrl").length>8' class="ava" align="right" style="margin-right: 1%; margin-left : 0.5%" src="{{localStorageService.getItem('logoUrl')}}">
