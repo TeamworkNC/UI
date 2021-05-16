@@ -18,10 +18,18 @@ export class UserSearchFilm {
 
   postCommand(idgenres: number[], search : string, idages: number[]): Observable <any> {
 
+  let genres = [];
+  let ages = [];
+  if(idgenres){
+    genres = idgenres;
+  }
+  if(idages){
+      genres = idages;
+    }
   const body = {
-          idgenres: idgenres,
+          idgenres: genres,
           idproducers: [],
-          idages: idages
+          idages: ages
         };
 
     return this.http.post(localUrl1+search, body, {

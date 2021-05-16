@@ -22,6 +22,8 @@ catalog : CatalogInt;
 @ViewChild(MatPaginator) paginator: MatPaginator;
 obs: Observable<any>;
 dataSource: MatTableDataSource<FilmShort>;
+array2:any;
+array1:any;
   constructor(private activateRoute: ActivatedRoute, private router: Router, private api: CatalogGet, private api1: GenresGet, private api2: AgeLimitsGet, private formBuilder: FormBuilder, private apiPost: UserSearchFilm, private changeDetector: ChangeDetectorRef) {
     this.userIn="";
     this.catalog= {
@@ -35,6 +37,8 @@ dataSource: MatTableDataSource<FilmShort>;
               filters: this.formBuilder.array([]),
               age : this.formBuilder.array([])
             });
+    this.array2 = <FormArray>this.filterFormGroup.get('age') as FormArray;
+    this.array1 = <FormArray>this.filterFormGroup.get('filters') as FormArray;
   }
   filterFormGroup : FormGroup;
 
@@ -78,21 +82,20 @@ dataSource: MatTableDataSource<FilmShort>;
   }
 
   onChange(event) {
-      const array1 = <FormArray>this.filterFormGroup.get('filters') as FormArray;
       if(event.checked) {
-        array1.push(new FormControl(event.source.value))
+        this.array1.push(new FormControl(event.source.value))
       } else {
-        const i = array1.controls.findIndex(x => x.value === event.source.value);
-        array1.removeAt(i);
+        const i = this.array1.controls.findIndex(x => x.value === event.source.value);
+        this.array1.removeAt(i);
       }
     }
   onChangeAge(event) {
-        const array2 = <FormArray>this.filterFormGroup.get('age') as FormArray;
+
         if(event.checked) {
-          array2.push(new FormControl(event.source.value))
+          this.array2.push(new FormControl(event.source.value))
         } else {
-          const i = array2.controls.findIndex(x => x.value === event.source.value);
-          array2.removeAt(i);
+          const i = this.array2.controls.findIndex(x => x.value === event.source.value);
+          this.array2.removeAt(i);
         }
       }
   postUserSearchOptions(){
@@ -127,6 +130,7 @@ dataSource: MatTableDataSource<FilmShort>;
                      });
           this.userIn='';
           this.getCatalogData();
+          this.filterFormGroup.reset();
 
     }
 
