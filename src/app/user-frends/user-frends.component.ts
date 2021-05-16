@@ -79,6 +79,7 @@ dataSourceFriendsIn: MatTableDataSource<OtherUser>;
                                                 this.dataSourceFriendsIn= new MatTableDataSource<OtherUser>(this.friendsInAll);
                                                 this.dataSourceFriendsIn.paginator = this.paginatorFriendsIn;
                                                 this.obsFriendsIn = this.dataSourceFriendsIn.connect();
+
                                              }
                                            });
            }

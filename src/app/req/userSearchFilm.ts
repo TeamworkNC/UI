@@ -6,7 +6,7 @@ import {map} from "rxjs/operators";
 
 var headers = new HttpHeaders();
 headers.append('Content-Type', 'application/json; charset=utf-8');
-const localUrl1 = 'http://localhost:8080/catalog';//поменять потом
+const localUrl1 = 'https://mac21-portal-backend.herokuapp.com/api/v1/se/searchFilm?search=';//поменять потом
 
 @Injectable({
   providedIn: 'root'
@@ -16,19 +16,19 @@ export class UserSearchFilm {
   constructor(private http: HttpClient) {
   }
 
-  postCommand(filters: string[], search : string): Observable <any> {
+  postCommand(idgenres: number[], search : string, idages: number[]): Observable <any> {
 
   const body = {
-          filters: filters,
-          search : search
+          idgenres: idgenres,
+          idproducers: [],
+          idages: idages
         };
 
-    return this.http.post(localUrl1, body, {
+    return this.http.post(localUrl1+search, body, {
                                          observe: 'response', headers: headers
                                        } ).pipe(map(function (i: any) {
                                        return {
-                                               films: i.body.films,
-                                               filters: i.body.filters
+                                               films: i.body
                                                };}));
   }
 }

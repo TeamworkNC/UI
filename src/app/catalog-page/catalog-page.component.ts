@@ -29,29 +29,20 @@ dataSource: MatTableDataSource<FilmShort>;
       "filters" : [],
       "ageLimits" : []
     }
+    this.getFilms();
     this.getCatalogData();
     this.filterFormGroup = this.formBuilder.group({
-              filters: this.formBuilder.array([])
+              filters: this.formBuilder.array([]),
+              age : this.formBuilder.array([])
             });
   }
   filterFormGroup : FormGroup;
+
   ngOnInit(): void {
-    this.getCatalogData();
     this.changeDetector.detectChanges();
   }
 
    getCatalogData(){
-           this.api.getCommand()
-               .subscribe((data: CatalogInt) => {
-                 if( data == null){
-                   this.catalog;
-                 }else{
-                 this.catalog.films  = data.films;
-                 this.dataSource= new MatTableDataSource<FilmShort>(this.catalog.films);
-                 this.dataSource.paginator = this.paginator;
-                 this.obs = this.dataSource.connect();
-                 }
-               });
 
            this.api1.getCommand()
                   .subscribe((data: any) => {
@@ -67,6 +58,19 @@ dataSource: MatTableDataSource<FilmShort>;
                                      });
 
          }
+  getFilms(){
+  this.api.getCommand()
+                 .subscribe((data: CatalogInt) => {
+                   if( data == null){
+                     this.catalog;
+                   }else{
+                   this.catalog.films  = data.films;
+                   this.dataSource= new MatTableDataSource<FilmShort>(this.catalog.films);
+                   this.dataSource.paginator = this.paginator;
+                   this.obs = this.dataSource.connect();
+                   }
+                 });
+                 }
 
   goFilmPage(id : number) {
     this.router.navigate(
@@ -82,17 +86,48 @@ dataSource: MatTableDataSource<FilmShort>;
         array1.removeAt(i);
       }
     }
-
+  onChangeAge(event) {
+        const array2 = <FormArray>this.filterFormGroup.get('age') as FormArray;
+        if(event.checked) {
+          array2.push(new FormControl(event.source.value))
+        } else {
+          const i = array2.controls.findIndex(x => x.value === event.source.value);
+          array2.removeAt(i);
+        }
+      }
   postUserSearchOptions(){
-    this.apiPost.postCommand(this.filterFormGroup.value.filters, this.userIn)
-                   .subscribe((data: CatalogInt) => {
+    this.apiPost.postCommand(this.filterFormGroup.value.filters, this.userIn, this.filterFormGroup.value.age)
+                   .subscribe((data: any) => {
                      if( data == null){
                        this.catalog;
                      }else{
-                     this.catalog  = data;
+                     this.catalog.films  = data.films;
+                     console.log(Array.from(this.catalog.films));
+                     console.log(this.catalog.films);
+                     this.dataSource= new MatTableDataSource<FilmShort>(Array.from(this.catalog.films));
+                     this.dataSource.paginator = this.paginator;
+                     this.obs = this.dataSource.connect();
                      }
                    });
   }
+
+  dropSearchOptions(){
+      this.apiPost.postCommand([], '', [])
+                     .subscribe((data: any) => {
+                       if( data == null){
+                         this.catalog;
+                       }else{
+                       this.catalog.films  = data.films;
+                       console.log(Array.from(this.catalog.films));
+                       console.log(this.catalog.films);
+                       this.dataSource= new MatTableDataSource<FilmShort>(Array.from(this.catalog.films));
+                       this.dataSource.paginator = this.paginator;
+                       this.obs = this.dataSource.connect();
+                       }
+                     });
+          this.userIn='';
+
+    }
 
   ngOnDestroy() {
         if (this.dataSource) {
