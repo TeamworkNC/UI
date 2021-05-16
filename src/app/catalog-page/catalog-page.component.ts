@@ -126,6 +126,7 @@ dataSource: MatTableDataSource<FilmShort>;
                        }
                      });
           this.userIn='';
+          this.getCatalogData();
 
     }
 
