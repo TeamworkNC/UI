@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild, ChangeDetectorRef,OnDestroy } from '@angular/core';
+import { Component, OnInit,ViewChild, ChangeDetectorRef,OnDestroy , Input} from '@angular/core';
 import { OtherUserGet } from 'src/app/req/otherUserGet';
 import { OtherUser, OtherUserArray } from 'src/app/other-user';
 import {Observable} from 'rxjs';
@@ -8,6 +8,7 @@ import {Router} from '@angular/router';
 import {UserFriendsGet} from 'src/app/req/userFriendsGet';
 import {LocalStorageService} from "src/app/local-storage-service";
 import {FriendInGet} from "src/app/req/friendInGet";
+import {UserSearchFriend} from "src/app/req/userSearchFriend";
 
 @Component({
   selector: 'app-user-frends',
@@ -28,7 +29,8 @@ friendsInAll: OtherUser[];
 dataSource: MatTableDataSource<OtherUser>;
 dataSourceFriends: MatTableDataSource<OtherUser>;
 dataSourceFriendsIn: MatTableDataSource<OtherUser>;
-  constructor(private api: OtherUserGet, private api1: UserFriendsGet, private api2: FriendInGet, private changeDetector: ChangeDetectorRef , public router: Router, public localStorageService: LocalStorageService) {
+@Input() userIn: string;
+  constructor(private api: OtherUserGet, private api1: UserFriendsGet, private api2: FriendInGet, private api3: UserSearchFriend, private changeDetector: ChangeDetectorRef , public router: Router, public localStorageService: LocalStorageService) {
     this.getOtherUserData();
     this.friendsInAll = [];
   }
@@ -87,6 +89,20 @@ dataSourceFriendsIn: MatTableDataSource<OtherUser>;
   goOtherUserPage(otherUserId : number){
                         this.router.navigate(
                             ['/otheruser/'+ otherUserId]);
+        }
+
+        searchFriend(){
+          this.api3.postCommand(this.userIn)
+                           .subscribe((data: OtherUserArray) => {
+                             if( data == null){
+                               this.users;
+                             }else{
+                             this.users = data;
+                             this.dataSource= new MatTableDataSource<OtherUser>(this.users.users);
+                             this.dataSource.paginator = this.paginator;
+                             this.obs = this.dataSource.connect();
+                             }
+                           });
         }
 
 }

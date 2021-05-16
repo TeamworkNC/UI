@@ -66,12 +66,11 @@
       <form style="display: inline" >
         <mat-form-field style="width: 70%; margin-left: 3%" >
           <mat-label class="test">Искать по логину</mat-label>
-          <input matInput placeholder="" value="" class="test">
-<!--                 [(ngModel)]="userIn" name="userIn"-->
+          <input matInput placeholder="" value="" class="test" [(ngModel)]="userIn" name="userIn">
 
         </mat-form-field>
       </form>
-      <button mat-button  class="test" >Поиск</button>
+      <button mat-button  class="test" (click)="searchFriend()">Поиск</button>
 <!--      (click)="postUserSearchOptions()"-->
       <button mat-button class="test" >
         <div style="">Сбросить</div>
