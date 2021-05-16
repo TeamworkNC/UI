@@ -41,7 +41,7 @@ export class InviteFriendsDialog implements OnInit {
     console.log('bl balba ba');
     console.log(userId);
     const url = `https://mac21-portal-backend.herokuapp.com/api/v1/sessions/${this.data.sessionId}/invite`;
-    this.http.post<any>(url, this.data.userId).subscribe();
+    this.http.post<any>(url, userId).subscribe();
   }
 
   closeDialog(): void {

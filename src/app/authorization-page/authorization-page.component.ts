@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
-import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
+import {HttpClient, HttpResponse} from '@angular/common/http';
 import {User} from 'src/app/user';
 import {Autor} from 'src/app/req/autor';
-import {ActivatedRoute, Router} from "@angular/router";
-import {MatDialog, MatDialogRef, MatDialogModule} from "@angular/material/dialog";
-import {LocalStorageService} from "src/app/local-storage-service";
+import {ActivatedRoute, Router} from '@angular/router';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {LocalStorageService} from 'src/app/local-storage-service';
+import {CurrentUserService} from '../features/core/services/current-user.service';
 
 @Component({
   selector: 'app-authorization-page',
@@ -15,17 +16,28 @@ import {LocalStorageService} from "src/app/local-storage-service";
 export class AuthorizationPageComponent implements OnInit {
   user: User;
   hidePass = true;
-  constructor(private http: HttpClient, private api: Autor, private activateRoute: ActivatedRoute, private router: Router, public dialog: MatDialog,public localStorageService: LocalStorageService) {
-   this.user = {"userId":0};
-   }
-noWhitespaceValidator(control: FormControl) {
+
+  constructor(
+    private http: HttpClient,
+    private api: Autor,
+    private activateRoute: ActivatedRoute,
+    private router: Router,
+    public dialog: MatDialog,
+    public localStorageService: LocalStorageService,
+    public currentUserService: CurrentUserService,
+  ) {
+    this.user = {'userId': 0};
+  }
+
+  noWhitespaceValidator(control: FormControl) {
     const isWhitespace = (control.value || '').trim().length === 0;
     const isValid = !isWhitespace;
-    return isValid ? null : { 'whitespace': true };
-}
+    return isValid ? null : {'whitespace': true};
+  }
 
   login = new FormControl('', [Validators.required, this.noWhitespaceValidator]);
   pass = new FormControl('', [Validators.required, this.noWhitespaceValidator]);
+
   getErrorMessageLogin() {
     if (this.login.hasError('required') || this.login.value.trim() == '') {
       return 'Поле обязательно для заполнения';
@@ -62,11 +74,11 @@ noWhitespaceValidator(control: FormControl) {
             }else{
             this.user = data.body;
             }
-            if (data.status == 200){
-                            this.goToProfile();
-                            this.localStorageService.setItem("userId",  this.user.userId+"");
-                            console.log(data.headers.keys());
-                          }
+            if (data.status == 200) {
+              this.goToProfile();
+              this.currentUserService.setUserId(this.user.userId);
+              console.log(data.headers.keys());
+            }
           },
 
             (err) => {this.failRegistrationDialog();}

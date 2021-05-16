@@ -1,75 +1,99 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {LocalStorageService} from "src/app/local-storage-service";
+import {LocalStorageService} from 'src/app/local-storage-service';
+import {CurrentUserService} from './features/core/services/current-user.service';
+import {NotificationService} from './features/core/services/notification.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+
   title = 'my-app111';
 
-  constructor(public router: Router, public localStorageService: LocalStorageService) {
+  notifications = [];
+  userId: number;
+
+  chatIsOpen = false;
+
+  hidden = false;
+
+  constructor(
+    public router: Router,
+    public localStorageService: LocalStorageService,
+    private currentUserService: CurrentUserService,
+    private notificationService: NotificationService,
+  ) {
   }
 
-  goHomePage() {
+  ngOnInit(): void {
+    this.notificationService.notifications$.subscribe(notification => {
+      alert(JSON.stringify(notification));
+    });
+
+    // если надо удалять нотификации
+    // this.notificationService.deleteAllNotifications();
+  }
+
+  openChat(): void {
+    this.chatIsOpen = true;
+  }
+
+  closeChat(): void {
+    this.chatIsOpen = false;
+  }
+
+
+  goHomePage(): void {
     this.router.navigate(
       ['/home']);
   }
 
-  goUserPage() {
+  goUserPage(): void {
     this.router.navigate(
-      ['/user/' + this.localStorageService.getItem("userId")]);
+      ['/user/' + this.localStorageService.getItem('userId')]);
   }
 
-  goCatalogPage() {
-            this.router.navigate(
-              ['/catalog']);
-          }
-
-  goRegistrationPage() {
-              this.router.navigate(
-                ['/registration']);
-            }
-  goAuthorizationPage() {
-                this.router.navigate(
-                  ['/authorization']);
-              }
-  goRoomPage(){
-                  this.router.navigate(
-                      ['/room/'+1]);
+  goCatalogPage(): void {
+    this.router.navigate(
+      ['/catalog']);
   }
 
-  goFriendsPage(){
-                    this.router.navigate(
-                        ['/friends/'+ this.localStorageService.getItem("userId")]);
-    }
+  goRegistrationPage(): void {
+    this.router.navigate(
+      ['/registration']);
+  }
 
-  goOtherUserPage(){
-                      this.router.navigate(
-                          ['/otheruser/'+1]);
-      }
+  goAuthorizationPage(): void {
+    this.router.navigate(
+      ['/authorization']);
+  }
 
-  chatIsOpen = false;
+  goRoomPage(): void {
+    this.router.navigate(
+      ['/room/' + 1]);
+  }
 
-    openChat(): void {
-      this.chatIsOpen = true;
-    }
+  goFriendsPage(): void {
+    this.router.navigate(
+      ['/friends/' + this.localStorageService.getItem('userId')]);
+  }
 
-    closeChat(): void {
-      this.chatIsOpen = false;
-    }
-   hidden = false;
+  goOtherUserPage(): void {
+    this.router.navigate(
+      ['/otheruser/' + 1]);
+  }
 
-  toggleBadgeVisibility() {
+  toggleBadgeVisibility(): void {
     this.hidden = !this.hidden;
   }
 
-  logoff(){
-    this.localStorageService.removeItem("userId");
-    this.localStorageService.removeItem("logoUrl");
+  logoff(): void {
+    this.localStorageService.removeItem('userId');
+    this.localStorageService.removeItem('logoUrl');
+    this.currentUserService.deleteUserId();
     this.goHomePage();
   }
-
 }
