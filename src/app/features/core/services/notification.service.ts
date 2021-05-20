@@ -42,7 +42,7 @@ export class NotificationService {
   }
 
   public deleteAllNotifications(): Observable<any> {
-    return this.http.delete(`https://mac21-portal-backend.herokuapp.com/api/v1/notifications?userId=${this.userId}`).pipe(
+    return this.http.delete(`https://mac21-portal-backend.herokuapp.com/api/v1/notifications?user_id=${this.userId}`).pipe(
       tap(() => {
         // удаляем историю сообщений
         this.notificationHistory = [];
@@ -65,7 +65,7 @@ export class NotificationService {
       throw new Error('cant get notifications from rest: user is not authorized');
     }
 
-    return this.http.get(`https://mac21-portal-backend.herokuapp.com/api/v1/notifications?userId=${this.userId}`).pipe(
+    return this.http.get(`https://mac21-portal-backend.herokuapp.com/api/v1/notifications?user_id=${this.userId}`).pipe(
       mergeMap((notifications: any[]) => {
         return from(notifications);
       }),
