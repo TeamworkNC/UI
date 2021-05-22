@@ -1,13 +1,15 @@
 import {Component, OnInit} from '@angular/core';
 import {ChatBotService} from '../../../core/services/chat-bot.service';
-import {LocalStorageService} from '../../../../local-storage-service';
-
+import {CurrentUserService} from '../../../core/services/current-user.service';
+import * as mime from 'mime';
 
 interface ChatMessage {
-  name: string;
-  text: string;
+  sender: string;
   reply: boolean;
+  type: 'text' | 'file';
+  text?: string;
   date: Date;
+  files?: any;
 }
 
 @Component({
@@ -21,51 +23,64 @@ export class RecommendationChatComponent implements OnInit {
   private readonly BOT_NAME = 'bot';
 
   messages: ChatMessage[] = [];
+  userId: number | undefined;
+  enabled = false;
 
   constructor(
     private readonly chatBotService: ChatBotService,
-    private localStorageService: LocalStorageService,
+    private readonly currentUserService: CurrentUserService,
   ) {
-
-    // FIXME
-    // if (this.userId == null) {
-    //   throw new Error('oops! user is not authorized!');
-    // }
   }
 
   ngOnInit(): void {
+    this.currentUserService.userId$.subscribe(userId => {
+      this.userId = userId;
+      // очищаем сообщения
+      this.messages = [];
+    });
   }
 
   sendMessage(text: string): void {
     this.messages.push(this.createUserMessage(text));
 
-    if (this.getUserId() == null) {
-      this.messages.push(this.createBotMessage('oops! not authorized!'));
+    if (this.userId == null) {
+      const message = this.createBotTextMessage('O нет! чтобы написать мне, вы должны авторизироваться');
+      this.messages.push(message);
       return;
     }
 
-    this.chatBotService.sendMessage(this.getUserId(), text).subscribe(response => {
-      this.messages.push(this.createBotMessage(response.text));
+    this.chatBotService.sendMessage(this.userId, text).subscribe(response => {
+      this.messages.push(this.createBotTextMessage(response.text));
 
       if (response.films) {
         for (const film of response.films) {
-          this.messages.push(this.createBotMessage(film.filmTitle));
-          this.messages.push(this.createBotMessage(film.description));
+          let filmDescription = film.filmTitle + '\n\n';
+          filmDescription += film.description;
+          this.messages.push(this.createBotTextMessage(filmDescription));
+          this.messages.push(this.createBotImgMessage(film.filmPoster));
+          this.messages.push(this.createBotBtnMessage(`https://mac21-ui.herokuapp.com/film/${film.idFilm}`));
         }
       }
+
+      console.log(this.messages);
     });
   }
 
   private createUserMessage(text: string): ChatMessage {
-    return {name: this.USER_NAME, text, reply: true, date: new Date()};
+    return {type: 'text', sender: this.USER_NAME, text, reply: true, date: new Date()};
   }
 
-  private createBotMessage(text: string): ChatMessage {
-    return {name: this.BOT_NAME, text, reply: false, date: new Date()};
+  private createBotTextMessage(text: string): ChatMessage {
+    return {type: 'text', sender: this.BOT_NAME, text, reply: false, date: new Date()};
   }
 
-  private getUserId(): number | undefined {
-    return Number(this.localStorageService.getItem('userId'));
+  private createBotBtnMessage(url: string): ChatMessage {
+    return {type: 'text', sender: this.BOT_NAME, text: url, reply: false, date: new Date()};
   }
 
+  private createBotImgMessage(url: string): ChatMessage {
+    const ext = url.split('.').pop();
+    const filesProp = [{url, type: mime.getType(ext)}];
+    return {type: 'file', sender: this.BOT_NAME, reply: false, date: new Date(), files: filesProp};
+  }
 }
