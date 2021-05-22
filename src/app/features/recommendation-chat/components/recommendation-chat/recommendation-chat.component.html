@@ -1,9 +1,11 @@
-<nb-chat title="Film recommendation chat">
+<nb-chat title="Чат-бот для рекомендаций">
   <nb-chat-message *ngFor="let msg of messages"
+                   [files]="msg.files"
                    [date]="msg.date"
                    [message]="msg.text"
                    [reply]="msg.reply"
-                   [sender]="msg.name">
+                   [sender]="msg.sender"
+                   [type]="msg.type">
   </nb-chat-message>
   <nb-chat-form (send)="sendMessage($event.message)">
   </nb-chat-form>
