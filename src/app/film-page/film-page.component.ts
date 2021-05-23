@@ -188,6 +188,11 @@ private subscription: Subscription;
               }
             });
   }
+  showAuthorizationSnack(){
+  this._snackBar.openFromComponent(PizzaPartyComponent2, {
+                                         duration: this.durationInSeconds * 1000,
+                                       });
+                                       }
 
   toFavorites(filmId: number, userId:  string) {
 
@@ -231,4 +236,15 @@ export class PizzaPartyComponent {
   `],
 })
 export class PizzaPartyComponent1 {
+}
+@Component({
+  selector: 'snack-bar-component',
+  templateUrl: 'auth.html',
+  styles: [`
+    .example-pizza-party {
+      color: hotpink;
+    }
+  `],
+})
+export class PizzaPartyComponent2 {
 }
