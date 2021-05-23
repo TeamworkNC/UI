@@ -46,6 +46,7 @@ array1:any;
                   filters: this.formBuilder.array([]),
                   age : this.formBuilder.array([])
                 });
+    this.getFilms();
   }
 
    getCatalogData(){
