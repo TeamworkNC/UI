@@ -111,9 +111,9 @@
                     <div style="display: inline">
                       <img src="assets/resource/age.png" style="margin-top: 1%; margin-right: 2%; margin-left: 2%; width: 10%; float:inherit;" align="left">
                     </div>
-                    <div style="display: inline;" align="left">{{film.filmAge}}+</div>
+                    <div style="display: inline;" align="left">{{film.ageRestrictions}}</div>
                   </div>
-                  <img src={{film.filmPoster}} style="margin-top: 2%; margin-right: 2%; margin-left: 2%; width: 90%">
+                  <img src={{film.logo}} style="margin-top: 2%; margin-right: 2%; margin-left: 2%; width: 90%">
                   <div style="font-weight: bold; margin-left: 3%; margin-top:3%; margin-right: 3%;">{{film.filmTitle}}</div>
                   <button mat-button  style="width: 100%; margin-left: 2%; margin-top: 3%; display: inline-block" class="test1" (click)="goFilmPage(film.idFilm)">Смотреть</button>
                 </mat-card>
@@ -130,7 +130,7 @@
 
       </mat-tab>
       <mat-tab label="Рекомендации">
-<!--        <div *ngIf = "obsRec">-->
+        <div *ngIf = "obsRec && this.recFilms.length>0">
           <mat-card style = 'margin-top: 3%'>
             <!--              <div class="test1" style="font-size:90%">Рекомендации:</div>-->
             <mat-card class="test1" style="width: 20%; margin-left: 3%; margin-top: 3%; display: inline-block; font-size: 80%;height:350px;vertical-align: middle" *ngFor="let film of obsRec | async">
@@ -138,26 +138,27 @@
                 <div style="display: inline">
                   <img src="assets/resource/rate.png" style="margin-top: 1%; margin-right: 2%; margin-left: 2%; width: 10%; float:inherit;" align="left">
                 </div>
-                <div style="display: inline;" align="left">{{film.filmRate}}</div>
+                <div style="display: inline;" align="left">{{film.rating}}</div>
                 <div style="display: inline">
                   <img src="assets/resource/age.png" style="margin-top: 1%; margin-right: 2%; margin-left: 2%; width: 10%; float:inherit;" align="left">
                 </div>
                 <div style="display: inline;" align="left">{{film.filmAge}}+</div>
               </div>
-              <img src={{film.filmImg}} style="margin-top: 2%; margin-right: 2%; margin-left: 2%; width: 90%">
-              <div style="font-weight: bold; margin-left: 3%; margin-top:3%; margin-right: 3%;">{{film.filmName}}</div>
-              <button mat-button  style="width: 100%; margin-left: 2%; margin-top: 3%; display: inline-block" class="test1" (click)="goFilmPage(film.filmId)">Смотреть</button>
+              <img src={{film.filmPoster}} style="margin-top: 2%; margin-right: 2%; margin-left: 2%; width: 90%">
+              <div style="font-weight: bold; margin-left: 3%; margin-top:3%; margin-right: 3%;">{{film.filmTitle}}</div>
+              <button mat-button  style="width: 100%; margin-left: 2%; margin-top: 3%; display: inline-block" class="test1" (click)="goFilmPage(film.idFilm)">Смотреть</button>
             </mat-card>
             <mat-paginator #MatPaginator2
                            [pageSizeOptions]="[4]" >
             </mat-paginator>
           </mat-card>
-<!--        </div>-->
-<!--        <div *ngIf = "!obsRec">-->
-<!--          <mat-card style=" width: 78%; margin-bottom: 1%;">-->
-<!--            <div class="test1">Ваш список избранного пока пуст</div>-->
-<!--          </mat-card>-->
-<!--        </div>-->
+        </div>
+        <div *ngIf = "!obsRec || this.recFilms.length==0">
+          <br>
+          <mat-card style=" width: 78%; margin-bottom: 1%;">
+            <div class="test1">Ваш список рекомендаций пока пуст</div>
+          </mat-card>
+        </div>
       </mat-tab>
       <mat-tab label="Комнаты">
         <mat-card style = 'margin-top: 3%; font-size: 100%;'>

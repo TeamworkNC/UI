@@ -13,6 +13,7 @@ import {FilmMain} from 'src/app/filmMain';
 import {MatPaginator} from '@angular/material/paginator';
 import {LocalStorageService} from 'src/app/local-storage-service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {RecommendationGet} from 'src/app/req/recommendationGet';
 
 const ELEMENT_DATA1: FilmMain[] = [
   {filmId: 1, filmName: 'Омерзительная восьмерка', filmRate: 7.2, filmImg: 'https://avatars.mds.yandex.net/get-kinopoisk-image/1900788/0bf728af-ce48-4c0e-9da3-f20ee81bc276/960x960', filmAge: 18},
@@ -66,8 +67,18 @@ dataForNotifications = ELEMENT_DATA3;
 obs: Observable<any>;
 dataSource3: MatTableDataSource<FilmMain>;
 obsRec: Observable<any>;
-dataSourceRec: MatTableDataSource<FilmMain> = new MatTableDataSource<FilmMain>(this.dataSource2);
-  constructor(private http: HttpClient,private _snackBar: MatSnackBar, private api: ProfileInfo, private api1: Reg, private activateRoute: ActivatedRoute,  public dialog: MatDialog,  private router: Router, private changeDetectorRef: ChangeDetectorRef, public localStorageService: LocalStorageService) {
+dataSourceRec: MatTableDataSource<FilmMain>;
+recFilms : any;
+  constructor(private http: HttpClient,
+  private _snackBar: MatSnackBar,
+    private api: ProfileInfo,
+    private api1: Reg,
+    private activateRoute: ActivatedRoute,
+    public dialog: MatDialog,
+    private router: Router,
+    private changeDetectorRef: ChangeDetectorRef,
+    public localStorageService: LocalStorageService,
+    private api2: RecommendationGet) {
 
   }
   date = new FormControl();
@@ -172,6 +183,7 @@ openDialog(){
       return isValid ? null : { 'whitespace': true };
   }
 
+
 sendUserData(){
     let body = {
       "login": this.login.value,
@@ -215,14 +227,25 @@ sendUserData(){
             this.dataSource3 =  new MatTableDataSource<any>(data.favoriteFilms);
             this.dataSource3.paginator = this.paginator;
             this.obs = this.dataSource3.connect();
-            this.dataSourceRec.paginator = this.paginatorRec;
-            this.obsRec = this.dataSourceRec.connect();
             this.localStorageService.setItem("logoUrl", data.logoUrl);
             this.login.setValue(data.login);
             this.email.setValue(data.email);
             this.date.setValue(data.birthday);
             }
           });
+       this.api2.postCommand(userId)
+                .subscribe((data: any) => {
+
+                  if( data == null){
+
+                  }else{
+                  this.changeDetectorRef.detectChanges();
+                  this.dataSourceRec =  new MatTableDataSource<any>(data.recommendationFilms);
+                  this.recFilms=data.recommendationFilms;
+                  this.dataSourceRec.paginator = this.paginatorRec;
+                  this.obsRec = this.dataSourceRec.connect();
+                  }
+                });
     }
 
     goToRoom( roomId : number ){
