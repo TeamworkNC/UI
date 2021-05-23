@@ -40,7 +40,28 @@
 <!--      <div>email - {{userprofile.email}}</div>-->
 <!--      <div>birthday - {{userprofile.birthday}}</div>-->
 <!--      <div>description - {{userprofile.description}}</div>-->
-      <div></div>
+      <div style="margin-top: 3%">А вот что мы предлагаем вам посмотреть вместе:</div>
+      <div style=" width: 100%; margin-top:1%; margin-bottom:1%" align="center" >
+        <mat-card class="test1" style="width: 20%; margin-left: 3%; margin-top: 3%; display: inline-block; height:500px;vertical-align: middle" *ngFor="let film of films; index as i">
+          <div align="left">
+            <div style="display: inline">
+              <img src="assets/resource/rate.png" style="margin-top: 1%; margin-right: 2%; margin-left: 2%; width: 10%; float:inherit;" align="left">
+            </div>
+            <div style="display: inline;" align="left">{{(film.rating+"").substring(0,4)}}</div>
+            <div style="display: inline">
+              <img src="assets/resource/age.png" style="margin-top: 1%; margin-right: 2%; margin-left: 2%; width: 10%; float:inherit;" align="left">
+            </div>
+            <div style="display: inline;" align="left">{{film.ageRestrictions}}</div>
+          </div>
+          <img src={{film.logo}} style="margin-top: 2%; margin-right: 2%; margin-left: 2%; width: 90%">
+          <div style="font-weight: bold; margin-left: 3%; margin-top:3%; margin-right: 3%;">{{film.name}}</div>
+          <button mat-button  style="width: 80%; margin-left: 2%; margin-top: 3%; display: inline-block" class="test1" (click)="goFilmPage(film.id)">Смотреть</button>
+        </mat-card>
+      </div>
+
+      <div>
+
+      </div>
     </div>
   </div>
 </div>

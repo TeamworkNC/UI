@@ -10,6 +10,7 @@ import {AddToFriend} from "src/app/req/addToFriend";
 import {AcceptFriend} from "src/app/req/acceptFriend";
 import {DeclineToFriend} from "src/app/req/declineToFriend";
 import {DeleteFriend} from "src/app/req/deleteFriend";
+import {HomeGet} from 'src/app/req/homeGet'
 
 @Component({
   selector: 'app-other-user',
@@ -24,8 +25,9 @@ private subscription: Subscription;
 friends: any[];
 friendsIn: any[];
 friendsInUser: any[];
+films: any;
   constructor(private activateRoute: ActivatedRoute, private api: PeopleGet, private api1: UserFriendsGet, private api2: FriendInGet, private api3: AddToFriend,
-  private api4: AcceptFriend,private api5: DeclineToFriend, private api6: DeleteFriend,
+  private api4: AcceptFriend,private api5: DeclineToFriend, private api6: DeleteFriend, private api7: HomeGet,private router: Router,
    public localStorageService: LocalStorageService) {
     this.subscription = new Subscription();
     this.userId = 0;
@@ -33,11 +35,26 @@ friendsInUser: any[];
                 this.userId = params['id'];
                 this.getUserData(this.userId);
               });
+    this.getFilms();
   }
 
   ngOnInit(): void {
   this.getUserData(this.userId);
   }
+  getFilms(){
+           this.api7.getCommand()
+               .subscribe((data: any) => {
+                 if( data == null){
+
+                 }else{
+                 this.films  = data.recommendation;
+                 }
+               });
+               }
+  goFilmPage(id : number) {
+                      this.router.navigate(
+                        ['/film/' + id]);
+                    }
   getUserData(userId: number){
 
         this.api.getCommand(userId)
