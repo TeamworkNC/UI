@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
+import {BrowserModule, Title} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -110,7 +110,7 @@ import {InviteFriendsDialog} from './room-page/components/invite-friends/invite-
     MatSortModule,
     VimeModule,
   ],
-  providers: [DatePipe],
+  providers: [DatePipe, Title],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

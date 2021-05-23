@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {LocalStorageService} from 'src/app/local-storage-service';
 import {CurrentUserService} from './features/core/services/current-user.service';
 import {NotificationService} from './features/core/services/notification.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ import {NotificationService} from './features/core/services/notification.service
 })
 export class AppComponent implements OnInit {
 
-  title = 'my-app111';
+  title = 'MovieAndChill';
 
   notifications = [];
   userId: number;
@@ -25,12 +26,15 @@ export class AppComponent implements OnInit {
     public localStorageService: LocalStorageService,
     private currentUserService: CurrentUserService,
     private notificationService: NotificationService,
+    private titleService: Title
   ) {
+  this.setTitle();
   }
 
   ngOnInit(): void {
     this.notificationService.notifications$.subscribe(notification => {
       alert(JSON.stringify(notification));
+      this.setTitle();
     });
 
     // если надо удалять нотификации
@@ -96,4 +100,8 @@ export class AppComponent implements OnInit {
     this.currentUserService.deleteUserId();
     this.goHomePage();
   }
+
+   public setTitle() {
+      this.titleService.setTitle(this.title);
+    }
 }
