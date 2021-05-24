@@ -21,6 +21,10 @@ export interface PeriodicElement {
   name: string;
   session: number;
 }
+export interface Notifications {
+  text: string;
+  notificationId: number;
+}
 const ELEMENT_DATA3: PeriodicElement[] = [
   { name: 'Пошли смотреть фильм "Омерзительная восьмерка"', session: 1},
   { name: 'Пошли смотреть фильм "Helium"', session: 2},
@@ -37,8 +41,9 @@ user: User;
 userId1 : number;
 private subscription: Subscription;
 displayedColumns: string[] = [ 'name', 'weight'];
+displayedColumnsNotifications: string[] = [ 'text', 'notificationId'];
 dataSource;
-dataForNotifications = ELEMENT_DATA3;
+dataForNotifications;
 @ViewChild('MatPaginator1') paginator: MatPaginator;
 @ViewChild('MatPaginator2') paginatorRec: MatPaginator;
 obs: Observable<any>;
@@ -260,9 +265,24 @@ sendUserData(){
 
                          }
                        });
+      this.http.get("https://mac21-portal-backend.herokuapp.com/api/v1/notifications?user_id=" + this.localStorageService.getItem("userId") ).pipe(map(function (i: any) { return {
+                                                                     notifications: i
+                                                                     };})).subscribe((data: any) => {
+
+                                                                                            if( data == null){
+
+                                                                                            }else{
+                                                                                            this.dataForNotifications=data.notifications.reverse();
+                                                                                            this.localStorageService.setItem("countOfNotifications", data.notifications.length);
+                                                                                            console.log("ffffffffffffff");
+                                                                                            console.log(this.localStorageService.getItem("countOfNotifications"));
+                                                                                            }
+                                                                                          });
 
     }
-
+markAsRead(notificationId : number) {
+console.log(notificationId);
+}
     goToRoom( roomId : number ){
       console.log(roomId);
       this.router.navigate(['/room/'+roomId]);

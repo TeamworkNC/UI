@@ -93,8 +93,14 @@ dataSourceFriendsIn: MatTableDataSource<OtherUser>;
            }
 
   goOtherUserPage(otherUserId : number){
-                        this.router.navigate(
-                            ['/otheruser/'+ otherUserId]);
+        if(otherUserId+""==this.localStorageService.getItem("userId")){
+         this.router.navigate(
+              ['/user/' + this.localStorageService.getItem('userId')]);
+        } else{
+        this.router.navigate(
+                                    ['/otheruser/'+ otherUserId]);
+        }
+
         }
 
         searchFriend(){
