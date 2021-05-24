@@ -101,6 +101,7 @@ export class AppComponent implements OnInit {
   logoff(): void {
     this.localStorageService.removeItem('userId');
     this.localStorageService.removeItem('logoUrl');
+    this.localStorageService.removeItem('admin');
     this.currentUserService.deleteUserId();
     this.goHomePage();
   }

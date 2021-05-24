@@ -225,12 +225,13 @@ sendUserData(){
             this.date.setValue(data.birthday);
             for(let i in data.globalRoles){
             if(data.globalRoles[i].name=="ADMIN"){
-            this.localStorageService.setItem("ADMIN", "1");
+            console.log(data.globalRoles[i].name);
+            this.localStorageService.setItem("admin", "1");
             break;
               }
              }
-             if(!this.localStorageService.getItem("ADMIN")){
-             this.localStorageService.setItem("ADMIN", "0");
+             if(!this.localStorageService.getItem("admin")){
+             this.localStorageService.setItem("admin", "0");
              }
             }
 

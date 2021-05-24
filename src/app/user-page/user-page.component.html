@@ -114,8 +114,8 @@
                     <div style="display: inline;" align="left">{{film.ageRestrictions}}</div>
                   </div>
                   <img src={{film.logo}} style="margin-top: 2%; margin-right: 2%; margin-left: 2%; width: 90%">
-                  <div style="font-weight: bold; margin-left: 3%; margin-top:3%; margin-right: 3%;">{{film.filmTitle}}</div>
-                  <button mat-button  style="width: 100%; margin-left: 2%; margin-top: 3%; display: inline-block" class="test1" (click)="goFilmPage(film.idFilm)">Смотреть</button>
+                  <div style="font-weight: bold; margin-left: 3%; margin-top:3%; margin-right: 3%;">{{film.name}}</div>
+                  <button mat-button  style="width: 100%; margin-left: 2%; margin-top: 3%; display: inline-block" class="test1" (click)="goFilmPage(film.id)">Смотреть</button>
                 </mat-card>
                 <mat-paginator #MatPaginator1
                                [pageSizeOptions]="[4]" >
@@ -138,11 +138,11 @@
                 <div style="display: inline">
                   <img src="assets/resource/rate.png" style="margin-top: 1%; margin-right: 2%; margin-left: 2%; width: 10%; float:inherit;" align="left">
                 </div>
-                <div style="display: inline;" align="left">{{film.rating}}</div>
+                <div style="display: inline;" align="left">{{(film.rating+"").substring(0,4)}}</div>
                 <div style="display: inline">
                   <img src="assets/resource/age.png" style="margin-top: 1%; margin-right: 2%; margin-left: 2%; width: 10%; float:inherit;" align="left">
                 </div>
-                <div style="display: inline;" align="left">{{film.filmAge}}+</div>
+                <div style="display: inline;" align="left">{{film.ageLimit.title}}</div>
               </div>
               <img src={{film.filmPoster}} style="margin-top: 2%; margin-right: 2%; margin-left: 2%; width: 90%">
               <div style="font-weight: bold; margin-left: 3%; margin-top:3%; margin-right: 3%;">{{film.filmTitle}}</div>
@@ -161,7 +161,7 @@
         </div>
       </mat-tab>
       <mat-tab label="Комнаты">
-        <div *ngIf = "this.dataSource.length>0">
+        <div *ngIf = "this.dataSource && this.dataSource.length>0">
         <mat-card style = 'margin-top: 3%; font-size: 100%;'>
           <div class="test1">Комнаты, где вы организатор:</div>
           <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%">
@@ -184,7 +184,7 @@
           </table>
         </mat-card>
           </div>
-        <div *ngIf = "this.dataSource.length==0">
+        <div *ngIf = "!this.dataSource || this.dataSource.length==0">
           <br>
           <mat-card style=" width: 78%; margin-bottom: 1%;">
             <div class="test1">Ваш список комнат пока пуст</div>
@@ -192,7 +192,7 @@
         </div>
       </mat-tab>
       <mat-tab label="Уведомления">
-        <div *ngIf = "this.dataForNotifications.length>0">
+        <div *ngIf = "this.dataForNotifications && this.dataForNotifications.length>0">
         <mat-card style = 'margin-top: 3%; font-size: 100%;'>
           <table mat-table [dataSource]="dataForNotifications" class="mat-elevation-z8" style="width: 100%">
             <!--- Note that these columns can be defined in any order.
@@ -214,7 +214,7 @@
           </table>
         </mat-card>
         </div>
-        <div *ngIf = "this.dataForNotifications.length==0">
+        <div *ngIf = "!this.dataForNotifications  || this.dataForNotifications.length==0">
           <br>
           <mat-card style=" width: 78%; margin-bottom: 1%;">
             <div class="test1">У вас пока нет уведомлений</div>

@@ -144,6 +144,8 @@ private subscription: Subscription;
                           if( data == null){
 
                           }else{
+                          this.mark.reset();
+                          this.textOtz.reset();
                           this.ngOnInit();
                           }
                         });;
