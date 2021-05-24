@@ -26,7 +26,8 @@ export class ProfileInfo {
     registrationDate : i.registrationDate,
     email: i.email,
     login: i.login,
-    favoriteFilms : i.favoriteFilms
+    favoriteFilms : i.favoriteFilms,
+    globalRoles: i.globalRoles
     };}));
   }
 }

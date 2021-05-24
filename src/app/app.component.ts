@@ -55,6 +55,11 @@ export class AppComponent implements OnInit {
       ['/home']);
   }
 
+  goAddFilmPage(){
+  this.router.navigate(
+        ['/addfilm']);
+  }
+
   goUserPage(): void {
     this.router.navigate(
       ['/user/' + this.localStorageService.getItem('userId')]);

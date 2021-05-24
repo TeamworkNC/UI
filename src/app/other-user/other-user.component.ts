@@ -39,7 +39,12 @@ films: any;
   }
 
   ngOnInit(): void {
-  this.getUserData(this.userId);
+  if(this.localStorageService.getItem("userId")){
+    this.getUserData(this.userId);
+  } else{
+    this.router.navigate(
+                            ['/home']);
+  }
   }
   getFilms(){
            this.api7.getCommand()

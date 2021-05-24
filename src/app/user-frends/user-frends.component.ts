@@ -36,8 +36,12 @@ dataSourceFriendsIn: MatTableDataSource<OtherUser>;
   }
 
   ngOnInit(): void {
-      this.getOtherUserData();
-      this.changeDetector.detectChanges();
+      if(this.localStorageService.getItem("userId")){
+            this.getOtherUserData();
+            this.changeDetector.detectChanges();
+      } else{
+          this.router.navigate(['/home']);
+      }
   }
 
   getOtherUserData(){

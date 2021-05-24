@@ -21,6 +21,7 @@ font-family: 'Cormorant Infant', serif;
         <button class="main" *ngIf='!localStorageService.getItem("userId")'mat-button (click)="goAuthorizationPage()">Авторизация</button>
         <button class="main" *ngIf='!localStorageService.getItem("userId")'mat-button (click)="goRegistrationPage()">Регистрация</button>
         <button class="main" *ngIf='localStorageService.getItem("userId")' mat-button (click)="goFriendsPage()">Друзья</button>
+        <button class="main" *ngIf='localStorageService.getItem("admin")=="1"' mat-button (click)="goAddFilmPage()">Добавить фильм</button>
         <button class="main" *ngIf='localStorageService.getItem("userId")' mat-button (click)="logoff()">Выйти</button>
 <!--        <button class="main" mat-button (click)="goRoomPage()">Комната</button>-->
       </div>

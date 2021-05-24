@@ -7,6 +7,7 @@ import {Session} from './session.model';
 import {Film} from './film.model';
 import {MatDialog} from '@angular/material/dialog';
 import {InviteFriendsDialog} from './components/invite-friends/invite-friends.dialog';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-room-page',
@@ -30,19 +31,24 @@ export class RoomPageComponent implements OnInit {
     private readonly route: ActivatedRoute,
     private readonly localStorageService: LocalStorageService,
     private readonly dialog: MatDialog,
+    private readonly router: Router,
   ) {
     this.sessionId = Number(route.snapshot.params.id);
     this.userId = Number(localStorageService.getItem('userId'));
   }
 
   async ngOnInit(): Promise<any> {
-    this.session = await this.loadSessionInfo(this.sessionId);
-    console.log(this.session);
-    this.film = await this.loadFilmInfo(this.session.filmID);
-    console.log(this.film);
+    if (this.localStorageService.getItem("userId")){
+      this.session = await this.loadSessionInfo(this.sessionId);
+      console.log(this.session);
+      this.film = await this.loadFilmInfo(this.session.filmID);
+      console.log(this.film);
 
-    this.playerDisabled = false;
-    this.chatDisabled = false;
+      this.playerDisabled = false;
+      this.chatDisabled = false;
+    } else{
+      this.router.navigate(['/home']);
+    }
   }
 
   loadSessionInfo(sessionId: number): Promise<Session> {
