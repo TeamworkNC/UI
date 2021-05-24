@@ -37,9 +37,9 @@ export class SessionsGet {
         }
         }
     return {
-     films : films,
-     sessions: sessions,
-     sessionsAll: sessionsAll
+     films : films.reverse(),
+     sessions: sessions.reverse(),
+     sessionsAll: sessionsAll.reverse()
      };}));
   }
 }
