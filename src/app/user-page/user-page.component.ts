@@ -15,6 +15,7 @@ import {LocalStorageService} from 'src/app/local-storage-service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {RecommendationGet} from 'src/app/req/recommendationGet';
 import {SessionsGet} from 'src/app/req/sessionsGet';
+import {map} from "rxjs/operators";
 
 export interface PeriodicElement {
   name: string;
@@ -244,8 +245,22 @@ sendUserData(){
                          }else{
                             console.log(data);
                             this.dataSource= data.sessionsAll;
+                            for( let i in this.dataSource){
+                              this.http.get("https://mac21-portal-backend.herokuapp.com/api/v1/films/" + this.dataSource[i].name ).pipe(map(function (i: any) { return {
+                                                               filmTitle: i.filmTitle
+                                                               };})).subscribe((data: any) => {
+
+                                                                                      if( data == null){
+
+                                                                                      }else{
+                                                                                      this.dataSource[i].name=data.filmTitle;
+                                                                                      }
+                                                                                    });
+                            }
+
                          }
                        });
+
     }
 
     goToRoom( roomId : number ){
