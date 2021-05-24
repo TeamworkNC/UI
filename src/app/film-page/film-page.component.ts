@@ -13,6 +13,7 @@ import { DatePipe } from '@angular/common';
 import { FavoritesFilmGet } from 'src/app/req/favoritesFilmGet';
 import { DeleteFromFavorites } from 'src/app/req/deleteFromFavorites';
 import { SeeFilm } from 'src/app/req/seeFilm';
+import {map} from "rxjs/operators";
 
 @Component({
   selector: 'ngbd-rating-events',
@@ -213,6 +214,20 @@ private subscription: Subscription;
                                      });
                 }
               });
+}
+
+removeFilm(){
+                this.http.delete("https://mac21-portal-backend.herokuapp.com/api/v1/films/" + this.filmId ).pipe(map(function (i: any) { return {
+                                                                               info: i
+                                                                               };})).subscribe((data: any) => {
+
+                                                                                                      if( data == null){
+
+                                                                                                      }else{
+                                                                                            this.router.navigate(
+                                                                                                  ['/catalog']);
+                                                                                                      }
+                                                                                                    });
 }
 
 }

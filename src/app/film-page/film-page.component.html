@@ -35,6 +35,9 @@ font-family: 'Cormorant Garamond', serif;
         <div *ngIf="arrOfUserFavoriteFilms.includes(this.filmId+'')">
           <button mat-button class="test" style="font-size: 150%" (click)="deleteFromFavourite(filmId, this.localStorageService.getItem('userId'))">Удалить из избранного</button>
         </div>
+        <div *ngIf="this.localStorageService.getItem('admin')=='1'">
+          <button mat-button class="test" style="font-size: 150%" (click)="removeFilm()">Удалить фильм</button>
+        </div>
 
       </div>
 
