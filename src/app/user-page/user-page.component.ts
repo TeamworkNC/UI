@@ -14,20 +14,15 @@ import {MatPaginator} from '@angular/material/paginator';
 import {LocalStorageService} from 'src/app/local-storage-service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {RecommendationGet} from 'src/app/req/recommendationGet';
+import {SessionsGet} from 'src/app/req/sessionsGet';
 
 export interface PeriodicElement {
   name: string;
-  position: string;
-  weight: number;
+  session: number;
 }
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: "ivan123", name: 'Омерзительная восьмерка', weight: 1},
-  {position: "dima2", name: 'Helium', weight: 2},
-];
-
 const ELEMENT_DATA3: PeriodicElement[] = [
-  {position: "ivan123", name: 'Пошли смотреть фильм "Омерзительная восьмерка"', weight: 1},
-  {position: "dima2", name: 'Пошли смотреть фильм "Helium"', weight: 2},
+  { name: 'Пошли смотреть фильм "Омерзительная восьмерка"', session: 1},
+  { name: 'Пошли смотреть фильм "Helium"', session: 2},
 ];
 
 @Component({
@@ -40,8 +35,8 @@ userprofile: UserProfile;
 user: User;
 userId1 : number;
 private subscription: Subscription;
-displayedColumns: string[] = ['position', 'name', 'weight'];
-dataSource = ELEMENT_DATA;
+displayedColumns: string[] = [ 'name', 'weight'];
+dataSource;
 dataForNotifications = ELEMENT_DATA3;
 @ViewChild('MatPaginator1') paginator: MatPaginator;
 @ViewChild('MatPaginator2') paginatorRec: MatPaginator;
@@ -59,7 +54,8 @@ recFilms : any;
     private router: Router,
     private changeDetectorRef: ChangeDetectorRef,
     public localStorageService: LocalStorageService,
-    private api2: RecommendationGet) {
+    private api2: RecommendationGet,
+    private api3: SessionsGet) {
 
   }
   date = new FormControl();
@@ -240,10 +236,21 @@ sendUserData(){
                   this.obsRec = this.dataSourceRec.connect();
                   }
                 });
+       this.api3.getCommand(userId)
+                       .subscribe((data: any) => {
+
+                         if( data == null){
+
+                         }else{
+                            console.log(data);
+                            this.dataSource= data.sessionsAll;
+                         }
+                       });
     }
 
     goToRoom( roomId : number ){
       console.log(roomId);
+      this.router.navigate(['/room/'+roomId]);
     }
     selectedFile: File;
     onFileChanged(event) {
