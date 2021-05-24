@@ -17,8 +17,10 @@ font-family: 'Cormorant Infant', serif;
       <div style="display: table-cell; width: 90%; vertical-align: top">
         <button class="main" mat-button (click)="goHomePage()">Главная</button>
         <button class="main" mat-button (click)="goCatalogPage()">Каталог</button>
-        <button class="main" *ngIf='localStorageService.getItem("userId")' mat-button (click)="goUserPage()">Личный кабинет</button>
-<!--        matBadge="this.localStorageService.getItem('countOfNotifications')" [matBadgeHidden]="hidden"-->
+        <button (click)="goUserPage()" *ngIf='localStorageService.getItem("userId")'
+                [matBadgeHidden]="notifications.length == 0" [matBadge]="notifications.length" class="main" mat-button>
+          Личный кабинет
+        </button>
         <button class="main" *ngIf='!localStorageService.getItem("userId")'mat-button (click)="goAuthorizationPage()">Авторизация</button>
         <button class="main" *ngIf='!localStorageService.getItem("userId")'mat-button (click)="goRegistrationPage()">Регистрация</button>
         <button class="main" *ngIf='localStorageService.getItem("userId")' mat-button (click)="goFriendsPage()">Друзья</button>

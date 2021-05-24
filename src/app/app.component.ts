@@ -3,7 +3,7 @@ import {Router} from '@angular/router';
 import {LocalStorageService} from 'src/app/local-storage-service';
 import {CurrentUserService} from './features/core/services/current-user.service';
 import {NotificationService} from './features/core/services/notification.service';
-import { Title } from '@angular/platform-browser';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -14,12 +14,10 @@ export class AppComponent implements OnInit {
 
   title = 'MovieAndChill';
 
-  notifications = [];
   userId: number;
 
+  notifications = [];
   chatIsOpen = false;
-
-  hidden = false;
 
   constructor(
     public router: Router,
@@ -28,12 +26,17 @@ export class AppComponent implements OnInit {
     private notificationService: NotificationService,
     private titleService: Title
   ) {
-  this.setTitle();
+    this.setTitle();
   }
 
   ngOnInit(): void {
-    this.notificationService.notifications$.subscribe(notification => {
-      alert(JSON.stringify(notification));
+    this.currentUserService.userId$.subscribe(userId => {
+      this.userId = userId;
+    });
+
+    this.notificationService.notifications$.subscribe(notifications => {
+      this.notifications = notifications;
+      console.log(notifications);
       this.setTitle();
     });
 
@@ -55,9 +58,9 @@ export class AppComponent implements OnInit {
       ['/home']);
   }
 
-  goAddFilmPage(){
-  this.router.navigate(
-        ['/addfilm']);
+  goAddFilmPage(): void {
+    this.router.navigate(
+      ['/addfilm']);
   }
 
   goUserPage(): void {
@@ -95,10 +98,6 @@ export class AppComponent implements OnInit {
       ['/otheruser/' + 1]);
   }
 
-  toggleBadgeVisibility(): void {
-    this.hidden = !this.hidden;
-  }
-
   logoff(): void {
     this.localStorageService.removeItem('userId');
     this.localStorageService.removeItem('logoUrl');
@@ -106,7 +105,7 @@ export class AppComponent implements OnInit {
     this.goHomePage();
   }
 
-   public setTitle() {
-      this.titleService.setTitle(this.title);
-    }
+  public setTitle(): void {
+    this.titleService.setTitle(this.title);
+  }
 }

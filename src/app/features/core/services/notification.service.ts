@@ -10,10 +10,13 @@ import {concat, map, mergeMap, tap} from 'rxjs/operators';
 })
 export class NotificationService {
 
-  public notifications$ = new Subject<any>();
-  private notificationHistory = [];
+  public notifications$ = new Subject<any[]>();
+  public newNotification$ = new Subject<any>();
 
   private notificationSubscription: Subscription;
+
+  private notifications = [];
+
   private userId;
 
   constructor(
@@ -38,19 +41,26 @@ export class NotificationService {
       throw new Error('cant get notifications: user is not authorized');
     }
 
-    return this.notificationHistory;
+    return this.notifications;
   }
 
   public deleteAllNotifications(): Observable<any> {
     return this.http.delete(`https://mac21-portal-backend.herokuapp.com/api/v1/notifications?user_id=${this.userId}`).pipe(
       tap(() => {
         // удаляем историю сообщений
-        this.notificationHistory = [];
+        this.notifications = [];
       })
     );
   }
 
   public deleteNotification(notificationId: number): Observable<any> {
+    // удаляем нотификаху из локальной истории
+    this.notifications = this.notifications.filter(value => {
+      return value.notificationId !== notificationId;
+    });
+
+    this.notifications$.next(this.notifications);
+
     return this.http.delete(`https://mac21-portal-backend.herokuapp.com/api/v1/notifications/${notificationId}`);
   }
 
@@ -89,8 +99,9 @@ export class NotificationService {
   private onNotificationReceived(notification: any): void {
     // проверяем, что пользователь все еще авторизован
     if (this.userId) {
-      this.notifications$.next(notification);
-      this.notificationHistory.push(notification);
+      this.notifications.push(notification);
+      this.newNotification$.next(notification);
+      this.notifications$.next(this.notifications);
     }
   }
 
@@ -99,7 +110,7 @@ export class NotificationService {
 
     this.notificationSubscription.unsubscribe();
     // удаляем все уведомления из истории
-    this.notificationHistory = [];
+    this.notifications = [];
   }
 
 }

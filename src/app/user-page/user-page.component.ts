@@ -15,16 +15,19 @@ import {LocalStorageService} from 'src/app/local-storage-service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {RecommendationGet} from 'src/app/req/recommendationGet';
 import {SessionsGet} from 'src/app/req/sessionsGet';
-import {map} from "rxjs/operators";
+import {map} from 'rxjs/operators';
+import {NotificationService} from '../features/core/services/notification.service';
 
 export interface PeriodicElement {
   name: string;
   session: number;
 }
+
 export interface Notifications {
   text: string;
   notificationId: number;
 }
+
 const ELEMENT_DATA3: PeriodicElement[] = [
   { name: 'Пошли смотреть фильм "Омерзительная восьмерка"', session: 1},
   { name: 'Пошли смотреть фильм "Helium"', session: 2},
@@ -51,17 +54,20 @@ dataSource3: MatTableDataSource<FilmMain>;
 obsRec: Observable<any>;
 dataSourceRec: MatTableDataSource<FilmMain>;
 recFilms : any;
+
   constructor(private http: HttpClient,
-  private _snackBar: MatSnackBar,
-    private api: ProfileInfo,
-    private api1: Reg,
-    private activateRoute: ActivatedRoute,
-    public dialog: MatDialog,
-    private router: Router,
-    private changeDetectorRef: ChangeDetectorRef,
-    public localStorageService: LocalStorageService,
-    private api2: RecommendationGet,
-    private api3: SessionsGet) {
+              private _snackBar: MatSnackBar,
+              private api: ProfileInfo,
+              private api1: Reg,
+              private activateRoute: ActivatedRoute,
+              public dialog: MatDialog,
+              private router: Router,
+              private changeDetectorRef: ChangeDetectorRef,
+              public localStorageService: LocalStorageService,
+              private api2: RecommendationGet,
+              private api3: SessionsGet,
+              private notificationService: NotificationService,
+  ) {
 
   }
   date = new FormControl();
@@ -281,7 +287,9 @@ sendUserData(){
 
     }
 markAsRead(notificationId : number) {
-console.log(notificationId);
+  console.log(notificationId);
+  this.notificationService.deleteNotification(notificationId).subscribe();
+
 }
     goToRoom( roomId : number ){
       console.log(roomId);
