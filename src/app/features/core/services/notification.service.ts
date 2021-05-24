@@ -50,6 +50,10 @@ export class NotificationService {
     );
   }
 
+  public deleteNotification(notificationId: number): Observable<any> {
+    return this.http.delete(`https://mac21-portal-backend.herokuapp.com/api/v1/notifications/${notificationId}`);
+  }
+
   private subscribeToNotifications(): void {
     console.log('subscribeToNotifications');
 
