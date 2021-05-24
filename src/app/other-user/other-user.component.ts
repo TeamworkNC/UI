@@ -10,7 +10,9 @@ import {AddToFriend} from "src/app/req/addToFriend";
 import {AcceptFriend} from "src/app/req/acceptFriend";
 import {DeclineToFriend} from "src/app/req/declineToFriend";
 import {DeleteFriend} from "src/app/req/deleteFriend";
-import {HomeGet} from 'src/app/req/homeGet'
+import {HomeGet} from 'src/app/req/homeGet';
+import {HttpClient} from '@angular/common/http';
+import {map} from "rxjs/operators";
 
 @Component({
   selector: 'app-other-user',
@@ -28,7 +30,7 @@ friendsInUser: any[];
 films: any;
   constructor(private activateRoute: ActivatedRoute, private api: PeopleGet, private api1: UserFriendsGet, private api2: FriendInGet, private api3: AddToFriend,
   private api4: AcceptFriend,private api5: DeclineToFriend, private api6: DeleteFriend, private api7: HomeGet,private router: Router,
-   public localStorageService: LocalStorageService) {
+   public localStorageService: LocalStorageService, private http: HttpClient) {
     this.subscription = new Subscription();
     this.userId = 0;
     this.subscription = this.activateRoute.params.subscribe(params => {
@@ -152,4 +154,17 @@ films: any;
                                                                                                   this.ngOnInit();
                                                                                                   });
                                                 }
+            deleteUser(){
+              this.http.delete("https://mac21-portal-backend.herokuapp.com/api/v1/users/" + this.userId ).pipe(map(function (i: any) { return {
+                                                                             info: i
+                                                                             };})).subscribe((data: any) => {
+
+                                                                                                    if( data == null){
+
+                                                                                                    }else{
+                                                                                          this.router.navigate(
+                                                                                                ['/friends/' + this.localStorageService.getItem('userId')]);
+                                                                                                    }
+                                                                                                  });
+            }
 }
