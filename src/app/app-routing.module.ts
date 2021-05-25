@@ -10,6 +10,7 @@ import { RoomPageComponent } from './room-page/room-page.component';
 import { UserFrendsComponent } from './user-frends/user-frends.component';
 import { OtherUserComponent } from './other-user/other-user.component';
 import { AddFilmComponent } from 'src/app/add-film/add-film.component';
+import { ForgotPasswordComponent } from 'src/app/forgot-password/forgot-password.component';
 
 export const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -23,6 +24,7 @@ export const routes: Routes = [
   {path: 'otheruser/:id', component: OtherUserComponent},
   {path: 'friends/:id', component: UserFrendsComponent},
   {path: 'addfilm', component: AddFilmComponent},
+  {path: 'forgotpass', component: ForgotPasswordComponent},
 ];
 
 @NgModule({

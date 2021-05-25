@@ -26,7 +26,12 @@ export class AuthorizationPageComponent implements OnInit {
     public localStorageService: LocalStorageService,
     public currentUserService: CurrentUserService,
   ) {
-    this.user = {'userId': 0};
+    if(this.localStorageService.getItem("userId") ){
+    this.router.navigate(
+                  ['/user', this.localStorageService.getItem("userId")]);}
+    else{
+      this.user = {'userId': 0};
+    }
   }
 
   noWhitespaceValidator(control: FormControl) {
@@ -53,12 +58,20 @@ export class AuthorizationPageComponent implements OnInit {
     }
 
   ngOnInit(): void {
+  if(this.localStorageService.getItem("userId") ){
+      this.router.navigate(
+                    ['/user', this.localStorageService.getItem("userId")]);}
+
   }
 
   goToProfile() {
       this.router.navigate(
         ['/user', this.user.userId]);
     }
+   goToForgotPassPage() {
+        this.router.navigate(
+          ['/forgotpass']);
+      }
 
     failRegistrationDialog(){
       this.dialog.open(FailLogin);

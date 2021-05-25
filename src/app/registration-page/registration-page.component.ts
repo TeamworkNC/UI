@@ -50,8 +50,11 @@ export class RegistrationPageComponent implements OnInit {
     public localStorageService: LocalStorageService,
     private readonly currentUserService: CurrentUserService,
   ) {
-    this.user = {'userId': 0};
-    this.userData = {'firstName': '', 'lastName': '', 'email': '', 'password': ''};
+  if(!this.localStorageService.getItem("userId")){this.user = {'userId': 0};this.userData = {'firstName': '', 'lastName': '', 'email': '', 'password': ''};}
+      else{
+        this.router.navigate(
+                ['/user', this.localStorageService.getItem("userId")]);
+      }
   }
 
   noWhitespaceValidator(control: FormControl) {
@@ -100,6 +103,9 @@ getErrorMessagePassSecond() {
         }
 
   ngOnInit(): void {
+   if(this.localStorageService.getItem("userId") ){
+        this.router.navigate(
+                      ['/user', this.localStorageService.getItem("userId")]);}
   }
 
   goToProfile() {
