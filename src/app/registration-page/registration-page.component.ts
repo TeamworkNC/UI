@@ -36,7 +36,7 @@ export const ISO_FORMAT = {
 })
 export class RegistrationPageComponent implements OnInit {
 
-  user: User;
+  user: any;
   userData: RegistrationData;
   hidePass = true;
   date = new FormControl(moment());
@@ -136,8 +136,9 @@ getErrorMessagePassSecond() {
               this.user = data.body;
               }
 
-              if (data.status == 200){
+              if (data.status == 200) {
                 this.currentUserService.userId = this.user.userId;
+                this.currentUserService.token = this.user.token; // not user
                 this.goToProfile();
               }
             },

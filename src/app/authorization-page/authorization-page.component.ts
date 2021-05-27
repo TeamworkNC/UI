@@ -14,7 +14,7 @@ import {CurrentUserService} from '../features/core/services/current-user.service
   styleUrls: ['./authorization-page.component.scss']
 })
 export class AuthorizationPageComponent implements OnInit {
-  user: User;
+  user: any;
   hidePass = true;
 
   constructor(
@@ -90,6 +90,7 @@ export class AuthorizationPageComponent implements OnInit {
             if (data.status == 200) {
               this.goToProfile();
               this.currentUserService.userId = this.user.userId;
+              this.currentUserService.token = this.user.token; // not user
               console.log(data.headers.keys());
             }
           },
