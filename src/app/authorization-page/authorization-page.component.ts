@@ -89,7 +89,7 @@ export class AuthorizationPageComponent implements OnInit {
             }
             if (data.status == 200) {
               this.goToProfile();
-              this.currentUserService.setUserId(this.user.userId);
+              this.currentUserService.userId = this.user.userId;
               console.log(data.headers.keys());
             }
           },

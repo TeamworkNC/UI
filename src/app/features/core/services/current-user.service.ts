@@ -8,23 +8,37 @@ import {LocalStorageService} from '../../../local-storage-service';
 export class CurrentUserService {
 
   userId$: BehaviorSubject<number | undefined>;
+  token$: BehaviorSubject<string | undefined>;
 
   constructor(private readonly localStorageService: LocalStorageService) {
     const userId = Number(this.localStorageService.getItem('userId'));
+    const token = this.localStorageService.getItem('token');
     this.userId$ = new BehaviorSubject<any>(userId);
+    this.token$ = new BehaviorSubject<any>(token);
   }
 
-  getUserId(userId: number): number | undefined {
+  get userId(): number | undefined {
     return this.userId$.value;
   }
 
-  setUserId(userId: number): void {
+  set userId(userId: number) {
     this.localStorageService.setItem('userId', String(userId));
-    return this.userId$.next(userId);
+    this.userId$.next(userId);
   }
 
-  deleteUserId(): void {
+  get token(): string | undefined {
+    return this.token$.value;
+  }
+
+  set token(token: string) {
+    this.localStorageService.setItem('token', token);
+    this.token$.next(token);
+  }
+
+  clear(): void {
     this.localStorageService.removeItem('userId');
-    return this.userId$.next(undefined);
+    this.localStorageService.removeItem('token');
+    this.userId$.next(undefined);
+    this.token$.next(undefined);
   }
 }

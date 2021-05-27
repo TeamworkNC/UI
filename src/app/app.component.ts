@@ -102,7 +102,7 @@ export class AppComponent implements OnInit {
     this.localStorageService.removeItem('userId');
     this.localStorageService.removeItem('logoUrl');
     this.localStorageService.removeItem('admin');
-    this.currentUserService.deleteUserId();
+    this.currentUserService.clear();
     this.goHomePage();
   }
 

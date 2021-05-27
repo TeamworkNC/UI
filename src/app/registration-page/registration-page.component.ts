@@ -137,7 +137,7 @@ getErrorMessagePassSecond() {
               }
 
               if (data.status == 200){
-                this.currentUserService.setUserId(this.user.userId);
+                this.currentUserService.userId = this.user.userId;
                 this.goToProfile();
               }
             },
