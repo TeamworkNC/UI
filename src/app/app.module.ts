@@ -51,8 +51,9 @@ import {PlayerComponent} from './components/player/player.component';
 import {VimeModule} from '@vime/angular';
 import {DatePipe} from '@angular/common';
 import {InviteFriendsDialog} from './room-page/components/invite-friends/invite-friends.dialog';
-import { AddFilmComponent } from './add-film/add-film.component';
-import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import {AddFilmComponent} from './add-film/add-film.component';
+import {ForgotPasswordComponent} from './forgot-password/forgot-password.component';
+import {CookieModule} from 'ngx-cookie';
 
 @NgModule({
   declarations: [
@@ -113,8 +114,10 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     MatPaginatorModule,
     MatSortModule,
     VimeModule,
+    CookieModule.forRoot(),
   ],
   providers: [DatePipe, Title],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
