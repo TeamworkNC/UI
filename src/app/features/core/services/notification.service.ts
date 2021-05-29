@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {CurrentUserService} from './current-user.service';
+import {AuthService} from './auth.service';
 import {RxStompService} from '@stomp/ng2-stompjs';
 import {HttpClient} from '@angular/common/http';
 import {from, Observable, Subject, Subscription} from 'rxjs';
@@ -20,10 +20,11 @@ export class NotificationService {
   private userId;
 
   constructor(
-    private readonly currentUserService: CurrentUserService,
+    private readonly currentUserService: AuthService,
     private readonly rxStompService: RxStompService,
     private readonly http: HttpClient,
   ) {
+
     this.currentUserService.userId$.subscribe(value => {
       this.userId = value;
       if (value != null) {

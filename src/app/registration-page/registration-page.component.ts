@@ -10,7 +10,7 @@ import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/
 import {MomentDateAdapter} from '@angular/material-moment-adapter';
 import {LocalStorageService} from 'src/app/local-storage-service';
 import * as _moment from 'moment';
-import {CurrentUserService} from '../features/core/services/current-user.service';
+import {AuthService} from '../features/core/services/auth.service';
 
 const moment = _moment;
 var headers = new HttpHeaders();
@@ -48,7 +48,7 @@ export class RegistrationPageComponent implements OnInit {
     private activateRoute: ActivatedRoute,
     private router: Router,
     public localStorageService: LocalStorageService,
-    private readonly currentUserService: CurrentUserService,
+    private readonly authService: AuthService,
   ) {
   if(!this.localStorageService.getItem("userId")){this.user = {'userId': 0};this.userData = {'firstName': '', 'lastName': '', 'email': '', 'password': ''};}
       else{
@@ -137,8 +137,8 @@ getErrorMessagePassSecond() {
               }
 
               if (data.status == 200) {
-                this.currentUserService.userId = this.user.userId;
-                this.currentUserService.token = this.user.token; // not user
+                this.authService.login(this.user.userId, this.user.token);
+
                 this.goToProfile();
               }
             },

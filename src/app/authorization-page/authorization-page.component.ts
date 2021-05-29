@@ -6,7 +6,7 @@ import {Autor} from 'src/app/req/autor';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {LocalStorageService} from 'src/app/local-storage-service';
-import {CurrentUserService} from '../features/core/services/current-user.service';
+import {AuthService} from '../features/core/services/auth.service';
 
 @Component({
   selector: 'app-authorization-page',
@@ -24,7 +24,7 @@ export class AuthorizationPageComponent implements OnInit {
     private router: Router,
     public dialog: MatDialog,
     public localStorageService: LocalStorageService,
-    public currentUserService: CurrentUserService,
+    public authService: AuthService,
   ) {
     if(this.localStorageService.getItem("userId") ){
     this.router.navigate(
@@ -89,8 +89,7 @@ export class AuthorizationPageComponent implements OnInit {
             }
             if (data.status == 200) {
               this.goToProfile();
-              this.currentUserService.userId = this.user.userId;
-              this.currentUserService.token = this.user.token; // not user
+              this.authService.login(this.user.userId, this.user.token);
               console.log(data.headers.keys());
             }
           },
