@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {LocalStorageService} from 'src/app/local-storage-service';
-import {CurrentUserService} from './features/core/services/current-user.service';
+import {AuthService} from './features/core/services/auth.service';
 import {NotificationService} from './features/core/services/notification.service';
 import {Title} from '@angular/platform-browser';
 
@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
   constructor(
     public router: Router,
     public localStorageService: LocalStorageService,
-    private currentUserService: CurrentUserService,
+    private authService: AuthService,
     private notificationService: NotificationService,
     private titleService: Title
   ) {
@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.currentUserService.userId$.subscribe(userId => {
+    this.authService.userId$.subscribe(userId => {
       this.userId = userId;
     });
 
@@ -102,7 +102,7 @@ export class AppComponent implements OnInit {
     this.localStorageService.removeItem('userId');
     this.localStorageService.removeItem('logoUrl');
     this.localStorageService.removeItem('admin');
-    this.currentUserService.deleteUserId();
+    this.authService.logout();
     this.goHomePage();
   }
 

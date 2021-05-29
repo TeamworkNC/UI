@@ -10,7 +10,7 @@ import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/
 import {MomentDateAdapter} from '@angular/material-moment-adapter';
 import {LocalStorageService} from 'src/app/local-storage-service';
 import * as _moment from 'moment';
-import {CurrentUserService} from '../features/core/services/current-user.service';
+import {AuthService} from '../features/core/services/auth.service';
 
 const moment = _moment;
 var headers = new HttpHeaders();
@@ -36,7 +36,7 @@ export const ISO_FORMAT = {
 })
 export class RegistrationPageComponent implements OnInit {
 
-  user: User;
+  user: any;
   userData: RegistrationData;
   hidePass = true;
   date = new FormControl(moment());
@@ -48,7 +48,7 @@ export class RegistrationPageComponent implements OnInit {
     private activateRoute: ActivatedRoute,
     private router: Router,
     public localStorageService: LocalStorageService,
-    private readonly currentUserService: CurrentUserService,
+    private readonly authService: AuthService,
   ) {
   if(!this.localStorageService.getItem("userId")){this.user = {'userId': 0};this.userData = {'firstName': '', 'lastName': '', 'email': '', 'password': ''};}
       else{
@@ -136,8 +136,9 @@ getErrorMessagePassSecond() {
               this.user = data.body;
               }
 
-              if (data.status == 200){
-                this.currentUserService.setUserId(this.user.userId);
+              if (data.status == 200) {
+                this.authService.login(this.user.userId, this.user.token);
+
                 this.goToProfile();
               }
             },

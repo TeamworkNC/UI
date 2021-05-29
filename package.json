@@ -46,6 +46,7 @@
     "moment": "^2.29.1",
     "ng-image-slider": "^2.6.4",
     "ngx-admin": "0.0.0-beta.0",
+    "ngx-cookie": "^5.0.2",
     "ngx-moment": "^5.0.0",
     "ngx-socket-io": "^4.0.0",
     "ngx-youtube-player": "^9.1.0",

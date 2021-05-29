@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ChatBotService} from '../../../core/services/chat-bot.service';
-import {CurrentUserService} from '../../../core/services/current-user.service';
+import {AuthService} from '../../../core/services/auth.service';
 import * as mime from 'mime';
 
 interface ChatMessage {
@@ -28,7 +28,7 @@ export class RecommendationChatComponent implements OnInit {
 
   constructor(
     private readonly chatBotService: ChatBotService,
-    private readonly currentUserService: CurrentUserService,
+    private readonly currentUserService: AuthService,
   ) {
   }
 
