@@ -1,10 +1,10 @@
-<h2 mat-dialog-title>Invite friends</h2>
+<h2 mat-dialog-title>пригласить друзей</h2>
 <mat-dialog-content>
 
   <div *ngIf="friends">
     <div *ngFor="let friend of friends" class="d-flex">
       <div class="flex-grow-1">{{friend.login}}</div>
-      <button (click)="onInviteButtonClick(friend.userId)" mat-button>invite</button>
+      <button (click)="onInviteButtonClick(friend.userId)" mat-button>пригласить</button>
     </div>
   </div>
 
