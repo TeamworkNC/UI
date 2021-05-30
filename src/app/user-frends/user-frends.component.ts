@@ -100,7 +100,6 @@ dataSourceFriendsIn: MatTableDataSource<OtherUser>;
         this.router.navigate(
                                     ['/otheruser/'+ otherUserId]);
         }
-
         }
 
         searchFriend(){

@@ -17,21 +17,9 @@ import {RecommendationGet} from 'src/app/req/recommendationGet';
 import {SessionsGet} from 'src/app/req/sessionsGet';
 import {map} from 'rxjs/operators';
 import {NotificationService} from '../features/core/services/notification.service';
+import {AcceptFriend} from "src/app/req/acceptFriend";
+import {DeclineToFriend} from "src/app/req/declineToFriend";
 
-export interface PeriodicElement {
-  name: string;
-  session: number;
-}
-
-export interface Notifications {
-  text: string;
-  notificationId: number;
-}
-
-const ELEMENT_DATA3: PeriodicElement[] = [
-  { name: 'Пошли смотреть фильм "Омерзительная восьмерка"', session: 1},
-  { name: 'Пошли смотреть фильм "Helium"', session: 2},
-];
 
 @Component({
   selector: 'app-user-page',
@@ -90,6 +78,15 @@ recFilms : any;
         }
         return '';
       }
+        goOtherUserPage(otherUserId : number){
+              if(otherUserId+""==this.localStorageService.getItem("userId")){
+               this.router.navigate(
+                    ['/user/' + this.localStorageService.getItem('userId')]);
+              } else{
+              this.router.navigate(
+                                          ['/otheruser/'+ otherUserId]);
+              }
+              }
 
   getErrorMessagePassFirst() {
                      if (this.passFirst.hasError('required') || this.passFirst.value.trim()=='') {
@@ -281,8 +278,6 @@ sendUserData(){
                                                                                             }else{
                                                                                             this.dataForNotifications=data.notifications.reverse();
                                                                                             this.localStorageService.setItem("countOfNotifications", data.notifications.length);
-                                                                                            console.log("ffffffffffffff");
-                                                                                            console.log(this.localStorageService.getItem("countOfNotifications"));
                                                                                             }
                                                                                           });
 
