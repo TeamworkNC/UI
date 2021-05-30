@@ -25,7 +25,8 @@ export class PeopleGet {
           logoUrl: i.logoUrl,
           description: i.description,
           registrationDate: i.registrationDate,
-          online: i.online
+          online: i.online,
+          banned: i.banned
     };}));
   }
 }

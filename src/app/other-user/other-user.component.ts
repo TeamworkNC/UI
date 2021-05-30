@@ -13,6 +13,9 @@ import {DeleteFriend} from "src/app/req/deleteFriend";
 import {HomeGet} from 'src/app/req/homeGet';
 import {HttpClient} from '@angular/common/http';
 import {map} from "rxjs/operators";
+import {Unban} from "src/app/req/unban";
+import {Ban} from "src/app/req/ban";
+
 
 @Component({
   selector: 'app-other-user',
@@ -28,8 +31,18 @@ friends: any[];
 friendsIn: any[];
 friendsInUser: any[];
 films: any;
-  constructor(private activateRoute: ActivatedRoute, private api: PeopleGet, private api1: UserFriendsGet, private api2: FriendInGet, private api3: AddToFriend,
-  private api4: AcceptFriend,private api5: DeclineToFriend, private api6: DeleteFriend, private api7: HomeGet,private router: Router,
+  constructor(private activateRoute: ActivatedRoute,
+  private api: PeopleGet,
+  private api1: UserFriendsGet,
+  private api2: FriendInGet,
+  private api3: AddToFriend,
+  private api4: AcceptFriend,
+  private api5: DeclineToFriend,
+  private api6: DeleteFriend,
+  private api7: HomeGet,
+  private api8: Ban,
+  private api9: Unban,
+  private router: Router,
    public localStorageService: LocalStorageService, private http: HttpClient) {
     this.subscription = new Subscription();
     this.userId = 0;
@@ -67,7 +80,7 @@ films: any;
         this.api.getCommand(userId)
             .subscribe((data: OtherUser) => {
               if( data == null){
-                this.userprofile = {"userId":0, "birthday": "", "description":"", "email": "", "login": "", "logoUrl": "","registrationDate":"", "online" : false};
+                this.userprofile = {"userId":0, "birthday": "", "description":"", "email": "", "login": "", "logoUrl": "","registrationDate":"", "online" : false, "banned":false};
               }else{
               this.userprofile = data;
               }
@@ -167,4 +180,24 @@ films: any;
                                                                                                     }
                                                                                                   });
             }
+            ban(){
+                                            this.api8.postCommand(this.userId)
+                                                                                 .subscribe((data: any) => {
+                                                                                     if( data == null){
+
+                                                                                      }else{
+                                                                                            }
+                                                                                      this.ngOnInit();
+                                                                                      });
+                                    }
+            unban(){
+                                                        this.api9.postCommand(this.userId)
+                                                                                             .subscribe((data: any) => {
+                                                                                                 if( data == null){
+
+                                                                                                  }else{
+                                                                                                        }
+                                                                                                  this.ngOnInit();
+                                                                                                  });
+                                                }
 }

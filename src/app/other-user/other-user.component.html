@@ -35,6 +35,8 @@
         <button *ngIf="!this.friends.includes(this.userId) && this.friendsIn.includes(this.userId)" class="test" style="font-size: 80%; margin-top: 3%" mat-button (click)="declineFriend()">Отклонить заявку</button>
         <button *ngIf="this.friends.includes(this.userId)" class="test" style="font-size: 80%; margin-top: 3%" mat-button (click)="deleteFriend()">Удалить из друзей</button>
         <button *ngIf="this.localStorageService.getItem('admin')=='1'" class="test" style="font-size: 80%; margin-top: 3%" mat-button (click)="deleteUser()">Удалить пользователя</button>
+        <button *ngIf="this.localStorageService.getItem('admin')=='1' && !this.userprofile.banned" class="test" style="font-size: 80%; margin-top: 3%" mat-button (click)="ban()">Заблокировать</button>
+        <button *ngIf="this.localStorageService.getItem('admin')=='1' && this.userprofile.banned" class="test" style="font-size: 80%; margin-top: 3%" mat-button (click)="unban()">Разблокировать</button>
       </div>
     </div>
     <div style="display: table-cell; width: 70%; vertical-align: top" align="center">

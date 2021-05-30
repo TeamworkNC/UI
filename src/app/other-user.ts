@@ -7,6 +7,7 @@ export class OtherUser {
     description: string;
     registrationDate: string;
     online: boolean;
+    banned: boolean;
 //     constructor() {
 //            this.userId = 0;
 //            this.login = '';
@@ -16,7 +17,7 @@ export class OtherUser {
 //            this.description='';
 //            this.registrationDate='';
 //         }
-    constructor(userId? : number, login? : string, email? : string, birthday? : string, logoUrl? : string, description? : string, registrationDate? : string, online?: boolean) {
+    constructor(userId? : number, login? : string, email? : string, birthday? : string, logoUrl? : string, description? : string, registrationDate? : string, online?: boolean, banned?: boolean) {
                this.userId = userId;
                this.login = login;
                this.email = email;
@@ -25,6 +26,7 @@ export class OtherUser {
                this.description=description;
                this.registrationDate=registrationDate;
                this.online = online;
+               this.banned = banned;
             }
 }
 
