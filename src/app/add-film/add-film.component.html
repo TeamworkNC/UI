@@ -28,10 +28,10 @@
 
       <div style="margin-top: 3%">Для добавления фильма,пожалуйста, заполните форму ниже:</div>
       <div class="test1" style="margin-top: 3%; margin-right: 3%">
-        <mat-horizontal-stepper linear #stepper>
+        <mat-horizontal-stepper #stepper>
           <mat-step [stepControl]="firstFormGroup">
             <form [formGroup]="firstFormGroup">
-              <ng-template matStepLabel > Fill out your name</ng-template>
+<!--              <ng-template matStepLabel >Общие данные</ng-template>-->
               <mat-form-field style="width:80%">
                 <mat-label class="test1" >Название фильма</mat-label>
                 <input matInput placeholder="Синтел" class="test1" formControlName="filmTitleCtrl" required>
@@ -45,31 +45,73 @@
               <input matInput class="test1"  formControlName="descriptionCtrl" required>
             </mat-form-field>
               <div>
-                <button mat-button class="test1" (click)="addFilm()">Отправить</button>
-                <button mat-button matStepperNext class="test1">Next</button>
+                <button mat-button class="test1" *ngIf="!filmId" (click)="addFilm()">Отправить</button>
+                <button mat-button matStepperNext *ngIf="filmId" class="test1">Следующая страница</button>
               </div>
             </form>
           </mat-step>
-          <mat-step [stepControl]="secondFormGroup" label="Fill out your address">
-            <form [formGroup]="secondFormGroup">
-              <mat-form-field>
-                <mat-label>Address</mat-label>
-                <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
-                       required>
-              </mat-form-field>
+          <mat-step class="test1">
+                <mat-label class="test1">Постер фильма</mat-label>
+                <input name="myFile" id = "imageFormId" accept="image/*" type="file" style="margin-top: 5%; margin-left: 20%" (change)="onFileChanged($event)"  required>
               <div>
-                <button mat-button matStepperPrevious class="test1">Back</button>
-                <button mat-button matStepperNext class="test1">Next</button>
+                <button mat-button class="test" *ngIf="!this.filmPoster" style="font-size: 100%" (click)="onUpload()" class="test1">Отправить</button>
+                <button mat-button matStepperNext *ngIf="this.filmPoster" class="test1" class="test1">Следующая страница</button>
               </div>
-            </form>
           </mat-step>
-          <mat-step>
-            <ng-template matStepLabel>Done</ng-template>
-            <p>You are now done.</p>
+          <mat-step class="test1">
+            <mat-label class="test1">Скрин №1</mat-label>
+            <input name="myFile" accept="image/*" type="file" style="margin-top: 5%; margin-left: 20%" (change)="onFileChanged($event)"  required>
             <div>
-              <button mat-button matStepperPrevious>Back</button>
-              <button mat-button (click)="stepper.reset()">Reset</button>
+              <button mat-button class="test" *ngIf="!this.filmScreen1" style="font-size: 100%" (click)="onUploadScreen()" class="test1">Отправить</button>
+              <button mat-button matStepperNext *ngIf="this.filmScreen1" class="test1" class="test1">Следующая страница</button>
             </div>
+          </mat-step>
+          <mat-step class="test1" >
+            <mat-label class="test1">Скрин №2</mat-label>
+            <input name="myFile" accept="image/*" type="file" style="margin-top: 5%; margin-left: 20%" (change)="onFileChanged($event)"  required>
+            <div>
+              <button mat-button class="test" *ngIf="!this.filmScreen2" style="font-size: 100%" (click)="onUploadScreen()" class="test1">Отправить</button>
+              <button mat-button matStepperNext *ngIf="this.filmScreen2" class="test1" class="test1">Следующая страница</button>
+            </div>
+          </mat-step>
+          <mat-step class="test1">
+            <mat-label class="test1">Скрин №3</mat-label>
+            <input name="myFile" accept="image/*" type="file" style="margin-top: 5%; margin-left: 20%" (change)="onFileChanged($event)"  required>
+            <div>
+              <button mat-button class="test" *ngIf="!this.filmScreen3" style="font-size: 100%" (click)="onUploadScreen()" class="test1">Отправить</button>
+              <button mat-button matStepperNext *ngIf="this.filmScreen3" class="test1" class="test1">Следующая страница</button>
+            </div>
+          </mat-step>
+          <mat-step class="test1">
+            <mat-label class="test1">Скрин №4</mat-label>
+            <input name="myFile" accept="image/*" type="file" style="margin-top: 5%; margin-left: 20%" (change)="onFileChanged($event)"  required>
+            <div>
+              <button mat-button class="test" *ngIf="!this.filmScreen4" style="font-size: 100%" (click)="onUploadScreen()" class="test1">Отправить</button>
+              <button mat-button matStepperNext *ngIf="this.filmScreen4" class="test1" class="test1">Следующая страница</button>
+            </div>
+          </mat-step>
+
+          <mat-step class="test1">
+            <mat-label class="test1">Скрин №5</mat-label>
+            <input name="myFile" accept="image/*" type="file" style="margin-top: 5%; margin-left: 20%" (change)="onFileChanged($event)"  required>
+            <div>
+              <button mat-button class="test" *ngIf="!this.filmScreen5" style="font-size: 100%" (click)="onUploadScreen()" class="test1">Отправить</button>
+              <button mat-button matStepperNext *ngIf="this.filmScreen5" class="test1" class="test1">Следующая страница</button>
+            </div>
+          </mat-step>
+
+          <mat-step class="test1">
+            <mat-label class="test1">Видео</mat-label>
+            <input name="myFile" accept="video/*" type="file" style="margin-top: 5%; margin-left: 20%" (change)="onFileChanged($event)"  required>
+            <div>
+              <button mat-button class="test" *ngIf="!this.filmVideo" style="font-size: 100%" (click)="onUploadScreen()" class="test1">Отправить</button>
+              <button mat-button matStepperNext *ngIf="this.filmVideo" class="test1" class="test1">Следующая страница</button>
+            </div>
+          </mat-step>
+
+          <mat-step>
+            <br>
+            <p class="test1">Фильм добавлен</p>
           </mat-step>
         </mat-horizontal-stepper>
       </div>

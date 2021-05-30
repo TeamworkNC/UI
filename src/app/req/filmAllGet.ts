@@ -66,7 +66,7 @@ export class FilmAllGet {
      description: i.description,
      actors:actors.length==0 ? "" : actors.substr(0, actors.length - 2),
      rating : rating.substr(0,4),
-     ageRestrictions : i.ageLimit.title,
+     ageRestrictions : i.ageLimit ? i.ageLimit.title: "",
      trailerId : i.filmTrailer,
      imageObject : carusel,
      reviews : reviews.reverse()

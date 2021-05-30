@@ -18,7 +18,7 @@ export class AddFilm {
   const body =
   {
     //idFilm: 0,
-    filmTitle: "string",
+    filmTitle: filmTitle,
     duration: null,
     releaseDate: null,
     filmPoster: null,
