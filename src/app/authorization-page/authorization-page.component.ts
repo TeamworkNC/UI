@@ -76,6 +76,9 @@ export class AuthorizationPageComponent implements OnInit {
     failRegistrationDialog(){
       this.dialog.open(FailLogin);
       }
+     banDialog(){
+           this.dialog.open(Ban);
+           }
 
 
   sendUserData(){
@@ -94,7 +97,16 @@ export class AuthorizationPageComponent implements OnInit {
             }
           },
 
-            (err) => {this.failRegistrationDialog();}
+            (err) => {
+            console.log( err);
+            if(err.status==423){
+              this.banDialog();
+            }
+            else{
+            this.failRegistrationDialog();
+              }
+
+            }
           );
     }
 }
@@ -104,6 +116,18 @@ export class AuthorizationPageComponent implements OnInit {
   templateUrl: 'failLogin.html',
 })
 export class FailLogin {
+constructor(public dialogRef: MatDialogRef<FailLogin>) {
+  }
+close(){
+   this.dialogRef.close(true);
+}
+}
+
+@Component({
+  selector: 'ban',
+  templateUrl: 'ban.html',
+})
+export class Ban {
 constructor(public dialogRef: MatDialogRef<FailLogin>) {
   }
 close(){

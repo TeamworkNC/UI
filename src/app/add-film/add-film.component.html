@@ -27,8 +27,51 @@
     <div style="display: table-cell; width: 70%; vertical-align: top" align="center">
 
       <div style="margin-top: 3%">Для добавления фильма,пожалуйста, заполните форму ниже:</div>
-      <div>
-
+      <div class="test1" style="margin-top: 3%; margin-right: 3%">
+        <mat-horizontal-stepper linear #stepper>
+          <mat-step [stepControl]="firstFormGroup">
+            <form [formGroup]="firstFormGroup">
+              <ng-template matStepLabel > Fill out your name</ng-template>
+              <mat-form-field style="width:80%">
+                <mat-label class="test1" >Название фильма</mat-label>
+                <input matInput placeholder="Синтел" class="test1" formControlName="filmTitleCtrl" required>
+              </mat-form-field>
+              <mat-form-field style="width:80%">
+                <mat-label class="test1" >Id видео на YouTube</mat-label>
+                <input matInput placeholder="HOfdboHvshg" class="test1"  formControlName="filmTrailerCtrl" required>
+              </mat-form-field>
+              <mat-form-field style="width:80%">
+              <mat-label class="test1" >Описание фильма</mat-label>
+              <input matInput class="test1"  formControlName="descriptionCtrl" required>
+            </mat-form-field>
+              <div>
+                <button mat-button class="test1" (click)="addFilm()">Отправить</button>
+                <button mat-button matStepperNext class="test1">Next</button>
+              </div>
+            </form>
+          </mat-step>
+          <mat-step [stepControl]="secondFormGroup" label="Fill out your address">
+            <form [formGroup]="secondFormGroup">
+              <mat-form-field>
+                <mat-label>Address</mat-label>
+                <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
+                       required>
+              </mat-form-field>
+              <div>
+                <button mat-button matStepperPrevious class="test1">Back</button>
+                <button mat-button matStepperNext class="test1">Next</button>
+              </div>
+            </form>
+          </mat-step>
+          <mat-step>
+            <ng-template matStepLabel>Done</ng-template>
+            <p>You are now done.</p>
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button (click)="stepper.reset()">Reset</button>
+            </div>
+          </mat-step>
+        </mat-horizontal-stepper>
       </div>
     </div>
   </div>

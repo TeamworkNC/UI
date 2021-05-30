@@ -54,6 +54,7 @@ import {InviteFriendsDialog} from './room-page/components/invite-friends/invite-
 import {AddFilmComponent} from './add-film/add-film.component';
 import {ForgotPasswordComponent} from './forgot-password/forgot-password.component';
 import {CookieModule} from 'ngx-cookie';
+import {MatStepperModule} from '@angular/material/stepper';
 
 @NgModule({
   declarations: [
@@ -115,6 +116,7 @@ import {CookieModule} from 'ngx-cookie';
     MatPaginatorModule,
     MatSortModule,
     VimeModule,
+    MatStepperModule,
     CookieModule.forRoot(),
   ],
   exports: [MatDialogModule],
