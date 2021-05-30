@@ -67,7 +67,7 @@ films: any;
         this.api.getCommand(userId)
             .subscribe((data: OtherUser) => {
               if( data == null){
-                this.userprofile = {"userId":0, "birthday": "", "description":"", "email": "", "login": "", "logoUrl": "","registrationDate":"" };
+                this.userprofile = {"userId":0, "birthday": "", "description":"", "email": "", "login": "", "logoUrl": "","registrationDate":"", "online" : false};
               }else{
               this.userprofile = data;
               }

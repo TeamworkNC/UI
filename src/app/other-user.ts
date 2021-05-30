@@ -6,6 +6,7 @@ export class OtherUser {
     logoUrl: string;
     description: string;
     registrationDate: string;
+    online: boolean;
 //     constructor() {
 //            this.userId = 0;
 //            this.login = '';
@@ -15,7 +16,7 @@ export class OtherUser {
 //            this.description='';
 //            this.registrationDate='';
 //         }
-    constructor(userId? : number, login? : string, email? : string, birthday? : string, logoUrl? : string, description? : string, registrationDate? : string) {
+    constructor(userId? : number, login? : string, email? : string, birthday? : string, logoUrl? : string, description? : string, registrationDate? : string, online?: boolean) {
                this.userId = userId;
                this.login = login;
                this.email = email;
@@ -23,6 +24,7 @@ export class OtherUser {
                this.logoUrl =logoUrl;
                this.description=description;
                this.registrationDate=registrationDate;
+               this.online = online;
             }
 }
 

@@ -289,7 +289,6 @@ markAsRead(notificationId : number) {
 }
 openNotifications(){
   for(let i in this.dataForNotifications){
-    console.log(this.dataForNotifications[i]);
     this.dialog.open(Notification, {data: this.dataForNotifications[i],  width: '50vw', maxWidth: '50vw',});
   }
 }

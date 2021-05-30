@@ -21,10 +21,14 @@
   <div style="display: table-row; width: 100%; ">
     <div style="display: table-cell; width: 26%" align="center">
       <div>
-        <img *ngIf="userprofile && userprofile.logoUrl.length>8" src={{userprofile.logoUrl}} style="width: 70%; margin-left: 5%; vertical-align: middle" align="center">
-        <img *ngIf="userprofile && userprofile.logoUrl.length<=8" src="assets/resource/nophoto.jpg" style="width: 70%; margin-left: 5%; vertical-align: middle" align="center">
+        <img *ngIf="userprofile.online" src="assets/resource/img_1.png" style="width:4%; margin-left:10%" align="left" >
+        <img *ngIf="!userprofile.online" src="assets/resource/img_2.png" style="width:5%; margin-left:10%" align="left">
       </div>
       <div>
+        <img *ngIf="userprofile && userprofile.logoUrl.length>8" src={{userprofile.logoUrl}} style="width: 70%; vertical-align: middle" align="center">
+        <img *ngIf="userprofile && userprofile.logoUrl.length<=8" src="assets/resource/nophoto.jpg" style="width: 70%; vertical-align: middle" align="center">
+      </div>
+      <div style="margin-left:10%">
         <button *ngIf="!this.friends.includes(this.userId) && !this.friendsIn.includes(this.userId) && !this.friendsInUser.includes(this.localStorageService.getItem('userId'))" (click)="addToFriend()" class="test" style="font-size: 80%; margin-top: 3%" mat-button>Отправить заявку</button>
         <button *ngIf=" this.friendsInUser.includes(this.localStorageService.getItem('userId'))" class="test" style="font-size: 80%; margin-top: 3%; color : #ffffff;" mat-button disabled>Заявка отправлена</button>
         <button *ngIf="!this.friends.includes(this.userId) && this.friendsIn.includes(this.userId)" class="test" style="font-size: 80%; margin-top: 3%" mat-button (click) ="acceptFriend()">Принять заявку</button>

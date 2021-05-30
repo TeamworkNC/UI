@@ -24,6 +24,8 @@
         <div class="test1">Друзья:</div>
         <div *ngIf = "obsFriends && this.friends.users.length>0">
         <mat-card class="test" style="width: 20%; margin-left: 3%; margin-top: 3%; display: inline-block; color: black; margin-bottom: 1%;" *ngFor="let user of obsFriends | async ">
+          <img *ngIf="user.online" src="assets/resource/img_4.png" style="width:10%" align="left">
+          <img *ngIf="!user.online" src="assets/resource/img_5.png" style="width:8%" align="left">
           <img *ngIf="user.logoUrl && user.logoUrl.length>8" src={{user.logoUrl}} style="margin-top: 2%; margin-right: 2%; margin-left: 2%; width: 90%; height: 80%">
           <img *ngIf="!user.logoUrl || user.logoUrl.length<=8" src="assets/resource/nophoto.jpg" style="margin-top: 2%; margin-right: 2%; margin-left: 2%; width: 90%; height: 80%">
           <div style="font-weight: bold; margin-left: 3%; margin-top:3%; margin-right: 3%; font-size: 80%">{{user.login}}</div>
@@ -43,6 +45,8 @@
         <div class="test1">Входящие заявки:</div>
         <div *ngIf = "obsFriendsIn && this.friendsInAll.length>0">
           <mat-card class="test" style="width: 20%; margin-left: 3%; margin-top: 3%; display: inline-block; color: black; margin-bottom: 1%;" *ngFor="let user of obsFriendsIn | async ">
+            <img *ngIf="user.online" src="assets/resource/img_4.png" style="width:10%" align="left">
+            <img *ngIf="!user.online" src="assets/resource/img_5.png" style="width:8%" align="left">
             <img *ngIf="user.logoUrl && user.logoUrl.length>8" src={{user.logoUrl}} style="margin-top: 2%; margin-right: 2%; margin-left: 2%; width: 90%; height: 80%">
             <img *ngIf="!user.logoUrl || user.logoUrl.length<=8" src="assets/resource/nophoto.jpg" style="margin-top: 2%; margin-right: 2%; margin-left: 2%; width: 90%; height: 80%">
             <div style="font-weight: bold; margin-left: 3%; margin-top:3%; margin-right: 3%; font-size: 80%">{{user.login}}</div>
@@ -78,6 +82,8 @@
         <div *ngIf = "obs && this.users.users.length>0">
       <mat-card style="display:table-cell; width: 78%; margin-bottom: 1%;">
         <mat-card class="test" style="width: 20%; margin-left: 3%; margin-top: 3%; display: inline-block; color: black; margin-bottom: 1%" *ngFor="let user of obs | async">
+          <img *ngIf="user.online" src="assets/resource/img_4.png" style="width:10%" align="left">
+          <img *ngIf="!user.online" src="assets/resource/img_5.png" style="width:8%" align="left">
           <img *ngIf="user.logoUrl && user.logoUrl.length>8" src={{user.logoUrl}} style="margin-top: 2%; margin-right: 2%; margin-left: 2%; width: 90%; height: 80%">
           <img *ngIf="!user.logoUrl || user.logoUrl.length<=8" src="assets/resource/nophoto.jpg" style="margin-top: 2%; margin-right: 2%; margin-left: 2%; width: 90%; height: 80%">
           <div style="font-weight: bold; margin-left: 3%; margin-top:3%; margin-right: 3%;">{{user.login}}</div>

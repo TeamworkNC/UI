@@ -24,7 +24,8 @@ export class PeopleGet {
           birthday: i.birthday,
           logoUrl: i.logoUrl,
           description: i.description,
-          registrationDate: i.registrationDate
+          registrationDate: i.registrationDate,
+          online: i.online
     };}));
   }
 }
