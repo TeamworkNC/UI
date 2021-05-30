@@ -2,13 +2,18 @@
 <mat-dialog-content>
 
   <div *ngIf="friends">
-    <div *ngFor="let friend of friends" class="d-flex">
-      <div class="flex-grow-1">{{friend.login}}</div>
-      <button (click)="onInviteButtonClick(friend.userId)" mat-button>пригласить</button>
+    <div class="row m-3" *ngFor="let friend of friends">
+      <div class="position-relative" style="width: 40px; height: 40px;">
+        <img class="rounded-circle" width="40px" height="40px" alt="user avatar" src="{{friend.logoUrl}}">
+        <div  *ngIf="friend.online" class="position-absolute rounded-circle"
+             style="top:0; left: 0; width: 10px; height: 10px; background-color: #51ba4a"></div>
+      </div>
+      <div class="col">{{friend.login}}</div>
+      <button class="col-auto" (click)="onInviteButtonClick(friend.userId)" mat-button>пригласить</button>
     </div>
   </div>
 
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button [mat-dialog-close]="true" mat-button>Close</button>
+  <button [mat-dialog-close]="true" mat-button>закрыть</button>
 </mat-dialog-actions>

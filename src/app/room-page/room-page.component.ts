@@ -38,7 +38,7 @@ export class RoomPageComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<any> {
-    if (this.localStorageService.getItem("userId")){
+    if (this.localStorageService.getItem('userId')){
       this.session = await this.loadSessionInfo(this.sessionId);
       console.log(this.session);
       this.film = await this.loadFilmInfo(this.session.filmID);
