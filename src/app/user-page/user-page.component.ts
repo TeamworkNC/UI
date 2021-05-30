@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild, Inject } from '@angular/core';
 import {UserProfile} from 'src/app/userprofile';
 import {User} from 'src/app/user';
 import {HttpClient, HttpResponse} from '@angular/common/http';
@@ -6,7 +6,7 @@ import {ProfileInfo} from 'src/app/req/profileInfo';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Observable, Subscription} from 'rxjs';
 import {FormControl, Validators} from '@angular/forms';
-import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {Reg} from 'src/app/req/reg';
 import {MatTableDataSource} from '@angular/material/table';
 import {FilmMain} from 'src/app/filmMain';
@@ -287,6 +287,12 @@ markAsRead(notificationId : number) {
   this.notificationService.deleteNotification(notificationId).subscribe();
 
 }
+openNotifications(){
+  for(let i in this.dataForNotifications){
+    console.log(this.dataForNotifications[i]);
+    this.dialog.open(Notification, {data: this.dataForNotifications[i],  width: '50vw', maxWidth: '50vw',});
+  }
+}
     goToRoom( roomId : number ){
       console.log(roomId);
       this.router.navigate(['/room/'+roomId]);
@@ -355,4 +361,37 @@ export class ChangePass {
   `],
 })
 export class ChangeData {
+}
+
+@Component({
+  selector: 'app-user-page',
+  templateUrl: 'notification.html',
+  styleUrls: ['./user-page.component.scss']
+})
+export class Notification {
+constructor(@Inject(MAT_DIALOG_DATA) public  data: any,
+ public dialogRef: MatDialogRef<Notification>,
+ private router: Router,
+ public localStorageService: LocalStorageService,
+ private notificationService: NotificationService,) {
+  }
+close(){
+   this.dialogRef.close(true);
+}
+markAsRead(notificationId : number) {
+  console.log(notificationId);
+  this.dialogRef.close(true);
+  this.notificationService.deleteNotification(notificationId).subscribe();
+}
+goOtherUserPage(otherUserId : number){
+              if(otherUserId+""==this.localStorageService.getItem("userId")){
+               this.router.navigate(
+                    ['/user/' + this.localStorageService.getItem('userId')]);
+              } else{
+              this.dialogRef.close(true);
+              this.router.navigate(
+                                          ['/otheruser/'+ otherUserId]);
+
+              }
+              }
 }

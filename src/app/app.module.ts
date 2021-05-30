@@ -6,7 +6,7 @@ import {AppComponent} from './app.component';
 import {HomePageComponent} from './home-page/home-page.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FilmPageComponent} from './film-page/film-page.component';
-import {UserPageComponent} from './user-page/user-page.component';
+import {UserPageComponent, Notification} from './user-page/user-page.component';
 import {CatalogPageComponent} from './catalog-page/catalog-page.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {RegistrationPageComponent} from './registration-page/registration-page.component';
@@ -71,7 +71,8 @@ import {CookieModule} from 'ngx-cookie';
     PlayerComponent,
     InviteFriendsDialog,
     AddFilmComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    Notification
   ],
   imports: [
     BrowserModule,
@@ -116,8 +117,27 @@ import {CookieModule} from 'ngx-cookie';
     VimeModule,
     CookieModule.forRoot(),
   ],
-  providers: [DatePipe, Title],
-  bootstrap: [AppComponent]
+  exports: [MatDialogModule],
+  providers: [DatePipe, Title, MatDialogModule],
+  bootstrap: [AppComponent],
+  entryComponents:[Notification],
 })
+// export class MaterialModule {}
+//
+// @NgModule({
+//   imports: [
+//     BrowserModule,
+//     CommonModule,
+//     MaterialModule,
+//     FormsModule,
+//     ReactiveFormsModule,
+//     BrowserAnimationsModule
+//   ],
+//   declarations: [AppComponent, ConfirmationDialog, AlertDialogComponent],
+//   entryComponents: [ConfirmationDialog, AlertDialogComponent],
+//   bootstrap: [AppComponent],
+//   providers: []
+// })
+
 export class AppModule {
 }

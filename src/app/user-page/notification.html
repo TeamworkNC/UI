@@ -1,0 +1,22 @@
+<mat-card class="test1" style="width: 100%; margin-top: 3%;display: inline-block; font-size: 80%; vertical-align: middle">
+  <div align="left">
+    <div style="display: table; border-spacing: 7px 11px;" >
+      <div style="display: table-cell; ">
+        <img *ngIf='data.pictureUrl.length>8' class="ava" align="left" src="{{data.pictureUrl}}">
+        <img *ngIf='data.pictureUrl.length<=8' class="ava"  align="left" src="assets/resource/nophoto.jpg">
+      </div>
+      <div align="left" style="margin-left:3%" style="display: table-cell; valign: top">{{data.senderName}}</div>
+    </div>
+  </div>
+
+  <div *ngIf="data.type=='stream_invite'" align="center" style="margin-bottom:3%" style=" valign: top">Эй, привет! Заходи к нам посмотерть "{{data.filmTitle}}" вместе!</div>
+  <div *ngIf="data.type=='friend_request'" align="center" style="margin-bottom:3%" style=" valign: top">{{data.senderName}} хочет добавить вас в друзья!</div>
+  <div style="margin-top:3%">
+    <a mat-button *ngIf="data.type=='stream_invite'" href={{data.roomUrl}} class="test1" >Присоединиться</a>
+    <button mat-button  *ngIf="data.type=='friend_request'" style="margin-left: 1%;" class="test1"  (click)="goOtherUserPage(data.senderId)">Перейти</button>
+    <button mat-button  style="margin-left: 1%;" class="test1"  (click)="markAsRead(data.notificationId)">Прочитано</button>
+  </div>
+</mat-card>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close (click)="close()">Закрыть</button>
+</div>
