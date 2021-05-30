@@ -109,6 +109,22 @@
             </div>
           </mat-step>
 
+
+          <mat-step class="test1">
+            <mat-label class="test1">Жанры</mat-label>
+            <div  [formGroup]="filterFormGroup">
+              <mat-checkbox style="display:block;margin-top: 1%; margin-left:3%"
+                            class="test1"
+                            *ngFor="let filter of this.filters; index as i"
+                            (change)="onChange($event)"
+                            [value]="filter.id_genre+''" >{{filter.genre_title}}</mat-checkbox>
+            </div>
+            <div>
+              <button mat-button class="test" *ngIf="!this.filmGenre" style="font-size: 100%" (click)="addGenre()" class="test1">Отправить</button>
+              <button mat-button matStepperNext *ngIf="this.filmGenre" class="test1" class="test1">Следующая страница</button>
+            </div>
+          </mat-step>
+
           <mat-step>
             <br>
             <p class="test1">Фильм добавлен</p>
