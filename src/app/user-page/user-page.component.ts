@@ -285,6 +285,7 @@ sendUserData(){
 markAsRead(notificationId : number) {
   console.log(notificationId);
   this.notificationService.deleteNotification(notificationId).subscribe();
+  this.ngOnInit();
 
 }
 openNotifications(){
