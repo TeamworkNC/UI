@@ -140,7 +140,7 @@ console.log(event);
    onUploadVideo(){
       const fd = new FormData();
       fd.append('file', this.selectedFile);
-      this.http.post('https://mac21-portal-backend.herokuapp.com/api/v1/filmContent/' + this.filmId +  '/uploadPoster', fd).subscribe(() => {
+      this.http.post('https://mac21-portal-backend.herokuapp.com/api/v1/filmContent/' + this.filmId +  '/uploadVideo', fd).subscribe(() => {
       this.ngOnInit();
       this.filmVideo=1;
        });
@@ -149,7 +149,7 @@ console.log(event);
    onUploadScreen(){
       const fd = new FormData();
       fd.append('file', this.selectedFile);
-      this.http.post('https://mac21-portal-backend.herokuapp.com/api/v1/filmContent/' + this.filmId +  '/uploadVideo', fd).subscribe(() => {
+      this.http.post('https://mac21-portal-backend.herokuapp.com/api/v1/filmContent/' + this.filmId +  '/uploadScreenshot', fd).subscribe(() => {
       this.ngOnInit();
       if(!this.filmScreen1){
         this.filmScreen1=1;
