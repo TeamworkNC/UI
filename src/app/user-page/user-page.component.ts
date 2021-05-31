@@ -269,24 +269,28 @@ sendUserData(){
 
                          }
                        });
-      this.http.get("https://mac21-portal-backend.herokuapp.com/api/v1/notifications?user_id=" + this.localStorageService.getItem("userId") ).pipe(map(function (i: any) { return {
-                                                                     notifications: i
-                                                                     };})).subscribe((data: any) => {
-
-                                                                                            if( data == null){
-
-                                                                                            }else{
-                                                                                            this.dataForNotifications=data.notifications.reverse();
-                                                                                            this.localStorageService.setItem("countOfNotifications", data.notifications.length);
-                                                                                            }
-                                                                                          });
+       this.getNotifications();
 
     }
+
+
+   getNotifications(){ this.http.get("https://mac21-portal-backend.herokuapp.com/api/v1/notifications?user_id=" + this.localStorageService.getItem("userId") ).pipe(map(function (i: any) { return {
+                                                                           notifications: i
+                                                                           };})).subscribe((data: any) => {
+
+                                                                                                  if( data == null){
+
+                                                                                                  }else{
+                                                                                                  this.dataForNotifications=data.notifications.reverse();
+                                                                                                  this.localStorageService.setItem("countOfNotifications", data.notifications.length);
+                                                                                                  }
+                                                                                                });
+                                                                                                }
 markAsRead(notificationId : number) {
   console.log(notificationId);
   this.notificationService.deleteNotification(notificationId).subscribe();
-  this.ngOnInit();
-
+  this.getNotifications();
+this.ngOnInit();
 }
 openNotifications(){
   for(let i in this.dataForNotifications){

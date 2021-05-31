@@ -111,8 +111,8 @@
 
 
           <mat-step class="test1">
-            <mat-label class="test1">Жанры</mat-label>
-            <div  [formGroup]="filterFormGroup">
+            <mat-label class="test1">Жанры:</mat-label>
+            <div  [formGroup]="filterFormGroup" align="left">
               <mat-checkbox style="display:block;margin-top: 1%; margin-left:3%"
                             class="test1"
                             *ngFor="let filter of this.filters; index as i"
@@ -144,8 +144,8 @@
           <mat-step class="test1">
             <mat-label class="test1">Режиссеры:</mat-label>
             <br>
-            <div [formGroup]="staffFormGroup">
-              <div  >
+            <div [formGroup]="staffFormGroup" >
+              <div  align="left">
                 <mat-checkbox style="display:block;margin-top: 1%; margin-left:3%"
                               class="test1"
                               *ngFor="let filter of this.producerss; index as i"
@@ -153,9 +153,9 @@
                               [value]="filter.id_staff+''" >{{filter.staff_first_name}} {{filter.staff_last_name}}</mat-checkbox>
               </div>
               <br>
-              <mat-label class="test1">Актеры:</mat-label>
+              <mat-label class="test1" align="center">Актеры:</mat-label>
               <br>
-              <div  >
+              <div  align="left">
                 <mat-checkbox style="display:block;margin-top: 1%; margin-left:3%"
                               class="test1"
                               *ngFor="let filter of this.actors; index as i"
