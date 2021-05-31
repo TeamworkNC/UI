@@ -130,6 +130,9 @@ onChangeAge(event) {
 console.log(event);
   const array2 = <FormArray>this.ageFormGroup.get('age') as FormArray;
         if(event.source._checked) {
+        if(array2.length>0){
+        array2.removeAt(0);
+        }
           array2.push(new FormControl(event.source.value))
         } else {
           const i = array2.controls.findIndex(x => x.value === event.source.value);
