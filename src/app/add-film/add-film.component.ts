@@ -30,7 +30,11 @@ export class AddFilmComponent implements OnInit {
   filmGenre : number;
   filmAge: number;
   ageLimits: any;
+  producerss: any;
   ageFormGroup: FormGroup;
+  staffFormGroup: FormGroup;
+  actors:any;
+  staffs: number;
   constructor(private router: Router,
   private readonly localStorageService: LocalStorageService,
   private _formBuilder: FormBuilder,
@@ -58,6 +62,9 @@ export class AddFilmComponent implements OnInit {
      this.ageFormGroup = this._formBuilder.group({
                         age: this._formBuilder.array([])
                       });
+     this.staffFormGroup = this._formBuilder.group({
+                             staff: this._formBuilder.array([])
+                           });
     }else{
     this.router.navigate(['/home']);
     }
@@ -73,6 +80,28 @@ export class AddFilmComponent implements OnInit {
           array1.removeAt(i);
         }
       }
+
+  onChangeStaff(event) {
+      const array3 = <FormArray>this.staffFormGroup.get('staff') as FormArray;
+          if(event.checked) {
+            array3.push(new FormControl(event.source.value))
+          } else {
+            const i = array3.controls.findIndex(x => x.value === event.source.value);
+            array3.removeAt(i);
+          }
+        }
+  addStuff(){
+    console.log(this.staffFormGroup.value.staff );
+    this.http.post("https://mac21-portal-backend.herokuapp.com/api/v1/films/" + this.filmId +"/addListStaff", this.staffFormGroup.value.staff  ).pipe(map(function (i: any) { return {
+                                                                                      info: i
+                                                                                      };})).subscribe((data: any) => {
+
+                                                                                                             if( data == null){
+
+                                                                                                             }else{
+                                                                                                   this.staffs=1;
+                                                                                                             }
+                                                                                                           });}
 
   addFilm(){
    this.api.postCommand(this.firstFormGroup.get('filmTitleCtrl').value, this.firstFormGroup.get('filmTrailerCtrl').value, this.firstFormGroup.get('descriptionCtrl').value)
@@ -158,12 +187,34 @@ console.log(event);
                       if( data == null){}
                       else{ this.ageLimits  = data.ageLimits; }
                                          });
+    this.http.get("https://mac21-portal-backend.herokuapp.com/api/v1/staffs/producerss").pipe(map(function (i: any) { return {
+                                                                                          info: i
+                                                                                          };})).subscribe((data: any) => {
+
+                                                                                                                 if( data == null){
+
+                                                                                                                 }else{
+
+                                                                                                       this.producerss=data.info;
+                                                                                                                 }
+                                                                                                               });
+
+     this.http.get("https://mac21-portal-backend.herokuapp.com/api/v1/staffs/actors").pipe(map(function (i: any) { return {
+                                                                                              info: i
+                                                                                              };})).subscribe((data: any) => {
+
+                                                                                                                     if( data == null){
+
+                                                                                                                     }else{
+
+                                                                                                           this.actors=data.info;
+                                                                                                                     }
+                                                                                                                   });
 
    }
 
 
    addAge(){
-   console.log(this.ageFormGroup.value.age[0]);
     this.http.post("https://mac21-portal-backend.herokuapp.com/api/v1/films/" + this.filmId + "/setAgeLimit"+ this.ageFormGroup.value.age[0],  {} ).pipe(map(function (i: any) { return {
                                                                                       info: i
                                                                                       };})).subscribe((data: any) => {

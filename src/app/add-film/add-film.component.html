@@ -140,6 +140,36 @@
             </div>
           </mat-step>
 
+
+          <mat-step class="test1">
+            <mat-label class="test1">Режиссеры:</mat-label>
+            <br>
+            <div [formGroup]="staffFormGroup">
+              <div  >
+                <mat-checkbox style="display:block;margin-top: 1%; margin-left:3%"
+                              class="test1"
+                              *ngFor="let filter of this.producerss; index as i"
+                              (change)="onChangeStaff($event)"
+                              [value]="filter.id_staff+''" >{{filter.staff_first_name}} {{filter.staff_last_name}}</mat-checkbox>
+              </div>
+              <br>
+              <mat-label class="test1">Актеры:</mat-label>
+              <br>
+              <div  >
+                <mat-checkbox style="display:block;margin-top: 1%; margin-left:3%"
+                              class="test1"
+                              *ngFor="let filter of this.actors; index as i"
+                              (change)="onChangeStaff($event)"
+                              [value]="filter.id_staff+''" >{{filter.staff_first_name}} {{filter.staff_last_name}}</mat-checkbox>
+              </div>
+            </div>
+
+            <div>
+              <button mat-button class="test" *ngIf="!this.staffs" style="font-size: 100%" (click)="addStuff()" class="test1">Отправить</button>
+              <button mat-button matStepperNext *ngIf="this.staffs" class="test1" class="test1">Следующая страница</button>
+            </div>
+          </mat-step>
+
           <mat-step>
             <br>
             <p class="test1">Фильм добавлен</p>
