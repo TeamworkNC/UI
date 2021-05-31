@@ -3,6 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {LocalStorageService} from '../../../local-storage-service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-invite-friends',
@@ -17,6 +18,7 @@ export class InviteFriendsDialog implements OnInit {
     private dialogRef: MatDialogRef<InviteFriendsDialog>,
     private http: HttpClient,
     private localStorageService: LocalStorageService,
+    private snackBar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data: { userId: number, sessionId: number }
   ) {
     console.log(data);
@@ -38,10 +40,12 @@ export class InviteFriendsDialog implements OnInit {
   }
 
   onInviteButtonClick(userId: number): void {
-    console.log('bl balba ba');
-    console.log(userId);
     const url = `https://mac21-portal-backend.herokuapp.com/api/v1/sessions/${this.data.sessionId}/invite`;
     this.http.post<any>(url, userId).subscribe();
+
+    this.snackBar.open('приглашение успешно отправлено!', 'ок', {
+      duration: 3000
+    });
   }
 
   closeDialog(): void {
