@@ -104,7 +104,7 @@
             <mat-label class="test1">Видео</mat-label>
             <input name="myFile" accept="video/*" type="file" style="margin-top: 5%; margin-left: 20%" (change)="onFileChanged($event)"  required>
             <div>
-              <button mat-button class="test" *ngIf="!this.filmVideo" style="font-size: 100%" (click)="onUploadScreen()" class="test1">Отправить</button>
+              <button mat-button class="test" *ngIf="!this.filmVideo" style="font-size: 100%" (click)="onUploadVideo()" class="test1">Отправить</button>
               <button mat-button matStepperNext *ngIf="this.filmVideo" class="test1" class="test1">Следующая страница</button>
             </div>
           </mat-step>
