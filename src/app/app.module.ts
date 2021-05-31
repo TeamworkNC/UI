@@ -55,6 +55,7 @@ import {AddFilmComponent} from './add-film/add-film.component';
 import {ForgotPasswordComponent} from './forgot-password/forgot-password.component';
 import {CookieModule} from 'ngx-cookie';
 import {MatStepperModule} from '@angular/material/stepper';
+import {MatRadioModule} from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -117,6 +118,7 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatSortModule,
     VimeModule,
     MatStepperModule,
+    MatRadioModule,
     CookieModule.forRoot(),
   ],
   exports: [MatDialogModule],

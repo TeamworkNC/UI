@@ -125,6 +125,21 @@
             </div>
           </mat-step>
 
+          <mat-step class="test1">
+            <mat-label class="test1">Возрастное ограничение</mat-label>
+            <div  [formGroup]="ageFormGroup">
+              <mat-radio-button style="display:block;margin-top: 1%; margin-left:3%"
+                            class="test1"
+                            *ngFor="let filter of this.ageLimits; index as i"
+                                (change)="onChangeAge($event)"
+                                [value]="filter.id_age_limit+''" formControlName="age">{{filter.title}}</mat-radio-button>
+            </div>
+            <div>
+              <button mat-button class="test" *ngIf="!this.filmAge" style="font-size: 100%" (click)="addAge()" class="test1">Отправить</button>
+              <button mat-button matStepperNext *ngIf="this.filmAge" class="test1" class="test1">Следующая страница</button>
+            </div>
+          </mat-step>
+
           <mat-step>
             <br>
             <p class="test1">Фильм добавлен</p>

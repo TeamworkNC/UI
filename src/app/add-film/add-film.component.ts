@@ -6,6 +6,7 @@ import {AddFilm} from 'src/app/req/addFilm';
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import {GenresGet} from "src/app/req/genresGet";
 import {map} from "rxjs/operators";
+import {AgeLimitsGet} from "src/app/req/ageLimitsGet";
 
 @Component({
   selector: 'app-add-film',
@@ -27,12 +28,17 @@ export class AddFilmComponent implements OnInit {
   filmVideo: number;
   filters: any;
   filmGenre : number;
+  filmAge: number;
+  ageLimits: any;
+  ageFormGroup: FormGroup;
   constructor(private router: Router,
   private readonly localStorageService: LocalStorageService,
   private _formBuilder: FormBuilder,
   private http: HttpClient,
   private api: AddFilm,
-  private api1: GenresGet,) { }
+  private api1: GenresGet,
+  private api2: AgeLimitsGet
+  ) { }
 
   ngOnInit(): void {
     if(this.localStorageService.getItem("admin")=="1"){
@@ -42,16 +48,21 @@ export class AddFilmComponent implements OnInit {
           descriptionCtrl: ['', Validators.required]
         });
      this.secondFormGroup = this._formBuilder.group({
-          secondCtrl: ['', Validators.required]
+          ageCtrl: ['', Validators.required]
         });
      this.getInfo();
      this.filterFormGroup = this._formBuilder.group({
-                   filters: this._formBuilder.array([]),
+                   filters: this._formBuilder.array([])
                  });
+
+     this.ageFormGroup = this._formBuilder.group({
+                        age: this._formBuilder.array([])
+                      });
     }else{
     this.router.navigate(['/home']);
     }
   }
+
 
   onChange(event) {
     const array1 = <FormArray>this.filterFormGroup.get('filters') as FormArray;
@@ -86,6 +97,16 @@ export class AddFilmComponent implements OnInit {
    this.filmPoster=1;
     });
    }
+onChangeAge(event) {
+console.log(event);
+  const array2 = <FormArray>this.ageFormGroup.get('age') as FormArray;
+        if(event.source._checked) {
+          array2.push(new FormControl(event.source.value))
+        } else {
+          const i = array2.controls.findIndex(x => x.value === event.source.value);
+          array2.removeAt(i);
+        }
+      }
 
    onUploadVideo(){
       const fd = new FormData();
@@ -132,7 +153,28 @@ export class AddFilmComponent implements OnInit {
                                 this.filters  = data.genres;
                                 }
                               });
+    this.api2.getCommand()
+                      .subscribe((data: any) => {
+                      if( data == null){}
+                      else{ this.ageLimits  = data.ageLimits; }
+                                         });
+
    }
+
+
+   addAge(){
+   console.log(this.ageFormGroup.value.age[0]);
+    this.http.post("https://mac21-portal-backend.herokuapp.com/api/v1/films/" + this.filmId + "/setAgeLimit"+ this.ageFormGroup.value.age[0],  {} ).pipe(map(function (i: any) { return {
+                                                                                      info: i
+                                                                                      };})).subscribe((data: any) => {
+
+                                                                                                             if( data == null){
+
+                                                                                                             }else{
+                                                                                                   this.filmAge=1;
+                                                                                                             }
+                                                                                                           });}
+
 
    addGenre(){
      this.http.post("https://mac21-portal-backend.herokuapp.com/api/v1/films/" + this.filmId +"/addListGenre", this.filterFormGroup.value.filters  ).pipe(map(function (i: any) { return {
@@ -145,6 +187,7 @@ export class AddFilmComponent implements OnInit {
                                                                                                this.filmGenre=1;
                                                                                                          }
                                                                                                        });}
+
 
   }
 
